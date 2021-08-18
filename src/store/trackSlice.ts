@@ -122,12 +122,9 @@ export const trackSlice = createSlice({
   reducers: {
     loadTracks: (state) => {
       state.value = tracks.data
-    },
-    addTrack: (state) => {
-      state.value.push(tracks.data[0])
     }
   }
 })
 
-export const { loadTracks, addTrack } = trackSlice.actions
+export const { loadTracks } = trackSlice.actions
 export const { reducer } = trackSlice
