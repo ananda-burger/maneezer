@@ -1,9 +1,9 @@
-function App() {
-  return (
-    <div className="App">
-      Hello world!
-    </div>
-  );
-}
+import TrackList from 'view/TrackList'
 
-export default App;
+export default function App() {
+  return (
+    <div>
+      <TrackList />
+    </div>
+  )
+}
