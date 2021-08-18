@@ -109,7 +109,7 @@ const tracks = {
 }
 
 const initialState: State = {
-  value: tracks.data
+  value: []
 }
 
 export const selectTracks = (state: RootState) => {
