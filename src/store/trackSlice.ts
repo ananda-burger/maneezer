@@ -30,7 +30,6 @@ export const trackSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchTracks.fulfilled, (state, action) => {
       state.lastIndex += 15
-      console.log(state.lastIndex)
       state.value = state.value.concat(action.payload)
     })
   }
