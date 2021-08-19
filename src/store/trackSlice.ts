@@ -5,7 +5,8 @@ import * as api from 'tracksAPI'
 
 const initialState: State = {
   value: [],
-  lastIndex: 0
+  lastIndex: 0,
+  favoriteTracks: []
 }
 
 export const selectTracks = (state: RootState) => {
