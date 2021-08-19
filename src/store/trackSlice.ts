@@ -4,16 +4,24 @@ import { State } from 'types'
 import * as api from 'tracksAPI'
 
 const initialState: State = {
-  value: []
+  value: [],
+  lastIndex: 0
 }
 
 export const selectTracks = (state: RootState) => {
   return state.track.value
 }
 
-export const fetchTracks = createAsyncThunk('track/loadTracks', () => {
-  return api.fetchTracks()
-})
+export const selectLastIndex = (state: RootState) => {
+  return state.track.lastIndex
+}
+
+export const fetchTracks = createAsyncThunk(
+  'track/loadTracks',
+  (index: number) => {
+    return api.fetchTracks(index)
+  }
+)
 
 export const trackSlice = createSlice({
   name: 'track',
@@ -21,7 +29,9 @@ export const trackSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTracks.fulfilled, (state, action) => {
-      state.value = action.payload
+      state.lastIndex += 15
+      console.log(state.lastIndex)
+      state.value = state.value.concat(action.payload)
     })
   }
 })
