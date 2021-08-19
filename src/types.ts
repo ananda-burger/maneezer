@@ -45,7 +45,7 @@ export interface Track {
 }
 
 export interface State {
-  value: Track[]
+  topTracks: Track[]
   lastIndex: number
   favoriteTracks: Track[]
 }

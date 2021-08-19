@@ -4,13 +4,13 @@ import { State } from 'types'
 import * as api from 'tracksAPI'
 
 const initialState: State = {
-  value: [],
+  topTracks: [],
   lastIndex: 0,
   favoriteTracks: []
 }
 
 export const selectTracks = (state: RootState) => {
-  return state.track.value
+  return state.track.topTracks
 }
 
 export const selectLastIndex = (state: RootState) => {
@@ -31,7 +31,7 @@ export const trackSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchTracks.fulfilled, (state, action) => {
       state.lastIndex += 15
-      state.value = state.value.concat(action.payload)
+      state.topTracks = state.topTracks.concat(action.payload)
     })
   }
 })
