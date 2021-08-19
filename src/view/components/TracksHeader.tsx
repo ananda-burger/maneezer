@@ -5,7 +5,7 @@ export default function TracksHeader() {
   return (
     <div className={classes.container}>
       <div className={classes.headerGrid}>
-        <div className={classes.hash}>#</div>
+        <div></div>
         <div></div>
         <div>TITLE</div>
         <div>ALBUM</div>

@@ -1,6 +1,6 @@
 a {
     text-decoration:  none;
-    color:  white;
+    color:  gray;
 }
 
 .head {
@@ -11,7 +11,7 @@ a {
   position: sticky;
   top: 0;
   width: 100%;
-  height: 3rem;
+  height: 3.5rem;
   z-index: 997;
 }
 
@@ -21,6 +21,7 @@ a {
   margin-right: 1.5rem;
   margin-left: 1.5rem;
   transition: 0.2s ease;
+  color:  white;
 }
 
 @media (min-width: 540px) {

@@ -5,28 +5,49 @@
     justify-content: space-between;
     flex-direction: row;
     justify-items: flex-start;
-    grid-template-columns: 0.3fr 0.7fr 4fr 3fr 1fr 1fr;
+    grid-template-columns: 0.5fr 0.7fr 4fr 3fr 1fr 1fr;
 }
 
 .trackName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color:  white;
     margin-bottom:  0.2rem;
+    max-width:  100%;
+}
+
+.albumTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .artistName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color:  gray;
     font-size:  0.9rem;
 }
 
 .playIcon {
-    height:  2.5rem;
-    color:  white;
+    height:  2.7rem;
+    transition:  0.2 ease;
 }
 
 .smallIcon {
     height:  1.3rem;
     width: 1.3rem;
     margin-left: 0.8rem;
+    transition:  0.2 ease;
+}
+
+.heartIcon {
+    height:  1.3rem;
+    width: 1.3rem;
+    margin-left: 0.8rem;
+    transition:  0.2 ease;
 }
 
 .smallCover {
@@ -34,6 +55,7 @@
 }
 
 .buttonsContainer {
+    color: gray;
     display:  flex;
     justify-self: end;
 }
@@ -47,12 +69,19 @@
     }
 
     .playIcon:hover {
+        fill:  rgb(227, 77, 134);
+        cursor:  pointer;
+        color: white;
+    }
+
+    .smallIcon:hover {
         color:  rgb(227, 77, 134);
         cursor:  pointer;
     }
 
-    .smallIcon:hover {
-        color:  lightcoral;
+    .heartIcon:hover {
+        color:  rgb(227, 77, 134);
         cursor:  pointer;
     }
+
 }

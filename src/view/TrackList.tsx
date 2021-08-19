@@ -16,7 +16,7 @@ export default function TrackList() {
 
   return (
     <div>
-      <ul>
+      <ul className={classes.container}>
         {tracks.map((track: types.Track) => {
           return <Track key={track.id} track={track} />
         })}
