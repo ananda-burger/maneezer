@@ -1,9 +1,15 @@
-export default function ExternalLink(props) {
+export default function ExternalLink({
+  className,
+  onClick
+}: {
+  className: string
+  onClick: React.MouseEventHandler<HTMLDivElement>
+}) {
   return (
-    <div onClick={props.onClick}>
+    <div onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={props.className}
+        className={className}
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"

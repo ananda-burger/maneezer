@@ -5,8 +5,9 @@ import { secondsToMinutes } from 'utilities'
 import ExternalLink from 'view/components/icons/ExternalLink'
 import Heart from 'view/components/icons/Heart'
 import Play from 'view/components/icons/Play'
+import * as types from 'types'
 
-export default function Track({ track }) {
+export default function Track({ track }: { track: types.Track }) {
   const dispatch = useDispatch()
 
   return (
@@ -28,7 +29,7 @@ export default function Track({ track }) {
           className={classes.heartIcon}
           onClick={() => dispatch(addToFavorites(track))}
         />
-        <a href={track.link} target="_blank">
+        <a href={track.link} target="_blank" rel="noreferrer">
           <ExternalLink className={classes.smallIcon} />
         </a>
       </div>

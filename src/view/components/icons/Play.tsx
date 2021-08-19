@@ -1,8 +1,8 @@
-export default function Play(props) {
+export default function Play({ className }: { className: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={props.className}
+      className={className}
       viewBox="0 0 24 24"
       stroke="currentColor"
     >
