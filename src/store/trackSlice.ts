@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { State } from 'types'
+import { State, Track } from 'types'
 import * as api from 'tracksAPI'
 
 const initialState: State = {
@@ -17,6 +17,10 @@ export const selectLastIndex = (state: RootState) => {
   return state.track.lastIndex
 }
 
+export const selectFavoriteTracks = (state: RootState) => {
+  return state.track.favoriteTracks
+}
+
 export const fetchTracks = createAsyncThunk(
   'track/loadTracks',
   (index: number) => {
@@ -27,7 +31,11 @@ export const fetchTracks = createAsyncThunk(
 export const trackSlice = createSlice({
   name: 'track',
   initialState,
-  reducers: {},
+  reducers: {
+    addToFavorites: (state, action: PayloadAction<Track>) => {
+      state.favoriteTracks.push(action.payload)
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchTracks.fulfilled, (state, action) => {
       state.lastIndex += 15
@@ -35,5 +43,7 @@ export const trackSlice = createSlice({
     })
   }
 })
+
+export const { addToFavorites } = trackSlice.actions
 
 export const { reducer } = trackSlice

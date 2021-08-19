@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from 'app/hooks'
 import { useEffect } from 'react'
-import { fetchTracks, selectTracks, selectLastIndex } from 'store/trackSlice'
+import {
+  fetchTracks,
+  selectTracks,
+  selectLastIndex,
+  selectFavoriteTracks
+} from 'store/trackSlice'
 import * as types from 'types'
 import Track from 'view/components/Track'
 import classes from 'view/TrackList.module.css'
@@ -8,6 +13,7 @@ import classes from 'view/TrackList.module.css'
 export default function TrackList() {
   const tracks = useSelector(selectTracks)
   const lastIndex = useSelector(selectLastIndex)
+  const favoriteTracks = useSelector(selectFavoriteTracks)
   const dispatch = useDispatch()
 
   useEffect(() => {
