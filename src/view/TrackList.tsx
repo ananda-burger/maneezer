@@ -5,7 +5,13 @@ import * as types from 'types'
 import Track from 'view/components/Track'
 import classes from 'view/TrackList.module.css'
 
-export default function TrackList({ tracks }: { tracks: types.Track[] }) {
+export default function TrackList({
+  tracks,
+  isFavorite
+}: {
+  tracks: types.Track[]
+  isFavorite?: boolean
+}) {
   const lastIndex = useSelector(selectLastIndex)
   const dispatch = useDispatch()
 
@@ -17,7 +23,7 @@ export default function TrackList({ tracks }: { tracks: types.Track[] }) {
     <div>
       <ul className={classes.container}>
         {tracks.map((track) => {
-          return <Track key={track.id} track={track} />
+          return <Track key={track.id} track={track} isFavorite={isFavorite} />
         })}
       </ul>
       <button

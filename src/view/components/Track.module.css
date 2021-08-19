@@ -50,6 +50,15 @@
     transition:  0.2 ease;
 }
 
+.fullHeartIcon {
+    height:  1.3rem;
+    width: 1.3rem;
+    margin-left: 0.8rem;
+    transition:  0.2 ease;
+    color: rgb(227, 77, 134);
+    fill: rgb(227, 77, 134);
+}
+
 .smallCover {
     height:  3rem;
 }
@@ -80,8 +89,13 @@
     }
 
     .heartIcon:hover {
-        color:  rgb(227, 77, 134);
+        color:  white;
+        fill:  rgb(227, 77, 134);
         cursor:  pointer;
     }
 
+    .fullHeartIcon:hover {
+        color:  white;
+        cursor:  pointer;
+    }
 }

@@ -34,16 +34,22 @@ export const trackSlice = createSlice({
   reducers: {
     addToFavorites: (state, action: PayloadAction<Track>) => {
       state.favoriteTracks.push(action.payload)
+    },
+    removeFromFavorites: (state, action: PayloadAction<Track>) => {
+      const index = state.favoriteTracks.findIndex((track) => {
+        return track.id === action.payload.id
+      })
+      state.favoriteTracks.slice(index, 1)
     }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTracks.fulfilled, (state, action) => {
-      state.lastIndex += 15
+      // state.lastIndex += 15
       state.topTracks = state.topTracks.concat(action.payload)
     })
   }
 })
 
-export const { addToFavorites } = trackSlice.actions
+export const { addToFavorites, removeFromFavorites } = trackSlice.actions
 
 export const { reducer } = trackSlice

@@ -19,7 +19,7 @@ export default function App() {
             <TrackList tracks={topTracks} />
           </Route>
           <Route path="/favorites">
-            <TrackList tracks={favoriteTracks} />
+            <TrackList tracks={favoriteTracks} isFavorite={true} />
           </Route>
         </Switch>
       </BrowserRouter>
