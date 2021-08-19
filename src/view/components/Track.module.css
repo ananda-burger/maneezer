@@ -1,0 +1,58 @@
+.trackContainer {
+    padding: 0.4rem 1.5rem;
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    justify-items: flex-start;
+    grid-template-columns: 0.3fr 0.7fr 4fr 3fr 1fr 1fr;
+}
+
+.trackName {
+    color:  white;
+    margin-bottom:  0.2rem;
+}
+
+.artistName {
+    color:  gray;
+    font-size:  0.9rem;
+}
+
+.playIcon {
+    height:  2.5rem;
+    color:  white;
+}
+
+.smallIcon {
+    height:  1.3rem;
+    width: 1.3rem;
+    margin-left: 0.8rem;
+}
+
+.smallCover {
+    height:  3rem;
+}
+
+.buttonsContainer {
+    display:  flex;
+    justify-self: end;
+}
+
+@media (hover: hover) {
+    .trackContainer:hover {
+        border: none;
+        border-radius:  5px;
+        background-color:  rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    .playIcon:hover {
+        color:  rgb(227, 77, 134);
+        cursor:  pointer;
+    }
+
+    .smallIcon:hover {
+        color:  lightcoral;
+        cursor:  pointer;
+    }
+}

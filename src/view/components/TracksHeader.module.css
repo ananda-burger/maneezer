@@ -1,0 +1,26 @@
+/* .container { */
+/*     margin-left: 2rem; */
+/*     margin-right: 2rem; */
+/* } */
+
+.headerGrid {
+    margin: 0;
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    justify-items: flex-start;
+    grid-template-columns: 0.5fr 1fr 4fr 3fr 1fr 1fr;
+    padding: 0.4rem 1.5rem;
+}
+
+.clock {
+    height: 1.3rem;
+    width: 1.3rem;
+}
+
+.deezer {
+    height: 1.8rem;
+    width: 1.8rem;
+    justify-self: flex-end;
+}
