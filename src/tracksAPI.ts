@@ -5006,10 +5006,10 @@ const TRACKS: { data: Track[]; total: number } = {
   total: 100
 }
 
-export const fetchTracks = (lastIndex: number) => {
+export const fetchTracks = (lastIndex: number, perPage: number) => {
   return new Promise<Track[]>((resolve, _reject) => {
     setTimeout(
-      () => resolve(TRACKS.data.slice(lastIndex, lastIndex + 15)),
+      () => resolve(TRACKS.data.slice(lastIndex, lastIndex + perPage)),
       Math.random() * 1000
     )
   })

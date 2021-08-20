@@ -1,9 +1,14 @@
 import { useDispatch, useSelector } from 'app/hooks'
 import { useEffect } from 'react'
-import { fetchTracks, selectLastIndex } from 'store/trackSlice'
+import {
+  fetchTracks,
+  selectLastIndex,
+  selectIsLoadingTrack
+} from 'store/trackSlice'
 import * as types from 'types'
 import Track from 'view/components/Track'
 import classes from 'view/TrackList.module.css'
+import useInfiniteScroll from 'react-infinite-scroll-hook'
 
 export default function TrackList({
   tracks,
@@ -13,11 +18,20 @@ export default function TrackList({
   isFavorite?: boolean
 }) {
   const lastIndex = useSelector(selectLastIndex)
+  const isLoading = useSelector(selectIsLoadingTrack)
+  const hasNextPage = useSelector((state) => state.track.hasMoreTopTracks)
   const dispatch = useDispatch()
 
+  const [sentryRef] = useInfiniteScroll({
+    loading: isLoading,
+    hasNextPage,
+    onLoadMore: () => dispatch(fetchTracks({ lastIndex, isLoading })),
+    rootMargin: '0px 0px 150px 0px'
+  })
+
   useEffect(() => {
-    dispatch(fetchTracks(lastIndex))
-  }, [dispatch, lastIndex])
+    dispatch(fetchTracks({ lastIndex, isLoading }))
+  }, [])
 
   return (
     <div>
@@ -25,13 +39,8 @@ export default function TrackList({
         {tracks.map((track) => {
           return <Track key={track.id} track={track} isFavorite={isFavorite} />
         })}
+        {(isLoading || hasNextPage) && <li ref={sentryRef}>loading!!!</li>}
       </ul>
-      <button
-        className={classes.button}
-        onClick={() => dispatch(fetchTracks(lastIndex))}
-      >
-        Infinity Scroll
-      </button>
     </div>
   )
 }

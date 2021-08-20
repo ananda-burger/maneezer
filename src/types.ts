@@ -46,6 +46,8 @@ export interface Track {
 
 export interface State {
   topTracks: Track[]
-  lastIndex: number
+  lastTopTracksIndex: number
   favoriteTracks: Track[]
+  isLoadingTopTracks: boolean
+  hasMoreTopTracks: boolean
 }
