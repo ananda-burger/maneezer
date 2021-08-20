@@ -1,17 +1,16 @@
 import styled from 'styled-components'
 
 const Icon = styled.svg`
-  width: 2.7rem !important;
-  height: 2.7rem !important;
+  margin-left: 0.8rem;
   transition: 0.2 ease;
   &:hover {
+    color: white;
     fill: rgb(227, 77, 134);
     cursor: pointer;
-    color: white;
   }
 `
 
-export default function Play() {
+export default function HollowHeart() {
   return (
     <Icon
       className="app-icon"
@@ -21,9 +20,9 @@ export default function Play() {
     >
       <path
         strokeLinecap="round"
-        strokeLinejoin="miter"
-        strokeWidth={1}
-        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+        strokeLinejoin="round"
+        strokeWidth={1.6}
+        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
       />
     </Icon>
   )

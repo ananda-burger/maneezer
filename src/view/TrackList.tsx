@@ -7,8 +7,12 @@ import {
 } from 'store/trackSlice'
 import * as types from 'types'
 import Track from 'view/components/Track'
-import classes from 'view/TrackList.module.css'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
+import styled from 'styled-components'
+
+const Container = styled.ul`
+  margin: 0 1rem;
+`
 
 export default function TrackList({
   tracks,
@@ -35,12 +39,12 @@ export default function TrackList({
 
   return (
     <div>
-      <ul className={classes.container}>
+      <Container>
         {tracks.map((track) => {
           return <Track key={track.id} track={track} isFavorite={isFavorite} />
         })}
         {(isLoading || hasNextPage) && <li ref={sentryRef}>loading!!!</li>}
-      </ul>
+      </Container>
     </div>
   )
 }
