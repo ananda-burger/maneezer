@@ -2,9 +2,10 @@ import styled from 'styled-components'
 
 const Icon = styled.svg`
   transition: 0.2 ease;
+  color: rgb(227, 77, 134);
+  fill: rgb(227, 77, 134);
   &:hover {
     color: white;
-    fill: rgb(227, 77, 134);
     cursor: pointer;
   }
 `
