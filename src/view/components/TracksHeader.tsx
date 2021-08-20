@@ -5,19 +5,21 @@ import { Icon } from 'view/components/styled'
 const Container = styled.div`
   position: sticky;
   top: 3.5rem;
-  background: black;
+  background: rgb(24, 24, 24);
+  border-bottom: 1px solid rgb(51, 51, 51);
+  color: gray;
 `
 
 const Grid = styled.div`
   margin: 0;
+  padding: 0.6rem 2rem;
   display: grid;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   justify-items: flex-start;
   grid-template-columns: 0.5fr 0.7fr 4fr 3fr 1fr 1fr;
-  padding: 0.4rem 2.5rem;
-  border-bottom: 1px solid rgb(51, 51, 51);
+  padding: 0.6rem 1.5rem;
 `
 
 export default function TracksHeader() {

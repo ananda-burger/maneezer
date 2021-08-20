@@ -8,6 +8,14 @@ import {
 import * as types from 'types'
 import Track from 'view/components/Track'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
+import Loading from 'view/components/icons/Loading'
+import styled from 'styled-components'
+
+const LoadingItem = styled.li`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+`
 
 export default function TrackList({
   tracks,
@@ -38,7 +46,11 @@ export default function TrackList({
         {tracks.map((track) => {
           return <Track key={track.id} track={track} isFavorite={isFavorite} />
         })}
-        {(isLoading || hasNextPage) && <li ref={sentryRef}>loading!!!</li>}
+        {(isLoading || hasNextPage) && (
+          <LoadingItem ref={sentryRef}>
+            <Loading />
+          </LoadingItem>
+        )}
       </div>
     </div>
   )

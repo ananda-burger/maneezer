@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   html {
       font-family: 'Roboto', sans-serif;
-      background-color:  black;
+      background-color:  rgb(18, 18, 18);
       color:  darkgray;
   }
 

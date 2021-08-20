@@ -14,14 +14,14 @@ const Header = styled.header`
   position: sticky;
   top: 0;
   width: 100%;
-  height: 3.5rem;
+  padding: 0.4rem 0;
   z-index: 997;
   position: sticky;
   top: 0;
 `
 
 const TopTracksLink = styled(Link)<{ path: string }>`
-  margin: 1rem;
+  margin: 2rem;
   &:hover {
     cursor: pointer;
     color: rgb(227, 77, 134);
@@ -35,7 +35,7 @@ const MainNavOptions = styled.div`
 `
 
 const FavoritesLink = styled(Link)<{ path: string }>`
-  margin: 1rem;
+  margin: 2rem;
   &:hover {
     cursor: pointer;
     color: rgb(227, 77, 134);
@@ -45,7 +45,7 @@ const FavoritesLink = styled(Link)<{ path: string }>`
 `
 
 const SearchLink = styled.a<{ path: string }>`
-  margin: 1rem;
+  margin: 2rem;
   &:hover {
     cursor: pointer;
     color: rgb(227, 77, 134);
