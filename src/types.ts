@@ -51,3 +51,8 @@ export interface State {
   isLoadingTopTracks: boolean
   hasMoreTopTracks: boolean
 }
+
+export interface AudioState {
+  audioInstance: any
+  playingTrackId?: number
+}

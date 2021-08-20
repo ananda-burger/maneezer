@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import { reducer as trackReducer } from 'store/trackSlice'
+import { reducer as audioReducer } from 'store/audioSlice'
 
 export const store = configureStore({
   reducer: {
-    track: trackReducer
+    track: trackReducer,
+    audio: audioReducer
   }
 })
 

@@ -1,12 +1,14 @@
-import { useDispatch } from 'app/hooks'
+import { useDispatch, useSelector } from 'app/hooks'
+import { pause, play, selectPlayingTrackId } from 'store/audioSlice'
 import { addToFavorites, removeFromFavorites } from 'store/trackSlice'
+import styled from 'styled-components'
+import * as types from 'types'
 import { secondsToMinutes } from 'utilities'
 import ExternalLink from 'view/components/icons/ExternalLink'
 import FullHeart from 'view/components/icons/FullHeart'
 import HollowHeart from 'view/components/icons/HollowHeart'
+import Pause from 'view/components/icons/Pause'
 import Play from 'view/components/icons/Play'
-import * as types from 'types'
-import styled from 'styled-components'
 
 const Container = styled.li`
   padding: 0.4rem 1.5rem;
@@ -71,9 +73,19 @@ export default function Track({
   isFavorite?: boolean
 }) {
   const dispatch = useDispatch()
+  const playingTrackId = useSelector(selectPlayingTrackId)
+
   return (
     <Container>
-      <Play />
+      {track.id === playingTrackId ? (
+        <div onClick={() => dispatch(pause())}>
+          <Pause />
+        </div>
+      ) : (
+        <div onClick={() => dispatch(play(track))}>
+          <Play />
+        </div>
+      )}
       <Cover src={track.album.cover_small} alt="Album cover" />
       <div>
         <TrackName>{track.title}</TrackName>
