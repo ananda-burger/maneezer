@@ -39,7 +39,6 @@
 .smallIcon {
     height:  1.3rem;
     width: 1.3rem;
-    margin-left: 0.8rem;
     transition:  0.2 ease;
 }
 
@@ -67,6 +66,10 @@
     color: gray;
     display:  flex;
     justify-self: end;
+}
+
+.buttonsContainer a:last-child {
+    margin-left: 0.8rem;
 }
 
 @media (hover: hover) {
