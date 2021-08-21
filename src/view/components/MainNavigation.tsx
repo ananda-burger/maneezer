@@ -62,15 +62,13 @@ const LogoLink = styled(Link)`
 const UserLink = styled(Link)`
   justify-self: flex-end;
 `
-export default function MainNavigation({
-  isSearching
-}: {
-  isSearching: boolean
-}) {
+
+export default function MainNavigation() {
   const { pathname: path } = useLocation()
   const dispatch = useDispatch()
-  const searchInput = useSelector(search.selectSearchInput)
   const history = useHistory()
+  const searchInput = useSelector(search.selectSearchInput)
+  const isSearching = useSelector(search.selectIsSearching)
 
   return (
     <Header>

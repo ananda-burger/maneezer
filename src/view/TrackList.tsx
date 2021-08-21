@@ -19,24 +19,25 @@ export default function TrackList({
   selectHasMoreTracks,
   selectIsLoadingTracks,
   selectLastIndex,
-  fetch,
-  tracks
+  selectTracks,
+  fetch
 }: {
   isFavorite?: boolean
   selectHasMoreTracks: (state: RootState) => boolean
   selectIsLoadingTracks: (state: RootState) => boolean
   selectLastIndex: (state: RootState) => number
+  selectTracks: (state: RootState) => types.Track[]
   fetch: AsyncThunk<
     types.Track[],
     { lastIndex: number; isLoading: boolean },
     {}
   >
-  tracks: types.Track[]
 }) {
+  const dispatch = useDispatch()
   const lastIndex = useSelector(selectLastIndex)
   const isLoading = useSelector(selectIsLoadingTracks)
   const hasNextPage = useSelector(selectHasMoreTracks)
-  const dispatch = useDispatch()
+  const tracks = useSelector(selectTracks)
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,

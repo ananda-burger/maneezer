@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import TrackList from 'view/TrackList'
 import MainNavigation from 'view/components/MainNavigation'
 import TracksHeader from 'view/components/TracksHeader'
-import { useSelector } from 'app/hooks'
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 import * as top from 'store/topTracksSlice'
@@ -29,16 +28,11 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default function App() {
-  const topTracks = useSelector(top.selectTracks)
-  const favoriteTracks = useSelector(favorites.selectTracks)
-  const filteredTracks = useSelector(search.selectTracks)
-  const isSearching = useSelector(search.selectIsSearching)
-
   return (
     <div>
       <GlobalStyle />
       <BrowserRouter>
-        <MainNavigation isSearching={isSearching} />
+        <MainNavigation />
         <TracksHeader />
         <Switch>
           <Route path="/" exact>
@@ -47,7 +41,7 @@ export default function App() {
               selectIsLoadingTracks={top.selectIsLoadingTracks}
               selectHasMoreTracks={top.selectHasMoreTracks}
               fetch={top.fetch}
-              tracks={topTracks}
+              selectTracks={top.selectTracks}
             />
           </Route>
           <Route path="/favorites">
@@ -55,14 +49,14 @@ export default function App() {
               selectLastIndex={favorites.selectLastIndex}
               selectIsLoadingTracks={favorites.selectIsLoadingTracks}
               selectHasMoreTracks={favorites.selectHasMoreTracks}
-              tracks={favoriteTracks}
+              selectTracks={favorites.selectTracks}
               fetch={favorites.fetch}
               isFavorite={true}
             />
           </Route>
           <Route path="/search">
             <TrackList
-              tracks={filteredTracks}
+              selectTracks={search.selectTracks}
               selectLastIndex={search.selectLastIndex}
               selectIsLoadingTracks={search.selectIsLoadingTracks}
               selectHasMoreTracks={search.selectHasMoreTracks}
