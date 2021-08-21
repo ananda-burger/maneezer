@@ -12,12 +12,10 @@ import { useRef } from 'react'
 const Header = styled.header`
   font-size: 1.2rem;
   background: black;
-  display: grid;
-  grid-template-columns: 1fr 8fr 1fr;
+  display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: space-between;
   position: sticky;
-  top: 0;
   width: 100%;
   padding: 0.7rem 0;
   z-index: 997;
@@ -26,7 +24,6 @@ const Header = styled.header`
 `
 
 const TopTracksLink = styled(Link)<{ path: string }>`
-  margin: 2rem;
   &:hover {
     cursor: pointer;
     color: rgb(227, 77, 134);
@@ -36,11 +33,18 @@ const TopTracksLink = styled(Link)<{ path: string }>`
 `
 
 const MainNavOptions = styled.div`
-  justify-self: center;
+  display: flex;
+  align-items: center;
+
+  a {
+    margin-left: 2rem;
+    &:first-child {
+      margin: 0;
+    }
+  }
 `
 
 const FavoritesLink = styled(Link)<{ path: string }>`
-  margin: 2rem;
   &:hover {
     cursor: pointer;
     color: rgb(227, 77, 134);
@@ -50,7 +54,6 @@ const FavoritesLink = styled(Link)<{ path: string }>`
 `
 
 const SearchLink = styled.a<{ path: string }>`
-  margin: 2rem;
   &:hover {
     cursor: pointer;
     color: rgb(227, 77, 134);
@@ -58,20 +61,16 @@ const SearchLink = styled.a<{ path: string }>`
 `
 
 const LogoLink = styled(Link)`
-  margin-left: 2rem;
+  margin-left: 1rem;
   justify-self: flex-start;
 `
 
 const UserLink = styled(Link)`
-  justify-self: flex-end;
+  margin-right: 1rem;
 `
 
 const InputContainer = styled.div`
   position: relative;
-  &:hover {
-    cursor: pointer;
-    color: rgb(227, 77, 134);
-  }
 `
 
 const SearchInput = styled.input`
@@ -100,66 +99,62 @@ export default function MainNavigation() {
         <Logo />
       </LogoLink>
       <MainNavOptions>
-        <div>
-          {isSearching ? (
-            <InputContainer>
-              <span onClick={() => dispatch(search.close())}>
-                <Back />
-              </span>
-              <SearchInput
-                ref={textInput}
-                value={searchInput}
-                type="text"
-                placeholder="Search"
-                spellCheck={false}
-                autoFocus
-                onChange={(e) => {
-                  dispatch(search.update(e.target.value))
-                }}
-                onKeyUp={(e) => {
-                  if (e.key === 'Escape') {
-                    dispatch(search.close())
-                  } else if (e.key === 'Enter') {
-                    history.push('/search?q=input')
-                  }
-                }}
-              />
-              {searchInput !== '' && (
-                <span
-                  onClick={() => {
-                    textInput.current && textInput.current.focus()
-                    dispatch(search.update(''))
-                  }}
-                >
-                  <ClearInput />
-                </span>
-              )}
-            </InputContainer>
-          ) : (
-            <div>
-              <TopTracksLink to="/" path={path}>
-                Top Tracks
-              </TopTracksLink>
-              <FavoritesLink to="/favorites" path={path}>
-                Favorites
-              </FavoritesLink>
-              <SearchLink
+        {isSearching ? (
+          <InputContainer>
+            <span onClick={() => dispatch(search.close())}>
+              <Back />
+            </span>
+            <SearchInput
+              ref={textInput}
+              value={searchInput}
+              type="text"
+              placeholder="Search"
+              spellCheck={false}
+              autoFocus
+              onChange={(e) => {
+                dispatch(search.update(e.target.value))
+              }}
+              onKeyUp={(e) => {
+                if (e.key === 'Escape') {
+                  dispatch(search.close())
+                } else if (e.key === 'Enter') {
+                  history.push('/search?q=input')
+                }
+              }}
+            />
+            {searchInput !== '' && (
+              <span
                 onClick={() => {
-                  dispatch(search.open())
+                  textInput.current && textInput.current.focus()
+                  dispatch(search.update(''))
                 }}
-                path={path}
               >
-                <Search />
-              </SearchLink>
-            </div>
-          )}
-        </div>
+                <ClearInput />
+              </span>
+            )}
+          </InputContainer>
+        ) : (
+          <>
+            <TopTracksLink to="/" path={path}>
+              Top Tracks
+            </TopTracksLink>
+            <FavoritesLink to="/favorites" path={path}>
+              Favorites
+            </FavoritesLink>
+            <SearchLink
+              onClick={() => {
+                dispatch(search.open())
+              }}
+              path={path}
+            >
+              <Search />
+            </SearchLink>
+          </>
+        )}
       </MainNavOptions>
-      <div>
-        <UserLink to="/">
-          <User />
-        </UserLink>
-      </div>
+      <UserLink to="/">
+        <User />
+      </UserLink>
     </Header>
   )
 }
