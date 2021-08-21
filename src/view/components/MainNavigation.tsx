@@ -8,6 +8,7 @@ import ClearInput from 'view/components/icons/ClearInput'
 import { useSelector, useDispatch } from 'app/hooks'
 import * as search from 'store/searchSlice'
 import { useRef } from 'react'
+import * as trackApi from 'tracksAPI'
 
 const Header = styled.header`
   font-size: 1.2rem;
@@ -153,7 +154,9 @@ export default function MainNavigation() {
         )}
       </MainNavOptions>
       <UserLink to="/">
-        <User />
+        <div onClick={() => trackApi.login()}>
+          <User />
+        </div>
       </UserLink>
     </Header>
   )

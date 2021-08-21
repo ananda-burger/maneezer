@@ -93,10 +93,10 @@ export const fetch = createAsyncThunk(
         type: 'track'
       }
     ]
+
     return Promise.resolve(tracks)
   }
 )
-
 export const searchSlice = createSlice({
   name: 'search',
   initialState,

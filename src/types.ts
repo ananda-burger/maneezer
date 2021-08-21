@@ -64,3 +64,16 @@ export interface SearchState {
   searchInput: string
   tracks: Track[]
 }
+
+export interface LoginResponse {
+  authInitDate: number
+  authResponse: { accessToken: string; expire: number }
+  status: 'connected' | 'not_authorized'
+  userID: string
+}
+
+export interface DeezerResponse {
+  data: Track[]
+  prev?: string
+  total: number
+}
