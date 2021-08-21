@@ -56,3 +56,9 @@ export interface AudioState {
   audioInstance: any
   playingTrackId?: number
 }
+
+export interface SearchState {
+  isSearching: boolean
+  searchInput: string
+  tracks: Track[]
+}

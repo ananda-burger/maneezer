@@ -1,8 +1,11 @@
-import { Link, useLocation } from 'react-router-dom'
+import { useHistory, Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Search from 'view/components/icons/Search'
 import User from 'view/components/icons/User'
 import Logo from 'view/components/icons/Logo'
+import { openSearch, closeSearch, updateSearchInput } from 'store/searchSlice'
+import { useSelector, useDispatch } from 'app/hooks'
+import { selectSearchInput } from 'store/searchSlice'
 
 const Header = styled.header`
   font-size: 1.2rem;
@@ -60,9 +63,15 @@ const LogoLink = styled(Link)`
 const UserLink = styled(Link)`
   justify-self: flex-end;
 `
-
-export default function MainNavigation() {
+export default function MainNavigation({
+  isSearching
+}: {
+  isSearching: boolean
+}) {
   const { pathname: path } = useLocation()
+  const dispatch = useDispatch()
+  const searchInput = useSelector(selectSearchInput)
+  const history = useHistory()
 
   return (
     <Header>
@@ -77,9 +86,43 @@ export default function MainNavigation() {
           Favorites
         </FavoritesLink>
         <span>
-          <SearchLink path={path}>
-            <Search />
-          </SearchLink>
+          {isSearching ? (
+            <span>
+              <span onClick={() => dispatch(closeSearch())}> {`<-`} </span>
+              <input
+                value={searchInput}
+                type="text"
+                autoFocus
+                onChange={(e) => {
+                  dispatch(updateSearchInput(e.target.value))
+                }}
+                onKeyUp={(e) => {
+                  if (e.key === 'Escape') {
+                    dispatch(closeSearch())
+                  } else if (e.key === 'Enter') {
+                    history.push('/search?q=input')
+                  }
+                }}
+              />
+              <span
+                onClick={() => {
+                  dispatch(updateSearchInput(''))
+                  dispatch(closeSearch())
+                }}
+              >
+                x
+              </span>
+            </span>
+          ) : (
+            <SearchLink
+              onClick={() => {
+                dispatch(openSearch())
+              }}
+              path={path}
+            >
+              <Search />
+            </SearchLink>
+          )}
         </span>
       </MainNavOptions>
       <div>
