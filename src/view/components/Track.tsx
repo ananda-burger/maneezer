@@ -25,6 +25,7 @@ const Container = styled.li`
       border-radius:  5px;
       background-color:  rgba(255, 255, 255, 0.2);
       color: white;
+      fill: rgb(34, 34, 34);
   }
 `
 

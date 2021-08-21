@@ -3,12 +3,15 @@ import styled from 'styled-components'
 import Search from 'view/components/icons/Search'
 import User from 'view/components/icons/User'
 import Logo from 'view/components/icons/Logo'
+import Back from 'view/components/icons/Back'
+import ClearInput from 'view/components/icons/ClearInput'
 import { useSelector, useDispatch } from 'app/hooks'
 import * as search from 'store/searchSlice'
+import { useRef } from 'react'
 
 const Header = styled.header`
   font-size: 1.2rem;
-  background: rgba(50, 5, 22);
+  background: black;
   display: grid;
   grid-template-columns: 1fr 8fr 1fr;
   align-items: center;
@@ -16,7 +19,7 @@ const Header = styled.header`
   position: sticky;
   top: 0;
   width: 100%;
-  padding: 0.4rem 0;
+  padding: 0.7rem 0;
   z-index: 997;
   position: sticky;
   top: 0;
@@ -63,12 +66,33 @@ const UserLink = styled(Link)`
   justify-self: flex-end;
 `
 
+const InputContainer = styled.div`
+  position: relative;
+  &:hover {
+    cursor: pointer;
+    color: rgb(227, 77, 134);
+  }
+`
+
+const SearchInput = styled.input`
+  font-size: 1.1rem;
+  color: white;
+  width: 20rem;
+  height: 2.3rem;
+  padding: 0 3rem;
+  border-radius: 5px;
+  border: none;
+  background: rgba(250, 250, 250, 0.3);
+  outline: pink;
+`
+
 export default function MainNavigation() {
   const { pathname: path } = useLocation()
   const dispatch = useDispatch()
   const history = useHistory()
   const searchInput = useSelector(search.selectSearchInput)
   const isSearching = useSelector(search.selectIsSearching)
+  const textInput = useRef<HTMLInputElement>(null)
 
   return (
     <Header>
@@ -76,19 +100,18 @@ export default function MainNavigation() {
         <Logo />
       </LogoLink>
       <MainNavOptions>
-        <TopTracksLink to="/" path={path}>
-          Top Tracks
-        </TopTracksLink>
-        <FavoritesLink to="/favorites" path={path}>
-          Favorites
-        </FavoritesLink>
-        <span>
+        <div>
           {isSearching ? (
-            <span>
-              <span onClick={() => dispatch(search.close())}> {`<-`} </span>
-              <input
+            <InputContainer>
+              <span onClick={() => dispatch(search.close())}>
+                <Back />
+              </span>
+              <SearchInput
+                ref={textInput}
                 value={searchInput}
                 type="text"
+                placeholder="Search"
+                spellCheck={false}
                 autoFocus
                 onChange={(e) => {
                   dispatch(search.update(e.target.value))
@@ -103,24 +126,32 @@ export default function MainNavigation() {
               />
               <span
                 onClick={() => {
+                  textInput.current && textInput.current.focus()
                   dispatch(search.update(''))
-                  dispatch(search.close())
                 }}
               >
-                x
+                <ClearInput />
               </span>
-            </span>
+            </InputContainer>
           ) : (
-            <SearchLink
-              onClick={() => {
-                dispatch(search.open())
-              }}
-              path={path}
-            >
-              <Search />
-            </SearchLink>
+            <div>
+              <TopTracksLink to="/" path={path}>
+                Top Tracks
+              </TopTracksLink>
+              <FavoritesLink to="/favorites" path={path}>
+                Favorites
+              </FavoritesLink>
+              <SearchLink
+                onClick={() => {
+                  dispatch(search.open())
+                }}
+                path={path}
+              >
+                <Search />
+              </SearchLink>
+            </div>
           )}
-        </span>
+        </div>
       </MainNavOptions>
       <div>
         <UserLink to="/">
