@@ -124,14 +124,16 @@ export default function MainNavigation() {
                   }
                 }}
               />
-              <span
-                onClick={() => {
-                  textInput.current && textInput.current.focus()
-                  dispatch(search.update(''))
-                }}
-              >
-                <ClearInput />
-              </span>
+              {searchInput !== '' && (
+                <span
+                  onClick={() => {
+                    textInput.current && textInput.current.focus()
+                    dispatch(search.update(''))
+                  }}
+                >
+                  <ClearInput />
+                </span>
+              )}
             </InputContainer>
           ) : (
             <div>

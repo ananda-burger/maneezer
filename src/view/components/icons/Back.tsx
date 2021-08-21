@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Icon = styled.svg`
   position: absolute;
-  top: 0.5rem;
+  top: calc(50% - 0.65rem);
   left: 0.7rem;
   transition: 0.2 ease;
   &:hover {
