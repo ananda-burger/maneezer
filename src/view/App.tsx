@@ -2,11 +2,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import TrackList from 'view/TrackList'
 import MainNavigation from 'view/components/MainNavigation'
 import TracksHeader from 'view/components/TracksHeader'
-import { selectTracks, selectFavoriteTracks } from 'store/trackSlice'
 import { useSelector } from 'app/hooks'
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
+import * as top from 'store/topTracksSlice'
 import * as search from 'store/searchSlice'
+import * as favorites from 'store/favoriteTracksSlice'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -28,10 +29,10 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default function App() {
-  const topTracks = useSelector(selectTracks)
-  const favoriteTracks = useSelector(selectFavoriteTracks)
-  const isSearching = useSelector(search.selectIsSearching)
+  const topTracks = useSelector(top.selectTracks)
+  const favoriteTracks = useSelector(favorites.selectTracks)
   const filteredTracks = useSelector(search.selectTracks)
+  const isSearching = useSelector(search.selectIsSearching)
 
   return (
     <div>
@@ -41,13 +42,32 @@ export default function App() {
         <TracksHeader />
         <Switch>
           <Route path="/" exact>
-            <TrackList tracks={topTracks} />
+            <TrackList
+              selectLastIndex={top.selectLastIndex}
+              selectIsLoadingTracks={top.selectIsLoadingTracks}
+              selectHasMoreTracks={top.selectHasMoreTracks}
+              fetch={top.fetch}
+              tracks={topTracks}
+            />
           </Route>
           <Route path="/favorites">
-            <TrackList tracks={favoriteTracks} isFavorite={true} />
+            <TrackList
+              selectLastIndex={favorites.selectLastIndex}
+              selectIsLoadingTracks={favorites.selectIsLoadingTracks}
+              selectHasMoreTracks={favorites.selectHasMoreTracks}
+              tracks={favoriteTracks}
+              fetch={favorites.fetch}
+              isFavorite={true}
+            />
           </Route>
           <Route path="/search">
-            <TrackList tracks={filteredTracks} />
+            <TrackList
+              tracks={filteredTracks}
+              selectLastIndex={search.selectLastIndex}
+              selectIsLoadingTracks={search.selectIsLoadingTracks}
+              selectHasMoreTracks={search.selectHasMoreTracks}
+              fetch={search.fetch}
+            />
           </Route>
         </Switch>
       </BrowserRouter>

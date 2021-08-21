@@ -3,9 +3,8 @@ import styled from 'styled-components'
 import Search from 'view/components/icons/Search'
 import User from 'view/components/icons/User'
 import Logo from 'view/components/icons/Logo'
-import { openSearch, closeSearch, updateSearchInput } from 'store/searchSlice'
 import { useSelector, useDispatch } from 'app/hooks'
-import { selectSearchInput } from 'store/searchSlice'
+import * as search from 'store/searchSlice'
 
 const Header = styled.header`
   font-size: 1.2rem;
@@ -70,7 +69,7 @@ export default function MainNavigation({
 }) {
   const { pathname: path } = useLocation()
   const dispatch = useDispatch()
-  const searchInput = useSelector(selectSearchInput)
+  const searchInput = useSelector(search.selectSearchInput)
   const history = useHistory()
 
   return (
@@ -88,17 +87,17 @@ export default function MainNavigation({
         <span>
           {isSearching ? (
             <span>
-              <span onClick={() => dispatch(closeSearch())}> {`<-`} </span>
+              <span onClick={() => dispatch(search.close())}> {`<-`} </span>
               <input
                 value={searchInput}
                 type="text"
                 autoFocus
                 onChange={(e) => {
-                  dispatch(updateSearchInput(e.target.value))
+                  dispatch(search.update(e.target.value))
                 }}
                 onKeyUp={(e) => {
                   if (e.key === 'Escape') {
-                    dispatch(closeSearch())
+                    dispatch(search.close())
                   } else if (e.key === 'Enter') {
                     history.push('/search?q=input')
                   }
@@ -106,8 +105,8 @@ export default function MainNavigation({
               />
               <span
                 onClick={() => {
-                  dispatch(updateSearchInput(''))
-                  dispatch(closeSearch())
+                  dispatch(search.update(''))
+                  dispatch(search.close())
                 }}
               >
                 x
@@ -116,7 +115,7 @@ export default function MainNavigation({
           ) : (
             <SearchLink
               onClick={() => {
-                dispatch(openSearch())
+                dispatch(search.open())
               }}
               path={path}
             >

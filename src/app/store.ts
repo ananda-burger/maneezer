@@ -1,13 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import { reducer as trackReducer } from 'store/trackSlice'
+import { reducer as trackReducer } from 'store/topTracksSlice'
 import { reducer as audioReducer } from 'store/audioSlice'
 import { reducer as searchReducer } from 'store/searchSlice'
+import { reducer as favoritesReducer } from 'store/favoriteTracksSlice'
 
 export const store = configureStore({
   reducer: {
-    track: trackReducer,
+    topTracks: trackReducer,
     audio: audioReducer,
-    search: searchReducer
+    search: searchReducer,
+    favoriteTracks: favoritesReducer
   }
 })
 

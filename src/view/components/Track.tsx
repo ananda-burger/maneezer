@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'app/hooks'
-import { pause, play, selectPlayingTrackId } from 'store/audioSlice'
-import { addToFavorites, removeFromFavorites } from 'store/trackSlice'
+import * as audio from 'store/audioSlice'
+import * as favorites from 'store/favoriteTracksSlice'
 import styled from 'styled-components'
 import * as types from 'types'
 import { secondsToMinutes } from 'utilities'
@@ -73,16 +73,16 @@ export default function Track({
   isFavorite?: boolean
 }) {
   const dispatch = useDispatch()
-  const playingTrackId = useSelector(selectPlayingTrackId)
+  const playingTrackId = useSelector(audio.selectPlayingTrackId)
 
   return (
     <Container>
       {track.id === playingTrackId ? (
-        <div onClick={() => dispatch(pause())}>
+        <div onClick={() => dispatch(audio.pause())}>
           <Pause />
         </div>
       ) : (
-        <div onClick={() => dispatch(play(track))}>
+        <div onClick={() => dispatch(audio.play(track))}>
           <Play />
         </div>
       )}
@@ -95,11 +95,11 @@ export default function Track({
       <div>{secondsToMinutes(track.duration)}</div>
       <ButtonsContainer>
         {isFavorite ? (
-          <div onClick={() => dispatch(removeFromFavorites(track))}>
+          <div onClick={() => dispatch(favorites.removeFromFavorites(track))}>
             <FullHeart />
           </div>
         ) : (
-          <div onClick={() => dispatch(addToFavorites(track))}>
+          <div onClick={() => dispatch(favorites.addToFavorites(track))}>
             <HollowHeart />
           </div>
         )}

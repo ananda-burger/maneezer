@@ -45,11 +45,10 @@ export interface Track {
 }
 
 export interface State {
-  topTracks: Track[]
-  lastTopTracksIndex: number
-  favoriteTracks: Track[]
-  isLoadingTopTracks: boolean
-  hasMoreTopTracks: boolean
+  tracks: Track[]
+  lastIndex: number
+  isLoading: boolean
+  hasMoreTracks: boolean
 }
 
 export interface AudioState {
@@ -58,7 +57,10 @@ export interface AudioState {
 }
 
 export interface SearchState {
+  hasMoreTracks: boolean
+  isLoading: boolean
   isSearching: boolean
+  lastIndex: number
   searchInput: string
   tracks: Track[]
 }
