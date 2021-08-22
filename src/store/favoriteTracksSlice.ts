@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
 import { FavoriteTracksState, Track } from 'types'
 import * as api from 'tracksAPI'
@@ -54,17 +54,18 @@ export const add = createAsyncThunk(
   }
 )
 
+export const remove = createAsyncThunk(
+  'favoriteTracks/removeFromFavorites',
+  (track: Track, { getState }: any) => {
+    const state: RootState = getState()
+    return api.removeFromFavorites(selectUserID(state), track)
+  }
+)
+
 export const favoritesSlice = createSlice({
   name: 'favoriteTracks',
   initialState,
-  reducers: {
-    removeFromFavorites: (state, action: PayloadAction<Track>) => {
-      const index = state.tracks.findIndex((track) => {
-        return track.id === action.payload.id
-      })
-      state.tracks.splice(index, 1)
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetch.fulfilled, (state, action) => {
@@ -79,9 +80,13 @@ export const favoritesSlice = createSlice({
       .addCase(add.fulfilled, (state, action) => {
         state.tracks.push(action.payload)
       })
+      .addCase(remove.fulfilled, (state, action) => {
+        const index = state.tracks.findIndex((track) => {
+          return track.id === action.payload.id
+        })
+        state.tracks.splice(index, 1)
+      })
   }
 })
-
-export const { removeFromFavorites } = favoritesSlice.actions
 
 export const { reducer } = favoritesSlice

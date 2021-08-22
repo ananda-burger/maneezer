@@ -98,7 +98,7 @@ export default function Track({
       <div>{secondsToMinutes(track.duration)}</div>
       <ButtonsContainer>
         {isFavorite ? (
-          <div onClick={() => dispatch(favorites.removeFromFavorites(track))}>
+          <div onClick={() => dispatch(favorites.remove(track))}>
             <FullHeart />
           </div>
         ) : (

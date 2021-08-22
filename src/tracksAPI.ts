@@ -54,6 +54,19 @@ export const addToFavorites = (id: string, track: Track) => {
   })
 }
 
+export const removeFromFavorites = (id: string, track: Track) => {
+  return new Promise<Track>((resolve, _reject) => {
+    window.DZ.api(
+      `user/${id}/tracks`,
+      'DELETE',
+      { track_id: track.id },
+      (_response: any) => {
+        resolve(track)
+      }
+    )
+  })
+}
+
 export const login = () => {
   return new Promise<LoginResponse>((resolve, _reject) => {
     window.DZ.login(
@@ -62,7 +75,7 @@ export const login = () => {
           resolve(response)
         }
       },
-      { perms: 'basic_access,manage_library' }
+      { perms: 'basic_access,manage_library,delete_library' }
     )
   })
 }
