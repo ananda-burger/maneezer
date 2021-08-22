@@ -44,7 +44,7 @@ export interface Track {
   type: string
 }
 
-export interface State {
+export interface TopTracksState {
   tracks: Track[]
   lastIndex: number
   isLoading: boolean

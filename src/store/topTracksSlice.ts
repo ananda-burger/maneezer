@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { State } from 'types'
+import { TopTracksState } from 'types'
 import * as api from 'tracksAPI'
 
-const initialState: State = {
+const initialState: TopTracksState = {
   tracks: [],
   lastIndex: 0,
   isLoading: false,
