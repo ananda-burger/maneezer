@@ -10,6 +10,7 @@ import reset from 'styled-reset'
 import MainNavigation from 'view/components/MainNavigation'
 import TracksHeader from 'view/components/TracksHeader'
 import TrackList from 'view/TrackList'
+import NotFound from 'view/NotFound'
 import { useDispatch } from 'app/hooks'
 
 const GlobalStyle = createGlobalStyle`
@@ -72,6 +73,9 @@ export default function App() {
               selectHasMoreTracks={search.selectHasMoreTracks}
               fetch={search.fetch}
             />
+          </Route>
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
       </BrowserRouter>
