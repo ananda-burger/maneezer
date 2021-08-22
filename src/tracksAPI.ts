@@ -1,4 +1,5 @@
 import { DeezerResponse, LoginResponse, Track } from 'types'
+import Cookies from 'js-cookie'
 
 export const fetchTracks = (lastIndex: number, perPage: number) => {
   return new Promise<Track[]>((resolve, _reject) => {
@@ -77,6 +78,14 @@ export const login = () => {
       },
       { perms: 'basic_access,manage_library,delete_library' }
     )
+  })
+}
+
+export const logout = () => {
+  return new Promise<boolean>((resolve, _reject) => {
+    window.DZ.logout()
+    Cookies.remove('currentAuthResponse')
+    resolve(true)
   })
 }
 

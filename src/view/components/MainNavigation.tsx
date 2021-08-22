@@ -58,10 +58,16 @@ const LogoutOptions = styled.div`
 `
 
 const LoginOptions = styled(LogoutOptions)`
+  margin-right: 1rem;
+  &:hover {
+    cursor: pointer;
+    color: rgb(227, 77, 134);
+  }
   svg {
     &:first-child {
       margin-right: 0.3rem;
     }
+  }
 `
 
 const FavoritesLink = styled(Link)<{ path: string }>`
@@ -197,19 +203,19 @@ export default function MainNavigation() {
           </>
         )}
       </MainNavOptions>
-      <UserLink to="/">
-        {isLogged ? (
-          <LogoutOptions onClick={() => dispatch(user.login())}>
+      {isLogged ? (
+        <UserLink to="/">
+          <LogoutOptions onClick={() => dispatch(user.logout())}>
             <User />
             Logout
           </LogoutOptions>
-        ) : (
-          <LoginOptions onClick={() => dispatch(user.login())}>
-            <Login />
-            Login
-          </LoginOptions>
-        )}
-      </UserLink>
+        </UserLink>
+      ) : (
+        <LoginOptions onClick={() => dispatch(user.login())}>
+          <Login />
+          Login
+        </LoginOptions>
+      )}
     </Header>
   )
 }

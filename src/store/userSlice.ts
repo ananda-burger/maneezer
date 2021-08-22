@@ -24,6 +24,10 @@ export const login = createAsyncThunk('user/login', () => {
   return api.login()
 })
 
+export const logout = createAsyncThunk<boolean>('user/logout', () => {
+  return api.logout()
+})
+
 export const fetchLoginStatus = createAsyncThunk(
   'user/fetchLoginStatus',
   () => {
@@ -42,6 +46,9 @@ export const userSlice = createSlice({
       })
       .addCase(fetchLoginStatus.fulfilled, (state, action) => {
         state.loginData = action.payload
+      })
+      .addCase(logout.fulfilled, (state, _action) => {
+        state.loginData = initialState.loginData
       })
   }
 })

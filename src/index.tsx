@@ -11,6 +11,7 @@ declare global {
       init: (config: { appId: string; channelUrl: string }) => void
       api: (...args: any) => void
       getLoginStatus: (callback: (response: LoginResponse) => void) => void
+      logout: () => void
       login: (
         callback: (response: LoginResponse) => void,
         permissions: { perms: string }
