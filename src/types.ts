@@ -83,3 +83,9 @@ export interface DeezerResponse {
   prev?: string
   total: number
 }
+
+export enum Route {
+  Home = '/',
+  Favorites = '/favorites',
+  Search = '/search'
+}

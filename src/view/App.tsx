@@ -4,6 +4,7 @@ import * as favorites from 'store/favoriteTracksSlice'
 import * as search from 'store/searchSlice'
 import * as top from 'store/topTracksSlice'
 import * as user from 'store/userSlice'
+import * as types from 'types'
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 import MainNavigation from 'view/components/MainNavigation'
@@ -44,7 +45,7 @@ export default function App() {
         <MainNavigation />
         <TracksHeader />
         <Switch>
-          <Route path="/" exact>
+          <Route path={types.Route.Home} exact>
             <TrackList
               selectLastIndex={top.selectLastIndex}
               selectIsLoadingTracks={top.selectIsLoadingTracks}
@@ -53,7 +54,7 @@ export default function App() {
               selectTracks={top.selectTracks}
             />
           </Route>
-          <Route path="/favorites">
+          <Route path={types.Route.Favorites}>
             <TrackList
               selectLastIndex={favorites.selectLastIndex}
               selectIsLoadingTracks={favorites.selectIsLoadingTracks}
@@ -63,7 +64,7 @@ export default function App() {
               isFavorite={true}
             />
           </Route>
-          <Route path="/search">
+          <Route path={types.Route.Search}>
             <TrackList
               selectTracks={search.selectTracks}
               selectLastIndex={search.selectLastIndex}

@@ -16,6 +16,10 @@ export const selectLoginData = (state: RootState) => {
   return state.user
 }
 
+export const selectIsLogged = (state: RootState) => {
+  return state.user.loginData.status === 'connected'
+}
+
 export const login = createAsyncThunk('user/login', () => {
   return api.login()
 })

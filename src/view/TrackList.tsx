@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'app/hooks'
 import { useEffect } from 'react'
-import * as types from 'types'
 import Track from 'view/components/Track'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import Loading from 'view/components/icons/Loading'
 import styled from 'styled-components'
 import { RootState } from 'app/store'
 import { AsyncThunk } from '@reduxjs/toolkit'
+import * as user from 'store/userSlice'
+import * as types from 'types'
 
 const LoadingItem = styled.li`
   display: flex;
@@ -38,6 +39,7 @@ export default function TrackList({
   const isLoading = useSelector(selectIsLoadingTracks)
   const hasNextPage = useSelector(selectHasMoreTracks)
   const tracks = useSelector(selectTracks)
+  const isLogged = useSelector(user.selectIsLogged)
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,
@@ -47,12 +49,14 @@ export default function TrackList({
   })
 
   useEffect(() => {
-    dispatch(fetch({ lastIndex, isLoading }))
+    if (isLogged && isFavorite) {
+      dispatch(fetch({ lastIndex, isLoading }))
+    }
   }, [])
 
-  return (
-    <div>
-      <div>
+  const renderTracks = () => {
+    return (
+      <>
         {tracks.map((track) => {
           return <Track key={track.id} track={track} isFavorite={isFavorite} />
         })}
@@ -61,7 +65,21 @@ export default function TrackList({
             <Loading />
           </LoadingItem>
         )}
-      </div>
+      </>
+    )
+  }
+
+  return (
+    <div>
+      {isFavorite ? (
+        isLogged ? (
+          renderTracks()
+        ) : (
+          <div>Please login to see your favorites</div>
+        )
+      ) : (
+        renderTracks()
+      )}
     </div>
   )
 }

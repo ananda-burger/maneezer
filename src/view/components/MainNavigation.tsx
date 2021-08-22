@@ -68,6 +68,11 @@ const LogoLink = styled(Link)`
 
 const UserLink = styled(Link)`
   margin-right: 1rem;
+  &:hover {
+    div {
+      color: rgb(227, 77, 134);
+    }
+  }
 `
 
 const InputContainer = styled.div`
@@ -92,6 +97,7 @@ export default function MainNavigation() {
   const history = useHistory()
   const searchInput = useSelector(search.selectSearchInput)
   const isSearching = useSelector(search.selectIsSearching)
+  const isLogged = useSelector(user.selectIsLogged)
   const textInput = useRef<HTMLInputElement>(null)
 
   return (
@@ -154,9 +160,11 @@ export default function MainNavigation() {
         )}
       </MainNavOptions>
       <UserLink to="/">
-        <div onClick={() => dispatch(user.login())}>
+        {isLogged ? (
           <User />
-        </div>
+        ) : (
+          <div onClick={() => dispatch(user.login())}>Login</div>
+        )}
       </UserLink>
     </Header>
   )

@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'app/hooks'
 import * as audio from 'store/audioSlice'
 import * as favorites from 'store/favoriteTracksSlice'
-import styled from 'styled-components'
+import * as user from 'store/userSlice'
 import * as types from 'types'
+import styled from 'styled-components'
 import { secondsToMinutes } from 'utilities'
 import ExternalLink from 'view/components/icons/ExternalLink'
 import FullHeart from 'view/components/icons/FullHeart'
@@ -75,6 +76,7 @@ export default function Track({
 }) {
   const dispatch = useDispatch()
   const playingTrackId = useSelector(audio.selectPlayingTrackId)
+  const isLogged = useSelector(user.selectIsLogged)
 
   return (
     <Container>
@@ -100,8 +102,12 @@ export default function Track({
             <FullHeart />
           </div>
         ) : (
-          <div onClick={() => dispatch(favorites.addToFavorites(track))}>
-            <HollowHeart />
+          <div>
+            {isLogged && (
+              <div onClick={() => dispatch(favorites.addToFavorites(track))}>
+                <HollowHeart />
+              </div>
+            )}
           </div>
         )}
         <a href={track.link} target="_blank" rel="noreferrer">
