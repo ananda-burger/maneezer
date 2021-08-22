@@ -72,7 +72,7 @@ export interface UserState {
 export interface LoginResponse {
   authInitDate: number
   authResponse: { accessToken: string; expire: number }
-  status: 'connected' | 'not_authorized'
+  status: 'connected' | 'not_authorized' | 'notConnected' | 'unknown'
   userID: string
 }
 
