@@ -34,7 +34,7 @@ export const fetch = createAsyncThunk(
     if (isLoading) {
       return Promise.resolve([])
     }
-    return api.fetchFavoriteTracks(lastIndex, PER_PAGE)
+    return api.fetchFavoriteTracks('<ID>', lastIndex, PER_PAGE)
   }
 )
 

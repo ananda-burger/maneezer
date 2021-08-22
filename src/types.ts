@@ -65,6 +65,10 @@ export interface SearchState {
   tracks: Track[]
 }
 
+export interface UserState {
+  loginData: LoginResponse
+}
+
 export interface LoginResponse {
   authInitDate: number
   authResponse: { accessToken: string; expire: number }

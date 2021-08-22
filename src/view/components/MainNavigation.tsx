@@ -7,8 +7,8 @@ import Back from 'view/components/icons/Back'
 import ClearInput from 'view/components/icons/ClearInput'
 import { useSelector, useDispatch } from 'app/hooks'
 import * as search from 'store/searchSlice'
+import * as user from 'store/userSlice'
 import { useRef } from 'react'
-import * as trackApi from 'tracksAPI'
 
 const Header = styled.header`
   font-size: 1.2rem;
@@ -154,7 +154,7 @@ export default function MainNavigation() {
         )}
       </MainNavOptions>
       <UserLink to="/">
-        <div onClick={() => trackApi.login()}>
+        <div onClick={() => dispatch(user.login())}>
           <User />
         </div>
       </UserLink>
