@@ -20,9 +20,11 @@ declare global {
   }
 }
 
+// For local development, use app ID 499022 and channel URL as
+// http://localhost:3000.
 window.DZ.init({
-  appId: '499022',
-  channelUrl: 'http://localhost:3000'
+  appId: '499722',
+  channelUrl: 'https://maneezer.netlify.com'
 })
 
 ReactDOM.render(
