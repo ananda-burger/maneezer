@@ -12,7 +12,7 @@ import Pause from 'view/components/icons/Pause'
 import Play from 'view/components/icons/Play'
 
 const Container = styled.li`
-  padding: 0.4rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   display: grid;
   align-items: center;
   justify-content: space-between;
@@ -39,7 +39,7 @@ const TrackName = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.35rem;
   max-width: 100%;
 `
 

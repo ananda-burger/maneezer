@@ -1,10 +1,14 @@
+import { useSelector } from 'app/hooks'
+import * as user from 'store/userSlice'
+import * as types from 'types'
 import Clock from 'view/components/icons/Clock'
 import styled from 'styled-components'
 import { Icon } from 'view/components/styled'
+import { useLocation } from 'react-router-dom'
 
 const Container = styled.div`
   position: sticky;
-  top: 3.5rem;
+  top: 4rem;
   background: rgb(24, 24, 24);
   border-bottom: 1px solid rgb(51, 51, 51);
   color: gray;
@@ -23,18 +27,23 @@ const Grid = styled.div`
 `
 
 export default function TracksHeader() {
+  const isLogged = useSelector(user.selectIsLogged)
+  const location = useLocation()
+
   return (
     <Container>
-      <Grid>
-        <div></div>
-        <div></div>
-        <div>TITLE</div>
-        <div>ALBUM</div>
-        <Icon>
-          <Clock />
-        </Icon>
-        <div></div>
-      </Grid>
+      {isLogged && location.pathname === types.Route.Favorites && (
+        <Grid>
+          <div></div>
+          <div></div>
+          <div>TITLE</div>
+          <div>ALBUM</div>
+          <Icon>
+            <Clock />
+          </Icon>
+          <div></div>
+        </Grid>
+      )}
     </Container>
   )
 }

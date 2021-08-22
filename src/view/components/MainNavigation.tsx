@@ -2,8 +2,9 @@ import { useHistory, Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Search from 'view/components/icons/Search'
 import User from 'view/components/icons/User'
-import Logo from 'view/components/icons/Logo'
 import Back from 'view/components/icons/Back'
+import Login from 'view/components/icons/Login'
+import Logo from 'view/components/icons/Logo'
 import ClearInput from 'view/components/icons/ClearInput'
 import { useSelector, useDispatch } from 'app/hooks'
 import * as search from 'store/searchSlice'
@@ -45,6 +46,24 @@ const MainNavOptions = styled.div`
   }
 `
 
+const LogoutOptions = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  svg {
+    &:first-child {
+      margin-right: 0.6rem;
+    }
+  }
+`
+
+const LoginOptions = styled(LogoutOptions)`
+  svg {
+    &:first-child {
+      margin-right: 0.3rem;
+    }
+`
+
 const FavoritesLink = styled(Link)<{ path: string }>`
   &:hover {
     cursor: pointer;
@@ -64,6 +83,13 @@ const SearchLink = styled.a<{ path: string }>`
 const LogoLink = styled(Link)`
   margin-left: 1rem;
   justify-self: flex-start;
+  display: flex;
+  align-items: center;
+  img {
+    &:first-child {
+      margin-right: 0.6rem;
+    }
+  }
 `
 
 const UserLink = styled(Link)`
@@ -91,6 +117,11 @@ const SearchInput = styled.input`
   outline: pink;
 `
 
+const Image = styled.img`
+  width: 32px;
+  height: 42px;
+`
+
 export default function MainNavigation() {
   const { pathname: path } = useLocation()
   const dispatch = useDispatch()
@@ -105,7 +136,11 @@ export default function MainNavigation() {
   return (
     <Header>
       <LogoLink to="/">
-        <Logo />
+        <Image
+          src="https://ik.imagekit.io/z9fjicafx6e/Media_Icons/Untitled_86yGLQ_ib_6u9-lnMbwCn.png?updatedAt=1629662990877"
+          alt="music notes"
+        />
+        Maneezer
       </LogoLink>
       <MainNavOptions>
         {isSearching ? (
@@ -164,9 +199,15 @@ export default function MainNavigation() {
       </MainNavOptions>
       <UserLink to="/">
         {isLogged ? (
-          <User />
+          <LogoutOptions onClick={() => dispatch(user.login())}>
+            <User />
+            Logout
+          </LogoutOptions>
         ) : (
-          <div onClick={() => dispatch(user.login())}>Login</div>
+          <LoginOptions onClick={() => dispatch(user.login())}>
+            <Login />
+            Login
+          </LoginOptions>
         )}
       </UserLink>
     </Header>

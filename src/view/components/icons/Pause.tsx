@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Icon = styled.svg`
-  color: darkgray;
+  color: rgb(227, 77, 134);
   transition: 0.2 ease;
   &:hover {
     fill: rgb(227, 77, 134);
