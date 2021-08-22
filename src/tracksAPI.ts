@@ -11,6 +11,21 @@ export const fetchTracks = (lastIndex: number, perPage: number) => {
   })
 }
 
+export const fetchFilteredTracks = (
+  searchInput: string,
+  lastIndex: number,
+  perPage: number
+) => {
+  return new Promise<Track[]>((resolve, _reject) => {
+    window.DZ.api(
+      `/search?q=${searchInput}&index=${lastIndex}&limit=${perPage}`,
+      (response) => {
+        resolve(response.data)
+      }
+    )
+  })
+}
+
 export const fetchFavoriteTracks = (
   id: string,
   lastIndex: number,

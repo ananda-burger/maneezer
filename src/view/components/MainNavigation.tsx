@@ -97,6 +97,8 @@ export default function MainNavigation() {
   const history = useHistory()
   const searchInput = useSelector(search.selectSearchInput)
   const isSearching = useSelector(search.selectIsSearching)
+  const lastIndex = useSelector(search.selectLastIndex)
+  const isLoading = useSelector(search.selectIsLoadingTracks)
   const isLogged = useSelector(user.selectIsLogged)
   const textInput = useRef<HTMLInputElement>(null)
 
@@ -125,7 +127,8 @@ export default function MainNavigation() {
                 if (e.key === 'Escape') {
                   dispatch(search.close())
                 } else if (e.key === 'Enter') {
-                  history.push('/search?q=input')
+                  dispatch(search.fetch({ isLoading, lastIndex }))
+                  history.push(`/search?q=${searchInput}`)
                 }
               }}
             />
