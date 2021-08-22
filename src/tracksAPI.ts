@@ -38,3 +38,11 @@ export const login = () => {
     )
   })
 }
+
+export const loginStatus = () => {
+  return new Promise<LoginResponse>((resolve, _reject) => {
+    window.DZ.getLoginStatus((response) => {
+      resolve(response)
+    })
+  })
+}

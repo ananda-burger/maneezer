@@ -10,6 +10,7 @@ declare global {
     DZ: {
       init: (config: { appId: string; channelUrl: string }) => void
       api: (url: string, callback: (response: DeezerResponse) => void) => void
+      getLoginStatus: (callback: (response: LoginResponse) => void) => void
       login: (
         callback: (response: LoginResponse) => void,
         permissions: { perms: string }

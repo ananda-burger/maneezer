@@ -1,12 +1,15 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import TrackList from 'view/TrackList'
-import MainNavigation from 'view/components/MainNavigation'
-import TracksHeader from 'view/components/TracksHeader'
+import * as favorites from 'store/favoriteTracksSlice'
+import * as search from 'store/searchSlice'
+import * as top from 'store/topTracksSlice'
+import * as user from 'store/userSlice'
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
-import * as top from 'store/topTracksSlice'
-import * as search from 'store/searchSlice'
-import * as favorites from 'store/favoriteTracksSlice'
+import MainNavigation from 'view/components/MainNavigation'
+import TracksHeader from 'view/components/TracksHeader'
+import TrackList from 'view/TrackList'
+import { useDispatch } from 'app/hooks'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -28,6 +31,12 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(user.fetchLoginStatus())
+  }, [])
+
   return (
     <div>
       <GlobalStyle />

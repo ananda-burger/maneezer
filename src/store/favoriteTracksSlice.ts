@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { TopTracksState, Track } from 'types'
+import { FavoriteTracksState, Track } from 'types'
 import * as api from 'tracksAPI'
 
-const initialState: TopTracksState = {
+const initialState: FavoriteTracksState = {
   tracks: [],
   lastIndex: 0,
   isLoading: false,
@@ -28,13 +28,21 @@ export const selectHasMoreTracks = (state: RootState) => {
   return state.favoriteTracks.hasMoreTracks
 }
 
+export const selectUserID = (state: RootState) => {
+  return state.user.loginData.userID
+}
+
 export const fetch = createAsyncThunk(
   'favoriteTracks/fetchFavoriteTracks',
-  ({ lastIndex, isLoading }: { lastIndex: number; isLoading: boolean }) => {
+  (
+    { lastIndex, isLoading }: { lastIndex: number; isLoading: boolean },
+    { getState }: any
+  ) => {
+    const state: RootState = getState()
     if (isLoading) {
       return Promise.resolve([])
     }
-    return api.fetchFavoriteTracks('<ID>', lastIndex, PER_PAGE)
+    return api.fetchFavoriteTracks(selectUserID(state), lastIndex, PER_PAGE)
   }
 )
 

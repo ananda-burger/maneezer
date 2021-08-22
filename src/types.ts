@@ -51,6 +51,8 @@ export interface TopTracksState {
   hasMoreTracks: boolean
 }
 
+export interface FavoriteTracksState extends TopTracksState {}
+
 export interface AudioState {
   audioInstance: any
   playingTrackId?: number
