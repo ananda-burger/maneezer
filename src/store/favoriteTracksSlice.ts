@@ -46,13 +46,18 @@ export const fetch = createAsyncThunk(
   }
 )
 
+export const add = createAsyncThunk(
+  'favoriteTracks/addToFavorites',
+  (track: Track, { getState }: any) => {
+    const state: RootState = getState()
+    return api.addToFavorites(selectUserID(state), track)
+  }
+)
+
 export const favoritesSlice = createSlice({
   name: 'favoriteTracks',
   initialState,
   reducers: {
-    addToFavorites: (state, action: PayloadAction<Track>) => {
-      state.tracks.push(action.payload)
-    },
     removeFromFavorites: (state, action: PayloadAction<Track>) => {
       const index = state.tracks.findIndex((track) => {
         return track.id === action.payload.id
@@ -71,9 +76,12 @@ export const favoritesSlice = createSlice({
       .addCase(fetch.pending, (state, _action) => {
         state.isLoading = true
       })
+      .addCase(add.fulfilled, (state, action) => {
+        state.tracks.push(action.payload)
+      })
   }
 })
 
-export const { addToFavorites, removeFromFavorites } = favoritesSlice.actions
+export const { removeFromFavorites } = favoritesSlice.actions
 
 export const { reducer } = favoritesSlice

@@ -104,7 +104,7 @@ export default function Track({
         ) : (
           <div>
             {isLogged && (
-              <div onClick={() => dispatch(favorites.addToFavorites(track))}>
+              <div onClick={() => dispatch(favorites.add(track))}>
                 <HollowHeart />
               </div>
             )}

@@ -1,10 +1,10 @@
-import { LoginResponse, Track } from 'types'
+import { DeezerResponse, LoginResponse, Track } from 'types'
 
 export const fetchTracks = (lastIndex: number, perPage: number) => {
   return new Promise<Track[]>((resolve, _reject) => {
     window.DZ.api(
       `/chart/0/tracks?index=${lastIndex}&limit=${perPage}`,
-      (response) => {
+      (response: DeezerResponse) => {
         resolve(response.data)
       }
     )
@@ -19,7 +19,7 @@ export const fetchFilteredTracks = (
   return new Promise<Track[]>((resolve, _reject) => {
     window.DZ.api(
       `/search?q=${searchInput}&index=${lastIndex}&limit=${perPage}`,
-      (response) => {
+      (response: DeezerResponse) => {
         resolve(response.data)
       }
     )
@@ -34,8 +34,21 @@ export const fetchFavoriteTracks = (
   return new Promise<Track[]>((resolve, _reject) => {
     window.DZ.api(
       `/user/${id}/tracks?index=${lastIndex}&limit=${perPage}`,
-      (response) => {
+      (response: DeezerResponse) => {
         resolve(response.data)
+      }
+    )
+  })
+}
+
+export const addToFavorites = (id: string, track: Track) => {
+  return new Promise<Track>((resolve, _reject) => {
+    window.DZ.api(
+      `user/${id}/tracks`,
+      'POST',
+      { track_id: track.id },
+      (_response: any) => {
+        resolve(track)
       }
     )
   })
