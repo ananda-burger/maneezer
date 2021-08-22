@@ -1,10 +1,6 @@
-import { useSelector } from 'app/hooks'
-import * as user from 'store/userSlice'
-import * as types from 'types'
 import Clock from 'view/components/icons/Clock'
 import styled from 'styled-components'
 import { Icon } from 'view/components/styled'
-import { useLocation } from 'react-router-dom'
 
 const Container = styled.div`
   position: sticky;
@@ -27,23 +23,18 @@ const Grid = styled.div`
 `
 
 export default function TracksHeader() {
-  const isLogged = useSelector(user.selectIsLogged)
-  const location = useLocation()
-
   return (
     <Container>
-      {isLogged && location.pathname === types.Route.Favorites && (
-        <Grid>
-          <div></div>
-          <div></div>
-          <div>TITLE</div>
-          <div>ALBUM</div>
-          <Icon>
-            <Clock />
-          </Icon>
-          <div></div>
-        </Grid>
-      )}
+      <Grid>
+        <div></div>
+        <div></div>
+        <div>TITLE</div>
+        <div>ALBUM</div>
+        <Icon>
+          <Clock />
+        </Icon>
+        <div></div>
+      </Grid>
     </Container>
   )
 }
