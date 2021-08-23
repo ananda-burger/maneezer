@@ -11,18 +11,21 @@ import HollowHeart from 'view/components/icons/HollowHeart'
 import Pause from 'view/components/icons/Pause'
 import Play from 'view/components/icons/Play'
 
-const Container = styled.li`
+const Container = styled.li<{ isPlaying: boolean }>`
   padding: 0.5rem 1.5rem;
   align-items: center;
   display: grid;
   grid-template-columns: minmax(0, 0.5fr) minmax(0, 0.7fr) minmax(0, 4fr) minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1fr);
   grid-gap: 0.8rem;
+  background-color: ${({ isPlaying }) =>
+    isPlaying ? 'rgb(227,77,134,0.25)' : 'transparent'};
 
   @media (hover: hover) {
     &:hover {
       border: none;
       border-radius:  5px;
-      background-color:  rgba(255, 255, 255, 0.2);
+      background-color: ${({ isPlaying }) =>
+        isPlaying ? 'rgb(227,77,134,0.4)' : 'rgba(255, 255, 255, 0.2)'};
       color: white;
       fill: rgb(34, 34, 34);
   }
@@ -82,10 +85,11 @@ export default function Track({
   const dispatch = useDispatch()
   const playingTrackId = useSelector(audio.selectPlayingTrackId)
   const isLogged = useSelector(user.selectIsLogged)
+  const isPlaying = track.id === playingTrackId
 
   return (
-    <Container>
-      {track.id === playingTrackId ? (
+    <Container isPlaying={isPlaying}>
+      {isPlaying ? (
         <Column onClick={() => dispatch(audio.pause())}>
           <Pause />
         </Column>
