@@ -18,7 +18,8 @@ const Container = styled.li`
   justify-content: space-between;
   flex-direction: row;
   justify-items: flex-start;
-  grid-template-columns: 0.5fr 0.7fr 4fr 3fr 1fr 1fr;
+  grid-template-columns: minmax(0, 0.5fr) minmax(0, 0.7fr) minmax(0, 4fr) minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-gap: 0.8rem;
 
   @media (hover: hover) {
     &:hover {
@@ -30,8 +31,15 @@ const Container = styled.li`
   }
 `
 
+const Column = styled.div`
+  max-width: 100%;
+`
+
 const Cover = styled.img`
-  height: 3rem;
+  min-width: 2rem;
+  max-width: 100%;
+  min-height: 2rem;
+  max-height: 3rem;
 `
 
 const TrackName = styled.div`
@@ -81,39 +89,47 @@ export default function Track({
   return (
     <Container>
       {track.id === playingTrackId ? (
-        <div onClick={() => dispatch(audio.pause())}>
+        <Column onClick={() => dispatch(audio.pause())}>
           <Pause />
-        </div>
+        </Column>
       ) : (
-        <div onClick={() => dispatch(audio.play(track))}>
+        <Column onClick={() => dispatch(audio.play(track))}>
           <Play />
-        </div>
+        </Column>
       )}
-      <Cover src={track.album.cover_small} alt="Album cover" />
-      <div>
+      <Column>
+        <Cover src={track.album.cover_small} alt="Album cover" />
+      </Column>
+      <Column>
         <TrackName>{track.title}</TrackName>
         <ArtistName>{track.artist.name}</ArtistName>
-      </div>
-      <AlbumTitle>{track.album.title}</AlbumTitle>
-      <div>{secondsToMinutes(track.duration)}</div>
-      <ButtonsContainer>
-        {isFavorite ? (
-          <div onClick={() => dispatch(favorites.remove(track))}>
-            <FullHeart />
-          </div>
-        ) : (
-          <div>
-            {isLogged && (
-              <div onClick={() => dispatch(favorites.add(track))}>
-                <HollowHeart />
-              </div>
-            )}
-          </div>
-        )}
-        <a href={track.link} target="_blank" rel="noreferrer">
-          <ExternalLink />
-        </a>
-      </ButtonsContainer>
+      </Column>
+      <Column>
+        <AlbumTitle>{track.album.title}</AlbumTitle>
+      </Column>
+      <Column>
+        <div>{secondsToMinutes(track.duration)}</div>
+      </Column>
+      <Column>
+        <ButtonsContainer>
+          {isFavorite ? (
+            <div onClick={() => dispatch(favorites.remove(track))}>
+              <FullHeart />
+            </div>
+          ) : (
+            <div>
+              {isLogged && (
+                <div onClick={() => dispatch(favorites.add(track))}>
+                  <HollowHeart />
+                </div>
+              )}
+            </div>
+          )}
+          <a href={track.link} target="_blank" rel="noreferrer">
+            <ExternalLink />
+          </a>
+        </ButtonsContainer>
+      </Column>
     </Container>
   )
 }
