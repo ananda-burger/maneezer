@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'app/hooks'
 import { useEffect } from 'react'
-import Track from 'view/components/Track'
+import Track from 'view/Track'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import Loading from 'view/components/icons/Loading'
 import { styled } from 'view/theme'
