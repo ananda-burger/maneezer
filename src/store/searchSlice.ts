@@ -48,6 +48,16 @@ export const fetch = createAsyncThunk(
   }
 )
 
+export const fetchFirstPage = createAsyncThunk(
+  'search/fetchFirstPage',
+  ({ isLoading, query }: { isLoading: boolean; query: string }) => {
+    if (isLoading) {
+      return Promise.resolve([])
+    }
+    return api.fetchFilteredTracks(query, 0, PER_PAGE)
+  }
+)
+
 export const updateAndFetch = createAsyncThunk(
   'search/updateAndFetch',
   (payload: FetchPayload, { dispatch }: any) => {
@@ -76,12 +86,17 @@ export const searchSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetch.fulfilled, (state, action) => {
-      state.lastIndex += PER_PAGE
-      state.hasMoreTracks = action.payload.length > 0
-      state.tracks = state.tracks.concat(action.payload)
-      state.isLoading = false
-    })
+    builder
+      .addCase(fetch.fulfilled, (state, action) => {
+        state.lastIndex += PER_PAGE
+        state.hasMoreTracks = action.payload.length > 0
+        state.tracks = state.tracks.concat(action.payload)
+        state.isLoading = false
+      })
+      .addCase(fetchFirstPage.fulfilled, (state, action) => {
+        state.tracks = action.payload
+        state.isLoading = false
+      })
   }
 })
 
