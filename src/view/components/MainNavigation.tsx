@@ -1,10 +1,9 @@
 import { useHistory, Link, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
+import { styled } from 'view/theme'
 import Search from 'view/components/icons/Search'
 import User from 'view/components/icons/User'
 import Back from 'view/components/icons/Back'
 import Login from 'view/components/icons/Login'
-import Logo from 'view/components/icons/Logo'
 import ClearInput from 'view/components/icons/ClearInput'
 import { useSelector, useDispatch } from 'app/hooks'
 import * as search from 'store/searchSlice'
@@ -62,7 +61,7 @@ const LoginOptions = styled(LogoutOptions)`
   transition: color 0.12s;
   &:hover {
     cursor: pointer;
-    color: rgb(227, 77, 134);
+    color: ${({ theme }) => theme.colors.secondary1};
   }
   svg {
     &:first-child {

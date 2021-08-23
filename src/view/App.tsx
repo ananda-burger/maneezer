@@ -6,14 +6,14 @@ import * as top from 'store/topTracksSlice'
 import * as user from 'store/userSlice'
 import * as popUp from 'store/popUpSlice'
 import * as types from 'types'
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import reset from 'styled-reset'
 import MainNavigation from 'view/components/MainNavigation'
 import TracksHeader from 'view/components/TracksHeader'
 import TrackList from 'view/TrackList'
 import NotFound from 'view/NotFound'
 import { useDispatch, useSelector } from 'app/hooks'
-import styled from 'styled-components'
+import { styled, theme } from 'view/theme'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -89,46 +89,48 @@ export default function App() {
   }
 
   return (
-    <div>
-      {popUpIsOpen && renderPopUp()}
-      <GlobalStyle />
-      <BrowserRouter>
-        <MainNavigation />
-        <TracksHeader />
-        <Switch>
-          <Route path={types.Route.Home} exact>
-            <TrackList
-              selectLastIndex={top.selectLastIndex}
-              selectIsLoadingTracks={top.selectIsLoadingTracks}
-              selectHasMoreTracks={top.selectHasMoreTracks}
-              fetch={top.fetch}
-              selectTracks={top.selectTracks}
-            />
-          </Route>
-          <Route path={types.Route.Favorites}>
-            <TrackList
-              selectLastIndex={favorites.selectLastIndex}
-              selectIsLoadingTracks={favorites.selectIsLoadingTracks}
-              selectHasMoreTracks={favorites.selectHasMoreTracks}
-              selectTracks={favorites.selectTracks}
-              fetch={favorites.fetch}
-              isFavorite={true}
-            />
-          </Route>
-          <Route path={types.Route.Search}>
-            <TrackList
-              selectTracks={search.selectTracks}
-              selectLastIndex={search.selectLastIndex}
-              selectIsLoadingTracks={search.selectIsLoadingTracks}
-              selectHasMoreTracks={search.selectHasMoreTracks}
-              fetch={search.fetch}
-            />
-          </Route>
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        {popUpIsOpen && renderPopUp()}
+        <GlobalStyle />
+        <BrowserRouter>
+          <MainNavigation />
+          <TracksHeader />
+          <Switch>
+            <Route path={types.Route.Home} exact>
+              <TrackList
+                selectLastIndex={top.selectLastIndex}
+                selectIsLoadingTracks={top.selectIsLoadingTracks}
+                selectHasMoreTracks={top.selectHasMoreTracks}
+                fetch={top.fetch}
+                selectTracks={top.selectTracks}
+              />
+            </Route>
+            <Route path={types.Route.Favorites}>
+              <TrackList
+                selectLastIndex={favorites.selectLastIndex}
+                selectIsLoadingTracks={favorites.selectIsLoadingTracks}
+                selectHasMoreTracks={favorites.selectHasMoreTracks}
+                selectTracks={favorites.selectTracks}
+                fetch={favorites.fetch}
+                isFavorite={true}
+              />
+            </Route>
+            <Route path={types.Route.Search}>
+              <TrackList
+                selectTracks={search.selectTracks}
+                selectLastIndex={search.selectLastIndex}
+                selectIsLoadingTracks={search.selectIsLoadingTracks}
+                selectHasMoreTracks={search.selectHasMoreTracks}
+                fetch={search.fetch}
+              />
+            </Route>
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
   )
 }
