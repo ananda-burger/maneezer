@@ -13,11 +13,8 @@ import Play from 'view/components/icons/Play'
 
 const Container = styled.li`
   padding: 0.5rem 1.5rem;
-  display: grid;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  justify-items: flex-start;
+  display: grid;
   grid-template-columns: minmax(0, 0.5fr) minmax(0, 0.7fr) minmax(0, 4fr) minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1fr);
   grid-gap: 0.8rem;
 
