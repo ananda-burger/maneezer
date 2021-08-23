@@ -124,6 +124,13 @@ least display a pop-up when this happens.
 [1] https://developers.Deezer.com/api/chart
 [2] https://developers.Deezer.com/api/search
 
+** Login
+
+The Deezer SDK =DZ.login= function has a bug where if the user logs in, logs out
+and tries to login again (without refreshing the page), then the function *does
+not do anything* and doesn't call the callback. Hence there's not much I can do
+and it's a known bug in this application.
+
 ** Logout
 
 The Deezer SDK =DZ.logout= function doesn't work as documented. It doesn't accept a
