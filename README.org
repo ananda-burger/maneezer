@@ -1,1 +1,157 @@
-* Maneezer
+#+title: Maneezer
+
+* Table of contents
+:properties:
+:toc: :include all :ignore this
+:end:
+:contents:
+- [[#product][Product]]
+- [[#local-development][Local development]]
+- [[#tech-stack][Tech stack]]
+- [[#deployment][Deployment]]
+- [[#features][Features]]
+- [[#deezer-integration-issues][Deezer integration issues]]
+  - [[#cors][CORS]]
+  - [[#no-way-to-know-if-a-track-has-been-favorited][No way to know if a track has been favorited]]
+  - [[#logout][Logout]]
+  - [[#caching][Caching]]
+- [[#improvements][Improvements]]
+  - [[#testing][Testing]]
+  - [[#error-handling][Error handling]]
+  - [[#typescript][Typescript]]
+:end:
+* Product
+
+/Maneezer/ is the name of a case-study currently hosted at
+https://maneezer.netlify.com. It's a music streaming application integrated with
+Deezer that allows users to list top musics of the day, listen to their preview
+and manage their favorites.
+
+#+begin_html
+<img src="docs/screenshot-01.png" width="500"/>
+<img src="docs/screenshot-02.jpg" height="350"/>
+#+end_html
+
+* Local development
+
+If you only want to run Maneezer locally you can use any recent Node version
+(14.x+). On the other hand, if you want to develop you should use the same Node
+and NPM versions used by Netlify, which as of 2021-08-23 is Node =v16.7.0= and
+NPM =v7.20.3=.
+
+Clone the repository and run the following commands in the repository directory.
+
+#+begin_example sh
+npm install && npm start
+#+end_example
+
+* Tech stack
+
+The set of tools are (in no order of importance):
+
+- [[https://developers.deezer.com/sdk/javascript][Deezer SDK]]
+- [[https://github.com/js-cookie/js-cookie][js-cookie]]
+- [[https://app.netlify.com/][Netlify]]
+- [[https://reactjs.org/][React]]
+- [[https://redux-toolkit.js.org/][Redux Toolkit]]
+- [[https://styled-components.com/][Styled Components]]
+- [[https://www.typescriptlang.org/][TypeScript]]
+
+I have learned tons of things in this project because I wasn't familiar with
+/Redux/ and /Styled Components/. On top of that, integrating with Deezer had
+many challenges due to its API inconsistencies and incomplete documentation.
+
+* Deployment
+
+Netlify was my service of choice to host Maneezer as a SPA. I've used it before,
+and I must say it's definitely a tool to be loved. The [[file:netlify.toml]] file
+sets up various configuration options and in the Netlify webapp, all I did was
+push my commits and the deployment was done.
+
+The Netlify project is currently configured to automatically build and deploy
+when commits are integrated into the =main= branch.
+
+* Features
+
+Users /not logged in/ can:
+
+1. List top tracks of the day.
+2. Listen to track previews (limited to 30s because of the Deezer terms of use).
+3. Search tracks using the Deezer API.
+4. Display a link to the original Deezer track.
+5. Login using any Deezer account (notice the user will need to accept certain
+   permissions to manage their favorites).
+
+Users /logged in/ can:
+
+1. List their favorite tracks.
+2. Add tracks to their favorites.
+3. Remove tracks from their favorites.
+4. Log out.
+
+Other notable *improvements/features*:
+
+1. Responsive application.
+2. Display a pop-up when asynchronous operations fail, e.g. when the user tries
+   to add to favorites a track that's been already favorited.
+3. Infinite scroll.
+4. Client router with 404 (Not Found) page.
+
+* Deezer integration issues
+** CORS
+
+I wanted/had to use Axios to make HTTP requests, but it doesn't support
+JSONP[1][2], which is the only way to bypass CORS when calling Deezer endpoints.
+The only alternative would be setting up a reverse proxy server so my server
+would allow requests from the client/browser to Deezer. Instead, I opted to use
+the Deezer Javascript SDK[3] and wrap function calls in custom promises.
+
+[1] https://stackoverflow.com/questions/43471288/how-to-use-jsonp-on-fetch-axios-cross-site-requests
+
+[2] https://github.com/axios/axios/blob/master/cookbook.md#jsonp
+
+[3] https://developers.Deezer.com/sdk/javascript
+
+** No way to know if a track has been favorited
+
+I could not find in the Deezer documentation[1][2] any response field that would
+tell me if any given track is in the user's favorite list. Therefore, the [[https://maneezer.netlify.com/][Top
+Tracks]] and [[https://maneezer.netlify.com/search/][Search]] pages cannot display if a track has been favorited. This in
+turn allows the user to attempt to favorite a track multiple times. Hopefully,
+the Deezer API returns an error when such attempts are made, so I decided to at
+least display a pop-up when this happens.
+
+[1] https://developers.Deezer.com/api/chart
+[2] https://developers.Deezer.com/api/search
+
+** Logout
+
+The Deezer SDK =logout= function doesn't work as documented. It doesn't accept a
+callback function, which means the application can't tell if the logout
+operation succeeded in the server. So the best I could do was to assume it'd
+always work and clean the cookie (because the function also does not clear the
+session).
+
+** Caching
+
+The [[https://maneezer.netlify.com/][Top Tracks]] and [[https://maneezer.netlify.com/favorites][Favorites]] pages could have their tracks' data cached locally
+using the [[https://developer.mozilla.org/pt-BR/docs/Web/API/Window/localStorage][HTML Web Storage API]].
+
+* Improvements
+** Testing
+
+There are no tests in the application, of any kind. I wanted to apply unit tests
+(which are the ones I have already learned) but I didn't have enough time to
+finish the case study with all the features.
+
+** Error handling
+
+All HTTP requests assume they will receive a response in a reasonable amount of
+time. Because of that there's no timeouts handling. Additionally, there are no
+retries.
+
+** Typescript
+
+As much as I wanted to enable the =noImplicitAny= configuration, I had a hard
+time typing some Redux Toolkit functions, like the ones created by
+=createAsyncThunk= and writing types for the Deezer SDK.
