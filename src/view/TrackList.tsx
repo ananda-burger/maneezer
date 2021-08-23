@@ -15,13 +15,24 @@ const LoadingItem = styled.li`
   padding: 1rem 0;
 `
 
-const Message = styled.div`
+const Container = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   font-size: 1.5rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const Message = styled.div`
+  width: 100%;
+  margin-top: 1rem;
+  text-align: center;
+  white-space: nowrap;
 `
 
 const Image = styled.img`
@@ -89,13 +100,13 @@ export default function TrackList({
         isLogged ? (
           renderTracks()
         ) : (
-          <Message>
+          <Container>
             <Image
               src="https://ik.imagekit.io/z9fjicafx6e/Media_Icons/Untitled_86yGLQ_ib_6u9-lnMbwCn.png?updatedAt=1629662990877"
               alt="music notes"
             />
-            Please login to see your favorites
-          </Message>
+            <Message>Please login to see your favorites</Message>
+          </Container>
         )
       ) : (
         renderTracks()
