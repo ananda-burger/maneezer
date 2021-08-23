@@ -1,7 +1,6 @@
 import { styled } from 'view/theme'
 
 const Icon = styled.svg`
-  margin-left: 0.8rem;
   transition: 0.2 ease;
   &:hover {
     color: white;

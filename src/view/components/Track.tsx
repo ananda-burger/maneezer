@@ -67,10 +67,14 @@ const AlbumTitle = styled.div`
 const ButtonsContainer = styled.div`
   color: ${({ theme }) => theme.colors.primary5};
   display: flex;
-  justify-self: end;
+  justify-content: flex-end;
 
-  a:last-child {
+  & > div {
     margin-left: 0.8rem;
+  }
+
+  & > div:first-child {
+    margin: 0;
   }
 `
 
@@ -117,17 +121,19 @@ export default function Track({
               <FullHeart />
             </div>
           ) : (
-            <div>
-              {isLogged && (
+            isLogged && (
+              <div>
                 <div onClick={() => dispatch(favorites.add(track))}>
                   <HollowHeart />
                 </div>
-              )}
-            </div>
+              </div>
+            )
           )}
-          <a href={track.link} target="_blank" rel="noreferrer">
-            <ExternalLink />
-          </a>
+          <div>
+            <a href={track.link} target="_blank" rel="noreferrer">
+              <ExternalLink />
+            </a>
+          </div>
         </ButtonsContainer>
       </Column>
     </Container>
