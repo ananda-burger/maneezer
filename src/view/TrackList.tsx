@@ -81,6 +81,15 @@ export default function TrackList({
   const renderTracks = () => {
     return (
       <>
+        {tracks.length === 0 && (
+          <Container>
+            <Image
+              src="https://ik.imagekit.io/z9fjicafx6e/Media_Icons/Untitled_86yGLQ_ib_6u9-lnMbwCn.png?updatedAt=1629662990877"
+              alt="music notes"
+            />
+            <Message>No songs match your search</Message>
+          </Container>
+        )}
         {tracks.map((track) => {
           return <Track key={track.id} track={track} isFavorite={isFavorite} />
         })}
