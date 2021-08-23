@@ -68,6 +68,9 @@ export const searchSlice = createSlice({
     },
     update: (state, action: PayloadAction<string>) => {
       state.searchInput = action.payload
+    },
+    clear: (state) => {
+      state.tracks = []
     }
   },
   extraReducers: (builder) => {
@@ -80,6 +83,6 @@ export const searchSlice = createSlice({
   }
 })
 
-export const { open, close, update } = searchSlice.actions
+export const { open, close, update, clear } = searchSlice.actions
 
 export const { reducer } = searchSlice

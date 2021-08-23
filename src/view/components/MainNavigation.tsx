@@ -173,6 +173,7 @@ export default function MainNavigation() {
                 if (e.key === 'Escape') {
                   dispatch(search.close())
                 } else if (e.key === 'Enter') {
+                  dispatch(search.clear())
                   dispatch(search.fetch({ isLoading, lastIndex }))
                   history.push(`/search?q=${searchInput}`)
                 }
