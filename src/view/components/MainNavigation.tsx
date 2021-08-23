@@ -158,6 +158,12 @@ const SearchInput = styled.input`
   border: none;
   background: ${({ theme }) => theme.colors.primary4};
   outline: none;
+
+  @media (max-width: 768px) {
+    & {
+      width: 10rem;
+    }
+  }
 `
 
 const TracksHeader = styled.div`
