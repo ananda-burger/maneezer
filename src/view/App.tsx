@@ -40,9 +40,14 @@ const GlobalStyle = createGlobalStyle`
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
   }
+
   a {
     text-decoration: none;
     color: darkgray;
+    transition: color 0.12s;
+    &:hover {
+      color: rgb(227, 77, 134);
+    }
   }
 
   .app-icon {

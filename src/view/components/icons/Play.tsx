@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 const Icon = styled.svg`
-  transition: 0.2 ease;
   &:hover {
     fill: rgb(227, 77, 134);
     cursor: pointer;

@@ -59,6 +59,7 @@ const LogoutOptions = styled.div`
 
 const LoginOptions = styled(LogoutOptions)`
   margin-right: 1rem;
+  transition: color 0.12s;
   &:hover {
     cursor: pointer;
     color: rgb(227, 77, 134);
@@ -80,6 +81,7 @@ const FavoritesLink = styled(Link)<{ path: string }>`
 `
 
 const SearchLink = styled.a<{ path: string }>`
+  transition: color 0.12s;
   &:hover {
     cursor: pointer;
     color: rgb(227, 77, 134);
@@ -95,9 +97,6 @@ const LogoLink = styled(Link)`
     &:first-child {
       margin-right: 0.6rem;
     }
-  }
-  &:hover {
-    color: rgb(227, 77, 134);
   }
 `
 
