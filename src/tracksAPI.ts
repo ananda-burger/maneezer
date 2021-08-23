@@ -88,6 +88,7 @@ export const login = () => {
 export const logout = () => {
   return new Promise<boolean>((resolve, _reject) => {
     window.DZ.logout()
+    window.DZ.clearDeezer()
     Cookies.remove('currentAuthResponse')
     resolve(true)
   })

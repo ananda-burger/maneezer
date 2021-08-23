@@ -9,6 +9,7 @@ declare global {
   interface Window {
     DZ: {
       init: (config: { appId: string; channelUrl: string }) => void
+      clearDeezer: () => void
       api: (...args: any) => void
       getLoginStatus: (callback: (response: LoginResponse) => void) => void
       logout: () => void

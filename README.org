@@ -126,11 +126,14 @@ least display a pop-up when this happens.
 
 ** Logout
 
-The Deezer SDK =logout= function doesn't work as documented. It doesn't accept a
+The Deezer SDK =DZ.logout= function doesn't work as documented. It doesn't accept a
 callback function, which means the application can't tell if the logout
-operation succeeded in the server. So the best I could do was to assume it'd
-always work and clean the cookie (because the function also does not clear the
-session).
+operation succeeded in the server. So the best I could do was to:
+
+1. Assume the server succeeds.
+2. Clean the cookie because =DZ.logout= does not clear the session.
+3. Call the undocumented function =DZ.clearDeezer= to tell Deezer to not send an
+   invalid auth token.
 
 ** Caching
 
