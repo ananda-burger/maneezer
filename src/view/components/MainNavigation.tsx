@@ -96,6 +96,9 @@ const LogoLink = styled(Link)`
       margin-right: 0.6rem;
     }
   }
+  &:hover {
+    color: rgb(227, 77, 134);
+  }
 `
 
 const UserLink = styled(Link)`
