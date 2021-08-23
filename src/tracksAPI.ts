@@ -43,13 +43,17 @@ export const fetchFavoriteTracks = (
 }
 
 export const addToFavorites = (id: string, track: Track) => {
-  return new Promise<Track>((resolve, _reject) => {
+  return new Promise<Track>((resolve, reject) => {
     window.DZ.api(
       `user/${id}/tracks`,
       'POST',
       { track_id: track.id },
-      (_response: any) => {
-        resolve(track)
+      (response: any) => {
+        if (typeof response === 'boolean') {
+          resolve(track)
+        } else {
+          reject(response.error.message)
+        }
       }
     )
   })

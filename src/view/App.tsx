@@ -4,6 +4,7 @@ import * as favorites from 'store/favoriteTracksSlice'
 import * as search from 'store/searchSlice'
 import * as top from 'store/topTracksSlice'
 import * as user from 'store/userSlice'
+import * as popUp from 'store/popUpSlice'
 import * as types from 'types'
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
@@ -11,7 +12,8 @@ import MainNavigation from 'view/components/MainNavigation'
 import TracksHeader from 'view/components/TracksHeader'
 import TrackList from 'view/TrackList'
 import NotFound from 'view/NotFound'
-import { useDispatch } from 'app/hooks'
+import { useDispatch, useSelector } from 'app/hooks'
+import styled from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -49,15 +51,41 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const PopUp = styled.div`
+  position: fixed;
+  display: inline;
+  box-shadow: 1px 1px 10px rgb(227 77 134);
+  bottom: 2rem;
+  border: 1.5px solid rgb(227, 77, 134);
+  font-weight: bold;
+  color: white;
+  right: 2rem;
+  padding: 1.1rem;
+  border-radius: 5px;
+  background: rgb(110 16 52);
+  max-width: 35ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 10ch;
+`
+
 export default function App() {
   const dispatch = useDispatch()
+  const popUpIsOpen = useSelector(popUp.selectIsOpen)
+  const popUpMessage = useSelector(popUp.selectMessage)
 
   useEffect(() => {
     dispatch(user.fetchLoginStatus())
   }, [])
 
+  const renderPopUp = () => {
+    return <PopUp>{popUpMessage}</PopUp>
+  }
+
   return (
     <div>
+      {popUpIsOpen && renderPopUp()}
       <GlobalStyle />
       <BrowserRouter>
         <MainNavigation />

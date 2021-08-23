@@ -4,6 +4,7 @@ import { reducer as audioReducer } from 'store/audioSlice'
 import { reducer as searchReducer } from 'store/searchSlice'
 import { reducer as favoritesReducer } from 'store/favoriteTracksSlice'
 import { reducer as userReducer } from 'store/userSlice'
+import { reducer as popUpReducer } from 'store/popUpSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     audio: audioReducer,
     search: searchReducer,
     favoriteTracks: favoritesReducer,
-    user: userReducer
+    user: userReducer,
+    popUp: popUpReducer
   }
 })
 

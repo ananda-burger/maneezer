@@ -71,6 +71,11 @@ export interface UserState {
   loginData: LoginResponse
 }
 
+export interface PopUpState {
+  isOpen: boolean
+  message: string
+}
+
 export interface LoginResponse {
   authInitDate: number
   authResponse: { accessToken: string; expire: number }

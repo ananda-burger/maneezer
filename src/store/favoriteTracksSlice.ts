@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
 import { FavoriteTracksState, Track } from 'types'
 import * as api from 'tracksAPI'
+import * as popUp from 'store/popUpSlice'
 
 const initialState: FavoriteTracksState = {
   tracks: [],
@@ -48,9 +49,11 @@ export const fetch = createAsyncThunk(
 
 export const add = createAsyncThunk(
   'favoriteTracks/addToFavorites',
-  (track: Track, { getState }: any) => {
+  async (track: Track, { getState, dispatch }: any) => {
     const state: RootState = getState()
-    return api.addToFavorites(selectUserID(state), track)
+    return api
+      .addToFavorites(selectUserID(state), track)
+      .catch((message) => dispatch(popUp.appear(message)))
   }
 )
 
