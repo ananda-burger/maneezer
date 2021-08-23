@@ -34,11 +34,6 @@ const Message = styled.div`
   white-space: nowrap;
 `
 
-const Image = styled.img`
-  width: 100px;
-  height: 100px;
-`
-
 export default function TrackList({
   isFavorite,
   selectHasMoreTracks,
@@ -83,10 +78,6 @@ export default function TrackList({
       <>
         {tracks.length === 0 && (
           <Container>
-            <Image
-              src="https://ik.imagekit.io/z9fjicafx6e/Media_Icons/Untitled_86yGLQ_ib_6u9-lnMbwCn.png?updatedAt=1629662990877"
-              alt="music notes"
-            />
             <Message>No songs match your search</Message>
           </Container>
         )}
@@ -109,10 +100,6 @@ export default function TrackList({
           renderTracks()
         ) : (
           <Container>
-            <Image
-              src="https://ik.imagekit.io/z9fjicafx6e/Media_Icons/Untitled_86yGLQ_ib_6u9-lnMbwCn.png?updatedAt=1629662990877"
-              alt="music notes"
-            />
             <Message>Please login to see your favorites</Message>
           </Container>
         )

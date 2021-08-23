@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'app/hooks'
 import * as search from 'store/searchSlice'
 import * as user from 'store/userSlice'
 import { useRef } from 'react'
+import Logo from 'view/components/icons/Logo'
 
 const Header = styled.header`
   font-size: 1.2rem;
@@ -96,10 +97,8 @@ const LogoLink = styled(Link)`
   justify-self: flex-start;
   display: flex;
   align-items: center;
-  img {
-    &:first-child {
-      margin-right: 0.6rem;
-    }
+  svg {
+    margin-right: 0.6rem;
   }
 `
 
@@ -128,11 +127,6 @@ const SearchInput = styled.input`
   outline: none;
 `
 
-const Image = styled.img`
-  width: 32px;
-  height: 42px;
-`
-
 export default function MainNavigation() {
   const { pathname: path } = useLocation()
   const dispatch = useDispatch()
@@ -147,10 +141,7 @@ export default function MainNavigation() {
   return (
     <Header>
       <LogoLink to="/">
-        <Image
-          src="https://ik.imagekit.io/z9fjicafx6e/Media_Icons/Untitled_86yGLQ_ib_6u9-lnMbwCn.png?updatedAt=1629662990877"
-          alt="music notes"
-        />
+        <Logo />
         Maneezer
       </LogoLink>
       <MainNavOptions>
