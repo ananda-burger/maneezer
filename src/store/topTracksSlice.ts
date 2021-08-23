@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { TopTracksState } from 'types'
+import { FetchPayload, TopTracksState } from 'types'
 import * as api from 'tracksAPI'
 
 const initialState: TopTracksState = {
@@ -30,7 +30,7 @@ export const selectHasMoreTracks = (state: RootState) => {
 
 export const fetch = createAsyncThunk(
   'track/fetchTracks',
-  ({ lastIndex, isLoading }: { lastIndex: number; isLoading: boolean }) => {
+  ({ lastIndex, isLoading }: FetchPayload) => {
     if (isLoading) {
       return Promise.resolve([])
     }

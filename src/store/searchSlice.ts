@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { SearchState } from 'types'
+import { FetchPayload, SearchState } from 'types'
 import * as api from 'tracksAPI'
 
 const initialState: SearchState = {
@@ -40,19 +40,20 @@ export const selectHasMoreTracks = (state: RootState) => {
 
 export const fetch = createAsyncThunk(
   'search/searchTracks',
-  (
-    { lastIndex, isLoading }: { lastIndex: number; isLoading: boolean },
-    { getState }: any
-  ) => {
+  ({ lastIndex, isLoading, query }: FetchPayload) => {
     if (isLoading) {
       return Promise.resolve([])
     }
-    const state: RootState = getState()
-    return api.fetchFilteredTracks(
-      selectSearchInput(state),
-      lastIndex,
-      PER_PAGE
-    )
+    return api.fetchFilteredTracks(query, lastIndex, PER_PAGE)
+  }
+)
+
+export const updateAndFetch = createAsyncThunk(
+  'search/updateAndFetch',
+  (payload: FetchPayload, { dispatch }: any) => {
+    dispatch(open())
+    dispatch(update(payload.query || ''))
+    dispatch(fetch(payload))
   }
 )
 
@@ -65,6 +66,7 @@ export const searchSlice = createSlice({
     },
     close: (state) => {
       state.isSearching = false
+      state.searchInput = ''
     },
     update: (state, action: PayloadAction<string>) => {
       state.searchInput = action.payload

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { FavoriteTracksState, Track } from 'types'
+import { FavoriteTracksState, FetchPayload, Track } from 'types'
 import * as api from 'tracksAPI'
 import * as popUp from 'store/popUpSlice'
 
@@ -35,10 +35,7 @@ export const selectUserID = (state: RootState) => {
 
 export const fetch = createAsyncThunk(
   'favoriteTracks/fetchFavoriteTracks',
-  (
-    { lastIndex, isLoading }: { lastIndex: number; isLoading: boolean },
-    { getState }: any
-  ) => {
+  ({ lastIndex, isLoading }: FetchPayload, { getState }: any) => {
     const state: RootState = getState()
     if (isLoading) {
       return Promise.resolve([])

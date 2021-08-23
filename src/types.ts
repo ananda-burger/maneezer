@@ -95,3 +95,9 @@ export enum Route {
   Favorites = '/favorites',
   Search = '/search'
 }
+
+export interface FetchPayload {
+  lastIndex: number
+  isLoading: boolean
+  query?: string
+}

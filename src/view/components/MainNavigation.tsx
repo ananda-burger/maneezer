@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'app/hooks'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import * as search from 'store/searchSlice'
 import * as user from 'store/userSlice'
@@ -13,6 +13,7 @@ import Search from 'view/components/icons/Search'
 import User from 'view/components/icons/User'
 import { Icon } from 'view/components/styled'
 import { styled } from 'view/theme'
+import queryString from 'query-string'
 
 const Header = styled.header`
   font-size: 1.2rem;
@@ -200,6 +201,17 @@ export default function MainNavigation() {
   const isLoading = useSelector(search.selectIsLoadingTracks)
   const isLogged = useSelector(user.selectIsLogged)
   const textInput = useRef<HTMLInputElement>(null)
+  const { q: urlSearchQuery }: { q?: string } = queryString.parse(
+    history.location.search
+  )
+
+  useEffect(() => {
+    if (!searchInput && urlSearchQuery) {
+      dispatch(
+        search.updateAndFetch({ lastIndex, isLoading, query: urlSearchQuery })
+      )
+    }
+  }, [])
 
   return (
     <Header>
@@ -229,7 +241,9 @@ export default function MainNavigation() {
                     dispatch(search.close())
                   } else if (e.key === 'Enter') {
                     dispatch(search.clear())
-                    dispatch(search.fetch({ isLoading, lastIndex }))
+                    dispatch(
+                      search.fetch({ isLoading, lastIndex, query: searchInput })
+                    )
                     history.push(`/search?q=${searchInput}`)
                   }
                 }}

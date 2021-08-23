@@ -13,7 +13,7 @@ export const fetchTracks = (lastIndex: number, perPage: number) => {
 }
 
 export const fetchFilteredTracks = (
-  searchInput: string,
+  searchInput: string | void,
   lastIndex: number,
   perPage: number
 ) => {

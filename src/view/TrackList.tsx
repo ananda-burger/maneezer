@@ -47,11 +47,7 @@ export default function TrackList({
   selectIsLoadingTracks: (state: RootState) => boolean
   selectLastIndex: (state: RootState) => number
   selectTracks: (state: RootState) => types.Track[]
-  fetch: AsyncThunk<
-    types.Track[],
-    { lastIndex: number; isLoading: boolean },
-    {}
-  >
+  fetch: AsyncThunk<types.Track[], types.FetchPayload, {}>
 }) {
   const dispatch = useDispatch()
   const lastIndex = useSelector(selectLastIndex)
