@@ -12,13 +12,10 @@ const Container = styled.div`
 
 const Grid = styled.div`
   margin: 0;
-  padding: 0.6rem 2rem;
   display: grid;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  justify-items: flex-start;
   grid-template-columns: 0.5fr 0.7fr 4fr 3fr 1fr 1fr;
+  grid-gap: 0.8rem;
   padding: 0.6rem 1.5rem;
 `
 
