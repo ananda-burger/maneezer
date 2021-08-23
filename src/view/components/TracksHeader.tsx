@@ -3,11 +3,12 @@ import styled from 'styled-components'
 import { Icon } from 'view/components/styled'
 
 const Container = styled.div`
+  font-size: 0.9rem;
   position: sticky;
   top: 4rem;
-  background: rgb(24, 24, 24);
-  border-bottom: 1px solid rgb(51, 51, 51);
-  color: gray;
+  background: ${({ theme }) => theme.colors.primary3};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.primary4};
+  color: ${({ theme }) => theme.colors.primary5};
 `
 
 const Grid = styled.div`

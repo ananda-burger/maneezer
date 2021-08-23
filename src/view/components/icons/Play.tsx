@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import { styled } from 'view/theme'
 
 const Icon = styled.svg`
   &:hover {
-    fill: rgb(227, 77, 134);
+    fill: ${({ theme }) => theme.colors.secondary1};
     cursor: pointer;
     color: white;
   }

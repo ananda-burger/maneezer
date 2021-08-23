@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   html {
       font-family: 'Roboto', sans-serif;
-      background-color:  rgb(18, 18, 18);
+      background-color:  ${theme.colors.primary2};
       color:  darkgray;
   }
 
@@ -33,20 +33,20 @@ const GlobalStyle = createGlobalStyle`
   }
 
   *::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.2);
+    background: ${theme.colors.primary4};
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: ${theme.colors.primary4};
     border-radius: 20px;
   }
 
   a {
     text-decoration: none;
-    color: darkgray;
+    color: ${theme.colors.primary5};
     transition: color 0.12s;
     &:hover {
-      color: rgb(227, 77, 134);
+      color: ${theme.colors.secondary1};
     }
   }
 
@@ -59,15 +59,15 @@ const GlobalStyle = createGlobalStyle`
 const PopUp = styled.div`
   position: fixed;
   display: inline;
-  box-shadow: 1px 1px 10px rgb(227 77 134);
+  box-shadow: 1px 1px 10px ${theme.colors.secondary1};
   bottom: 2rem;
-  border: 1.5px solid rgb(227, 77, 134);
+  border: 1.5px solid ${theme.colors.secondary1};
   font-weight: bold;
   color: white;
   right: 2rem;
   padding: 1.1rem;
   border-radius: 5px;
-  background: rgb(110 16 52);
+  background: ${theme.colors.secondary2};
   max-width: 35ch;
   white-space: nowrap;
   overflow: hidden;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'view/theme'
 import { Link } from 'react-router-dom'
 
 const HomeButton = styled(Link)<{ path: string }>`
@@ -8,7 +8,7 @@ const HomeButton = styled(Link)<{ path: string }>`
   margin: 1rem;
   height: 2.5rem;
   width: 150px;
-  background-color: #ff69b4;
+  background-color: ${({ theme }) => theme.colors.secondary1};
   border-radius: 50px;
   font-weight: bold;
   cursor: pointer;
@@ -16,7 +16,7 @@ const HomeButton = styled(Link)<{ path: string }>`
   transition: 0.2s ease;
   &:hover {
     background-color: white;
-    color: #ff69b4;
+    color: ${({ theme }) => theme.colors.secondary1};
   }
 `
 
@@ -54,13 +54,13 @@ const Info = styled.div`
 `
 
 const Title = styled.p`
-  color: #ff69b4;
+  color: ${({ theme }) => theme.colors.secondary1};
   line-height: 1.2;
   font-size: 3rem;
   margin: 1rem;
   margin-top: 0;
   @media (min-width: 420px) {
-    color: #ff69b4;
+    color: ${({ theme }) => theme.colors.secondary1};
     line-height: 1.2;
     font-weight: bold;
     font-size: 4rem;

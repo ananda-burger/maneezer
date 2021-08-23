@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import Track from 'view/components/Track'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import Loading from 'view/components/icons/Loading'
-import styled from 'styled-components'
+import { styled } from 'view/theme'
 import { RootState } from 'app/store'
 import { AsyncThunk } from '@reduxjs/toolkit'
 import * as user from 'store/userSlice'
@@ -19,7 +19,6 @@ const Container = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   font-size: 1.5rem;
   display: flex;

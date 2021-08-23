@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import { styled } from 'view/theme'
 
 const Icon = styled.svg`
   transition: 0.2 ease;
-  color: rgb(227, 77, 134);
-  fill: rgb(227, 77, 134);
+  color: ${({ theme }) => theme.colors.secondary1};
+  fill: ${({ theme }) => theme.colors.secondary1};
   &:hover {
     color: white;
     cursor: pointer;

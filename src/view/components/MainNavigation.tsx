@@ -12,7 +12,7 @@ import { useRef } from 'react'
 
 const Header = styled.header`
   font-size: 1.2rem;
-  background: black;
+  background: ${({ theme }) => theme.colors.primary1};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,10 +27,12 @@ const Header = styled.header`
 const TopTracksLink = styled(Link)<{ path: string }>`
   &:hover {
     cursor: pointer;
-    color: rgb(227, 77, 134);
+    color: ${({ theme }) => theme.colors.secondary1};
   }
   ${({ path }) =>
-    path === '/' ? 'color: rgb(227, 77, 134);' : 'color: darkgray;'}
+    path === '/'
+      ? `color: ${({ theme }) => theme.colors.secondary1};`
+      : `color: ${({ theme }) => theme.colors.primary5};`}
 `
 
 const MainNavOptions = styled.div`
@@ -73,17 +75,19 @@ const LoginOptions = styled(LogoutOptions)`
 const FavoritesLink = styled(Link)<{ path: string }>`
   &:hover {
     cursor: pointer;
-    color: rgb(227, 77, 134);
+    color: ${({ theme }) => theme.colors.secondary1};
   }
   ${({ path }) =>
-    path === '/favorites' ? 'color: rgb(227, 77, 134);' : 'color: darkgray;'}
+    path === '/favorites'
+      ? `color: ${({ theme }) => theme.colors.secondary1};`
+      : `color: ${({ theme }) => theme.colors.primary5};`}
 `
 
 const SearchLink = styled.a<{ path: string }>`
   transition: color 0.12s;
   &:hover {
     cursor: pointer;
-    color: rgb(227, 77, 134);
+    color: ${({ theme }) => theme.colors.secondary1};
   }
 `
 
@@ -103,7 +107,7 @@ const UserLink = styled(Link)`
   margin-right: 1rem;
   &:hover {
     div {
-      color: rgb(227, 77, 134);
+      color: ${({ theme }) => theme.colors.secondary1};
     }
   }
 `
@@ -120,8 +124,8 @@ const SearchInput = styled.input`
   padding: 0 3rem;
   border-radius: 5px;
   border: none;
-  background: rgba(250, 250, 250, 0.3);
-  outline: pink;
+  background: ${({ theme }) => theme.colors.primary4};
+  outline: none;
 `
 
 const Image = styled.img`

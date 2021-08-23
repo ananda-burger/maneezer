@@ -3,7 +3,7 @@ import * as audio from 'store/audioSlice'
 import * as favorites from 'store/favoriteTracksSlice'
 import * as user from 'store/userSlice'
 import * as types from 'types'
-import styled from 'styled-components'
+import { styled } from 'view/theme'
 import { secondsToMinutes } from 'utilities'
 import ExternalLink from 'view/components/icons/ExternalLink'
 import FullHeart from 'view/components/icons/FullHeart'
@@ -24,10 +24,9 @@ const Container = styled.li<{ isPlaying: boolean }>`
     &:hover {
       border: none;
       border-radius:  5px;
-      background-color: ${({ isPlaying }) =>
-        isPlaying ? 'rgb(227,77,134,0.4)' : 'rgba(255, 255, 255, 0.2)'};
+      background-color: ${({ theme, isPlaying }) =>
+        isPlaying ? 'rgb(227,77,134,0.4)' : theme.colors.primary4};
       color: white;
-      fill: rgb(34, 34, 34);
   }
 `
 
@@ -55,7 +54,7 @@ const ArtistName = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: gray;
+  color: ${({ theme }) => theme.colors.primary5};
   font-size: 0.9rem;
 `
 
@@ -66,7 +65,7 @@ const AlbumTitle = styled.div`
 `
 
 const ButtonsContainer = styled.div`
-  color: gray;
+  color: ${({ theme }) => theme.colors.primary5};
   display: flex;
   justify-self: end;
 

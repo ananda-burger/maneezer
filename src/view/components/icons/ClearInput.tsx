@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'view/theme'
 
 const Icon = styled.svg`
   position: absolute;
@@ -6,9 +6,9 @@ const Icon = styled.svg`
   right: 0.5rem;
   transition: 0.2 ease;
   &:hover {
-    fill: rgb(227, 77, 134);
+    fill: ${({ theme }) => theme.colors.secondary1};
     cursor: pointer;
-    color: rgb(227, 77, 134);
+    color: ${({ theme }) => theme.colors.secondary1};
 `
 
 export default function ClearInput() {
