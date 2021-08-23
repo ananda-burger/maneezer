@@ -48,9 +48,10 @@ export const add = createAsyncThunk(
   'favoriteTracks/addToFavorites',
   async (track: Track, { getState, dispatch }: any) => {
     const state: RootState = getState()
-    return api
-      .addToFavorites(selectUserID(state), track)
-      .catch((message) => dispatch(popUp.appear(message)))
+    return api.addToFavorites(selectUserID(state), track).catch((message) => {
+      dispatch(popUp.appear(message))
+      throw new Error(message)
+    })
   }
 )
 
