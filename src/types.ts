@@ -74,6 +74,7 @@ export interface UserState {
 export interface PopUpState {
   isOpen: boolean
   message: string
+  timer: ReturnType<typeof setTimeout> | void
 }
 
 export interface LoginResponse {
