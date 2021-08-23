@@ -28,10 +28,24 @@ const Container = styled.li<{ isPlaying: boolean }>`
         isPlaying ? 'rgb(227,77,134,0.4)' : theme.colors.primary4};
       color: white;
   }
+
+  @media (max-width: 768px) {
+    & {
+      grid-template-columns: minmax(0, 0.5fr) minmax(0, 0.7fr) minmax(0, 4fr) minmax(0, 1fr);
+    }
+  }
 `
 
 const Column = styled.div`
   max-width: 100%;
+`
+
+const ColumnLarge = styled(Column)`
+  @media (max-width: 768px) {
+    & {
+      display: none;
+    }
+  }
 `
 
 const Cover = styled.img`
@@ -108,12 +122,12 @@ export default function Track({
         <TrackName>{track.title}</TrackName>
         <ArtistName>{track.artist.name}</ArtistName>
       </Column>
-      <Column>
+      <ColumnLarge>
         <AlbumTitle>{track.album.title}</AlbumTitle>
-      </Column>
-      <Column>
+      </ColumnLarge>
+      <ColumnLarge>
         <div>{secondsToMinutes(track.duration)}</div>
-      </Column>
+      </ColumnLarge>
       <Column>
         <ButtonsContainer>
           {isFavorite ? (

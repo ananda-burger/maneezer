@@ -166,9 +166,15 @@ const TracksHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary4};
   color: ${({ theme }) => theme.colors.primary5};
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    & {
+      display: none;
+    }
+  }
 `
 
-const Grid = styled.div`
+const TracksHeaderGroup = styled.div`
   margin: 0;
   display: grid;
   align-items: center;
@@ -266,16 +272,18 @@ export default function MainNavigation() {
         )}
       </Nav>
       <TracksHeader>
-        <Grid>
+        <TracksHeaderGroup>
           <div></div>
           <div></div>
           <div>TITLE</div>
           <div>ALBUM</div>
-          <Icon>
-            <Clock />
-          </Icon>
+          <div>
+            <Icon>
+              <Clock />
+            </Icon>
+          </div>
           <div></div>
-        </Grid>
+        </TracksHeaderGroup>
       </TracksHeader>
     </Header>
   )
