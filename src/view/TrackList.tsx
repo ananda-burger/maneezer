@@ -76,11 +76,6 @@ export default function TrackList({
   const renderTracks = () => {
     return (
       <>
-        {tracks.length === 0 && (
-          <Container>
-            <Message>No songs match your search</Message>
-          </Container>
-        )}
         {tracks.map((track) => {
           return <Track key={track.id} track={track} isFavorite={isFavorite} />
         })}
