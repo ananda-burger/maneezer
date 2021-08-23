@@ -12,7 +12,7 @@ import { useRef } from 'react'
 
 const Header = styled.header`
   font-size: 1.2rem;
-  background: ${({ theme }) => theme.colors.primary1};
+  background: ${({ theme }) => theme.colors.primary2};
   display: flex;
   align-items: center;
   justify-content: space-between;

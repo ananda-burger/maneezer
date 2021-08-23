@@ -6,7 +6,7 @@ const Container = styled.div`
   font-size: 0.9rem;
   position: sticky;
   top: 4rem;
-  background: ${({ theme }) => theme.colors.primary3};
+  background: ${({ theme }) => theme.colors.primary2};
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary4};
   color: ${({ theme }) => theme.colors.primary5};
 `

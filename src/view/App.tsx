@@ -75,6 +75,11 @@ const PopUp = styled.div`
   min-width: 10ch;
 `
 
+const Container = styled.div`
+  max-width: 1536px;
+  margin: 0 auto;
+`
+
 export default function App() {
   const dispatch = useDispatch()
   const popUpIsOpen = useSelector(popUp.selectIsOpen)
@@ -90,7 +95,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <Container>
         {popUpIsOpen && renderPopUp()}
         <GlobalStyle />
         <BrowserRouter>
@@ -130,7 +135,7 @@ export default function App() {
             </Route>
           </Switch>
         </BrowserRouter>
-      </div>
+      </Container>
     </ThemeProvider>
   )
 }
