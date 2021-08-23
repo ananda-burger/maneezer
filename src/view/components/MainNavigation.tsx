@@ -1,17 +1,18 @@
-import { useHistory, Link, useLocation } from 'react-router-dom'
-import { styled } from 'view/theme'
-import Search from 'view/components/icons/Search'
-import User from 'view/components/icons/User'
-import Back from 'view/components/icons/Back'
-import Login from 'view/components/icons/Login'
-import ClearInput from 'view/components/icons/ClearInput'
-import { useSelector, useDispatch } from 'app/hooks'
+import { useDispatch, useSelector } from 'app/hooks'
+import { useRef } from 'react'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import * as search from 'store/searchSlice'
 import * as user from 'store/userSlice'
-import { useRef } from 'react'
-import Logo from 'view/components/icons/Logo'
-import { Icon } from 'view/components/styled'
+import { Route } from 'types'
+import Back from 'view/components/icons/Back'
+import ClearInput from 'view/components/icons/ClearInput'
 import Clock from 'view/components/icons/Clock'
+import Login from 'view/components/icons/Login'
+import Logo from 'view/components/icons/Logo'
+import Search from 'view/components/icons/Search'
+import User from 'view/components/icons/User'
+import { Icon } from 'view/components/styled'
+import { styled } from 'view/theme'
 
 const Header = styled.header`
   font-size: 1.2rem;
@@ -40,10 +41,10 @@ const TopTracksLink = styled(Link)<{ path: string }>`
     cursor: pointer;
     color: ${({ theme }) => theme.colors.secondary1};
   }
-  ${({ path }) =>
-    path === '/'
-      ? `color: ${({ theme }) => theme.colors.secondary1};`
-      : `color: ${({ theme }) => theme.colors.primary5};`}
+  ${({ path, theme }) =>
+    path === Route.Home
+      ? `color: ${theme.colors.secondary1};`
+      : `color: ${theme.colors.primary5};`}
 `
 
 const MainNavOptions = styled.div`
@@ -105,10 +106,10 @@ const FavoritesLink = styled(Link)<{ path: string }>`
     cursor: pointer;
     color: ${({ theme }) => theme.colors.secondary1};
   }
-  ${({ path }) =>
+  ${({ path, theme }) =>
     path === '/favorites'
-      ? `color: ${({ theme }) => theme.colors.secondary1};`
-      : `color: ${({ theme }) => theme.colors.primary5};`}
+      ? `color: ${theme.colors.secondary1};`
+      : `color: ${theme.colors.primary5};`}
 `
 
 const SearchLink = styled.a<{ path: string }>`
