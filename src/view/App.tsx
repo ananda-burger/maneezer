@@ -9,7 +9,6 @@ import * as types from 'types'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import reset from 'styled-reset'
 import MainNavigation from 'view/components/MainNavigation'
-import TracksHeader from 'view/components/TracksHeader'
 import TrackList from 'view/TrackList'
 import NotFound from 'view/NotFound'
 import { useDispatch, useSelector } from 'app/hooks'
@@ -100,7 +99,6 @@ export default function App() {
         <GlobalStyle />
         <BrowserRouter>
           <MainNavigation />
-          <TracksHeader />
           <Switch>
             <Route path={types.Route.Home} exact>
               <TrackList
