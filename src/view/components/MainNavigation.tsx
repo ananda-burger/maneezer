@@ -21,6 +21,12 @@ const Header = styled.header`
   padding: 0.7rem 0;
   z-index: 997;
   top: 0;
+
+  @media (max-width: 768px) {
+    .medium-only {
+      display: none;
+    }
+  }
 `
 
 const Nav = styled.div`
@@ -58,6 +64,13 @@ const LogoutOptions = styled.div`
   display: flex;
   align-items: center;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    svg {
+      margin: 0;
+    }
+  }
+
   svg {
     &:first-child {
       margin-right: 0.6rem;
@@ -68,13 +81,21 @@ const LogoutOptions = styled.div`
 const LoginOptions = styled(LogoutOptions)`
   margin-right: 1rem;
   transition: color 0.12s;
+
   &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.colors.secondary1};
   }
+
   svg {
     &:first-child {
       margin-right: 0.3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      margin: 0;
     }
   }
 `
@@ -103,6 +124,7 @@ const LogoLink = styled(Link)`
   justify-self: flex-start;
   display: flex;
   align-items: center;
+
   svg {
     margin-right: 0.6rem;
   }
@@ -110,10 +132,15 @@ const LogoLink = styled(Link)`
 
 const UserLink = styled(Link)`
   margin-right: 1rem;
-  &:hover {
-    div {
-      color: ${({ theme }) => theme.colors.secondary1};
+
+  @media (max-width: 768px) {
+    & {
+      margin: 0;
     }
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.secondary1};
   }
 `
 
@@ -166,7 +193,7 @@ export default function MainNavigation() {
       <Nav>
         <LogoLink to="/">
           <Logo />
-          Maneezer
+          <span className="medium-only">Maneezer</span>
         </LogoLink>
         <MainNavOptions>
           {isSearching ? (
@@ -228,13 +255,13 @@ export default function MainNavigation() {
           <UserLink to="/">
             <LogoutOptions onClick={() => dispatch(user.logout())}>
               <User />
-              Logout
+              <span className="medium-only">Logout</span>
             </LogoutOptions>
           </UserLink>
         ) : (
           <LoginOptions onClick={() => dispatch(user.login())}>
             <Login />
-            Login
+            <span className="medium-only">Login</span>
           </LoginOptions>
         )}
       </Nav>
