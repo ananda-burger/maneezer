@@ -45,6 +45,8 @@ const MainNavOptions = styled.div`
   align-items: center;
 
   a {
+    font-weight: bold;
+    font-size: 1.3rem;
     margin-left: 2rem;
     &:first-child {
       margin: 0;
@@ -136,7 +138,7 @@ const TracksHeader = styled.div`
   background: ${({ theme }) => theme.colors.primary2};
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary4};
   color: ${({ theme }) => theme.colors.primary5};
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 `
 
 const Grid = styled.div`
