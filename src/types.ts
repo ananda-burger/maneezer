@@ -44,6 +44,37 @@ export interface Track {
   type: string
 }
 
+export interface Playlist {
+  id: string
+  title: string
+  duration: number
+  public: boolean
+  is_loved_track: boolean
+  collaborative: boolean
+  nb_tracks: number
+  fans: number
+  link: string
+  picture: string
+  picture_small: string
+  picture_meduim: string
+  picture_big: string
+  picture_xl: string
+  checksum: string
+  tracklist: string
+  creation_date: string
+  md5_image: string
+  picture_type: string
+  time_add: string
+  time_mod: string
+  creator: {
+    id: string
+    name: string
+    tracklist: string
+    type: string
+  }
+  type: string
+}
+
 export interface TopTracksState {
   tracks: Track[]
   lastIndex: number
@@ -52,6 +83,17 @@ export interface TopTracksState {
 }
 
 export interface FavoriteTracksState extends TopTracksState {}
+
+export interface PlaylistTracksState extends TopTracksState {
+  id: string
+}
+
+export interface PlaylistsState {
+  playlists: Playlist[]
+  lastIndex: number
+  isLoading: boolean
+  hasMorePlaylists: boolean
+}
 
 export interface AudioState {
   audioInstance: any
@@ -90,14 +132,27 @@ export interface DeezerResponse {
   total: number
 }
 
+export interface DeezerPlaylistResponse {
+  data: Playlist[]
+  prev?: string
+  total: number
+}
+
 export enum Route {
   Home = '/',
   Favorites = '/favorites',
-  Search = '/search'
+  Search = '/search',
+  Playlists = '/playlists',
+  Playlist = '/playlists/:id'
 }
 
 export interface FetchPayload {
   lastIndex: number
   isLoading: boolean
   query?: string
+  playlistId?: string
+}
+
+export interface FetchPlaylistPayload extends FetchPayload {
+  playlistId: string
 }

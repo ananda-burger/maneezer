@@ -13,6 +13,8 @@ import TrackList from 'view/TrackList'
 import NotFound from 'view/NotFound'
 import { useDispatch, useSelector } from 'app/hooks'
 import { styled, theme } from 'view/theme'
+import PlaylistList from 'view/PlaylistList'
+import PlaylistTrackList from 'view/PlaylistTrackList'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -127,6 +129,12 @@ export default function App() {
                 selectHasMoreTracks={search.selectHasMoreTracks}
                 fetch={search.fetch}
               />
+            </Route>
+            <Route path={types.Route.Playlists} exact>
+              <PlaylistList />
+            </Route>
+            <Route path={types.Route.Playlist}>
+              <PlaylistTrackList />
             </Route>
             <Route>
               <NotFound />

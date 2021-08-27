@@ -1,4 +1,10 @@
-import { DeezerResponse, LoginResponse, Track } from 'types'
+import {
+  DeezerPlaylistResponse,
+  DeezerResponse,
+  LoginResponse,
+  Playlist,
+  Track
+} from 'types'
 import Cookies from 'js-cookie'
 
 export const fetchTracks = (lastIndex: number, perPage: number) => {
@@ -21,6 +27,21 @@ export const fetchFilteredTracks = (
     window.DZ.api(
       `/search?q=${searchInput}&index=${lastIndex}&limit=${perPage}`,
       (response: DeezerResponse) => {
+        resolve(response.data)
+      }
+    )
+  })
+}
+
+export const fetchPlaylists = (
+  id: string,
+  lastIndex: number,
+  perPage: number
+) => {
+  return new Promise<Playlist[]>((resolve, _reject) => {
+    window.DZ.api(
+      `/user/${id}/playlists?index=${lastIndex}&limit=${perPage}`,
+      (response: DeezerPlaylistResponse) => {
         resolve(response.data)
       }
     )
@@ -67,6 +88,21 @@ export const removeFromFavorites = (id: string, track: Track) => {
       { track_id: track.id },
       (_response: any) => {
         resolve(track)
+      }
+    )
+  })
+}
+
+export const fetchPlaylistTracks = (
+  lastIndex: number,
+  perPage: number,
+  playlistId: string
+) => {
+  return new Promise<Track[]>((resolve, _reject) => {
+    window.DZ.api(
+      `/playlist/${playlistId}/tracks?index=${lastIndex}&limit=${perPage}`,
+      (response: DeezerResponse) => {
+        resolve(response.data)
       }
     )
   })

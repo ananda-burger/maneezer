@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'app/hooks'
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import Track from 'view/Track'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import Loading from 'view/components/icons/Loading'
@@ -55,11 +56,15 @@ export default function TrackList({
   const hasNextPage = useSelector(selectHasMoreTracks)
   const tracks = useSelector(selectTracks)
   const isLogged = useSelector(user.selectIsLogged)
+  const location = useLocation()
+
+  const playlistId = location.pathname.substr(11)
+  console.log(playlistId)
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,
     hasNextPage,
-    onLoadMore: () => dispatch(fetch({ lastIndex, isLoading })),
+    onLoadMore: () => dispatch(fetch({ lastIndex, isLoading, playlistId })),
     rootMargin: '0px 0px 150px 0px'
   })
 
