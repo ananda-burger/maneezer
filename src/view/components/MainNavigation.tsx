@@ -225,7 +225,7 @@ export default function MainNavigation() {
           </LoginOptions>
         )}
       </Nav>
-      <TracksHeader />
+      {history.location.pathname !== '/playlists' && <TracksHeader />}
     </Header>
   )
 }
