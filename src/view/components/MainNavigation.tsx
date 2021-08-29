@@ -1,16 +1,15 @@
 import { useDispatch, useSelector } from 'app/hooks'
-import { useRef, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import * as search from 'store/searchSlice'
 import * as user from 'store/userSlice'
 import { Route } from 'types'
-import Back from 'view/components/icons/Back'
-import ClearInput from 'view/components/icons/ClearInput'
 import Clock from 'view/components/icons/Clock'
 import Login from 'view/components/icons/Login'
 import Logo from 'view/components/icons/Logo'
 import Search from 'view/components/icons/Search'
 import User from 'view/components/icons/User'
+import SearchInputContainer from 'view/SearchInputContainer'
 import { Icon } from 'view/components/styled'
 import { styled } from 'view/theme'
 import queryString from 'query-string'
@@ -146,28 +145,6 @@ const UserLink = styled(Link)`
   }
 `
 
-const InputContainer = styled.div`
-  position: relative;
-`
-
-const SearchInput = styled.input`
-  font-size: 1.1rem;
-  color: white;
-  width: 20rem;
-  height: 2.3rem;
-  padding: 0 3rem;
-  border-radius: 5px;
-  border: none;
-  background: ${({ theme }) => theme.colors.primary4};
-  outline: none;
-
-  @media (max-width: 768px) {
-    & {
-      width: 10rem;
-    }
-  }
-`
-
 const TracksHeader = styled.div`
   font-size: 0.9rem;
   background: ${({ theme }) => theme.colors.primary2};
@@ -200,7 +177,6 @@ export default function MainNavigation() {
   const lastIndex = useSelector(search.selectLastIndex)
   const isLoading = useSelector(search.selectIsLoadingTracks)
   const isLogged = useSelector(user.selectIsLogged)
-  const textInput = useRef<HTMLInputElement>(null)
   const { q: urlSearchQuery }: { q?: string } = queryString.parse(
     history.location.search
   )
@@ -222,42 +198,10 @@ export default function MainNavigation() {
         </LogoLink>
         <MainNavOptions>
           {isSearching ? (
-            <InputContainer>
-              <span onClick={() => dispatch(search.close())}>
-                <Back />
-              </span>
-              <SearchInput
-                ref={textInput}
-                value={searchInput}
-                type="text"
-                placeholder="Search"
-                spellCheck={false}
-                autoFocus
-                onChange={(e) => {
-                  dispatch(search.update(e.target.value))
-                }}
-                onKeyUp={(e) => {
-                  if (e.key === 'Escape') {
-                    dispatch(search.close())
-                  } else if (e.key === 'Enter') {
-                    dispatch(
-                      search.fetchFirstPage({ isLoading, query: searchInput })
-                    )
-                    history.push(`/search?q=${searchInput}`)
-                  }
-                }}
-              />
-              {searchInput !== '' && (
-                <span
-                  onClick={() => {
-                    textInput.current && textInput.current.focus()
-                    dispatch(search.update(''))
-                  }}
-                >
-                  <ClearInput />
-                </span>
-              )}
-            </InputContainer>
+            <SearchInputContainer
+              searchInput={searchInput}
+              isLoading={isLoading}
+            />
           ) : (
             <>
               <TopTracksLink to="/" path={path}>
