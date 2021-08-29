@@ -112,6 +112,17 @@ const FavoritesLink = styled(Link)<{ path: string }>`
       : `color: ${theme.colors.primary5};`}
 `
 
+const PlaylistsLink = styled(Link)<{ path: string }>`
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.secondary1};
+  }
+  ${({ path, theme }) =>
+    path === '/playlists'
+      ? `color: ${theme.colors.secondary1};`
+      : `color: ${theme.colors.primary5};`}
+`
+
 const SearchLink = styled.a<{ path: string }>`
   transition: color 0.12s;
   &:hover {
@@ -218,6 +229,9 @@ export default function MainNavigation() {
               >
                 <Search />
               </SearchLink>
+              <PlaylistsLink to="/playlists" path={path}>
+                Playlists
+              </PlaylistsLink>
             </>
           )}
         </MainNavOptions>
