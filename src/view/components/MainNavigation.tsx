@@ -4,13 +4,12 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import * as search from 'store/searchSlice'
 import * as user from 'store/userSlice'
 import { Route } from 'types'
-import Clock from 'view/components/icons/Clock'
 import Login from 'view/components/icons/Login'
 import Logo from 'view/components/icons/Logo'
 import Search from 'view/components/icons/Search'
 import User from 'view/components/icons/User'
 import SearchInputContainer from 'view/SearchInputContainer'
-import { Icon } from 'view/components/styled'
+import TracksHeader from 'view/TracksHeader'
 import { styled } from 'view/theme'
 import queryString from 'query-string'
 
@@ -156,29 +155,6 @@ const UserLink = styled(Link)`
   }
 `
 
-const TracksHeader = styled.div`
-  font-size: 0.9rem;
-  background: ${({ theme }) => theme.colors.primary2};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.primary4};
-  color: ${({ theme }) => theme.colors.primary5};
-  margin-top: 1rem;
-
-  @media (max-width: 768px) {
-    & {
-      display: none;
-    }
-  }
-`
-
-const TracksHeaderGroup = styled.div`
-  margin: 0;
-  display: grid;
-  align-items: center;
-  grid-template-columns: 0.5fr 0.7fr 4fr 3fr 1fr 1fr;
-  grid-gap: 0.8rem;
-  padding: 0.6rem 1.5rem;
-`
-
 export default function MainNavigation() {
   const { pathname: path } = useLocation()
   const dispatch = useDispatch()
@@ -249,20 +225,7 @@ export default function MainNavigation() {
           </LoginOptions>
         )}
       </Nav>
-      <TracksHeader>
-        <TracksHeaderGroup>
-          <div></div>
-          <div></div>
-          <div>TITLE</div>
-          <div>ALBUM</div>
-          <div>
-            <Icon>
-              <Clock />
-            </Icon>
-          </div>
-          <div></div>
-        </TracksHeaderGroup>
-      </TracksHeader>
+      <TracksHeader />
     </Header>
   )
 }
