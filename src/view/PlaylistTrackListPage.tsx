@@ -12,6 +12,12 @@ interface Params {
   id: string
 }
 
+const LoadingItem = styled.li`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+`
+
 const Container = styled.div`
   position: fixed;
   top: 50%;
@@ -55,9 +61,9 @@ export default function PlaylistTrackList() {
             return <Track key={track.id} track={track} />
           })}
           {(isLoading || hasNextPage) && (
-            <li ref={sentryRef}>
+            <LoadingItem ref={sentryRef}>
               <LoadingIcon />
-            </li>
+            </LoadingItem>
           )}
         </>
       ) : (

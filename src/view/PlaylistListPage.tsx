@@ -5,7 +5,14 @@ import * as user from 'store/userSlice'
 import Playlist from 'view/Playlist'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import LoadingIcon from 'view/components/icons/LoadingIcon'
+import PlusIcon from 'view/components/icons/PlusIcon'
 import { styled } from 'view/components/theme'
+
+const LoadingItem = styled.li`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+`
 
 const Container = styled.div`
   position: fixed;
@@ -17,6 +24,33 @@ const Container = styled.div`
   flex-flow: column;
   align-items: center;
   justify-content: center;
+`
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  gap: 1rem;
+  padding: 2rem;
+`
+
+const GridItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid ${({ theme }) => theme.colors.primary4};
+  border-radius: 5px;
+  width: 100%;
+  max-width: 200px;
+  height: 250px;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  transition: 0.2s ease;
+  :hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.secondary1};
+    fill: white;
+    background: ${({ theme }) => theme.colors.primary3};
+  }
 `
 
 export default function PlaylistList() {
@@ -43,19 +77,22 @@ export default function PlaylistList() {
   return (
     <>
       {isLogged ? (
-        <>
-          <div>Create playlist</div>
+        <GridContainer>
+          <GridItem>
+            <PlusIcon />
+            Create Playlist
+          </GridItem>
           {playlists.map((playlist) => {
             return <Playlist key={playlist.id} playlist={playlist} />
           })}
-        </>
+        </GridContainer>
       ) : (
         <Container>Please log in to see your playlists</Container>
       )}
       {(isLoading || hasNextPage) && (
-        <li ref={sentryRef}>
+        <LoadingItem ref={sentryRef}>
           <LoadingIcon />
-        </li>
+        </LoadingItem>
       )}
     </>
   )
