@@ -1,9 +1,4 @@
-import {
-  ActionCreator,
-  createAsyncThunk,
-  createSlice,
-  PayloadAction
-} from '@reduxjs/toolkit'
+import { ActionCreator, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
 import { Track, PlaylistTracksState, FetchPlaylistPayload } from 'types'
 import * as api from 'tracksAPI'
@@ -44,7 +39,7 @@ export const fetch = createAsyncThunk(
   'playlistTracks/fetch',
   ({ lastIndex, isLoading, playlistId }: FetchPlaylistPayload) => {
     if (isLoading) {
-      return Promise.resolve({ playlistId, tracks: [] })
+      return Promise.resolve([])
     }
     return api.fetchPlaylistTracks(lastIndex, PER_PAGE, playlistId)
   }
@@ -57,13 +52,13 @@ export const playlistTracksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetch.fulfilled, (state, action) => {
-        const playlist = state[action.payload.playlistId]
+        const playlist = state[action.meta.arg.playlistId]
 
-        state[action.payload.playlistId] = {
-          hasMoreTracks: action.payload.tracks.length > 0,
+        state[action.meta.arg.playlistId] = {
+          hasMoreTracks: action.payload.length > 0,
           isLoading: false,
           lastIndex: playlist.lastIndex + PER_PAGE,
-          tracks: playlist.tracks.concat(action.payload.tracks)
+          tracks: playlist.tracks.concat(action.payload)
         }
       })
       .addCase(fetch.pending, (state, action) => {

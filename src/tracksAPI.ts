@@ -98,19 +98,14 @@ export const fetchPlaylistTracks = (
   perPage: number,
   playlistId: string
 ) => {
-  return new Promise<{ tracks: Track[]; playlistId: string }>(
-    (resolve, _reject) => {
-      window.DZ.api(
-        `/playlist/${playlistId}/tracks?index=${lastIndex}&limit=${perPage}`,
-        (response: DeezerResponse) => {
-          resolve({
-            tracks: response.data,
-            playlistId
-          })
-        }
-      )
-    }
-  )
+  return new Promise<Track[]>((resolve, _reject) => {
+    window.DZ.api(
+      `/playlist/${playlistId}/tracks?index=${lastIndex}&limit=${perPage}`,
+      (response: DeezerResponse) => {
+        resolve(response.data)
+      }
+    )
+  })
 }
 
 export const login = () => {
