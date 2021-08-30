@@ -59,7 +59,6 @@ export default function TrackList({
   const location = useLocation()
 
   const playlistId = location.pathname.substr(11)
-  console.log(playlistId)
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,

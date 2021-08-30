@@ -84,8 +84,8 @@ export interface TopTracksState {
 
 export interface FavoriteTracksState extends TopTracksState {}
 
-export interface PlaylistTracksState extends TopTracksState {
-  id: string
+export interface PlaylistTracksState {
+  [playlistId: string]: TopTracksState
 }
 
 export interface PlaylistsState {

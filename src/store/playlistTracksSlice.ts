@@ -1,39 +1,50 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import {
+  ActionCreator,
+  createAsyncThunk,
+  createSlice,
+  PayloadAction
+} from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { PlaylistTracksState, FetchPlaylistPayload, FetchPayload } from 'types'
+import { Track, PlaylistTracksState, FetchPlaylistPayload } from 'types'
 import * as api from 'tracksAPI'
 
-const initialState: PlaylistTracksState = {
-  tracks: [],
-  lastIndex: 0,
-  isLoading: false,
-  hasMoreTracks: true,
-  id: ''
-}
+const initialState: PlaylistTracksState = {}
 
 const PER_PAGE = 30
 
-export const selectTracks = (state: RootState) => {
-  return state.playlistTracks.tracks
-}
+export const selectTracks =
+  (playlistId: string) =>
+  (state: RootState): Track[] => {
+    const playlist = state.playlistTracks[playlistId]
+    return playlist ? playlist.tracks : []
+  }
 
-export const selectLastIndex = (state: RootState) => {
-  return state.playlistTracks.lastIndex
-}
+export const selectLastIndex =
+  (playlistId: string) =>
+  (state: RootState): number => {
+    const playlist = state.playlistTracks[playlistId]
+    return playlist ? playlist.lastIndex : 0
+  }
 
-export const selectIsLoadingTracks = (state: RootState) => {
-  return state.playlistTracks.isLoading
-}
+export const selectIsLoadingTracks =
+  (playlistId: string) =>
+  (state: RootState): boolean => {
+    const playlist = state.playlistTracks[playlistId]
+    return playlist ? playlist.isLoading : false
+  }
 
-export const selectHasMoreTracks = (state: RootState) => {
-  return state.playlistTracks.hasMoreTracks
-}
+export const selectHasMoreTracks =
+  (playlistId: string) =>
+  (state: RootState): boolean => {
+    const playlist = state.playlistTracks[playlistId]
+    return playlist ? playlist.hasMoreTracks : false
+  }
 
 export const fetch = createAsyncThunk(
   'playlistTracks/fetch',
   ({ lastIndex, isLoading, playlistId }: FetchPlaylistPayload) => {
     if (isLoading) {
-      return Promise.resolve([])
+      return Promise.resolve({ playlistId, tracks: [] })
     }
     return api.fetchPlaylistTracks(lastIndex, PER_PAGE, playlistId)
   }
@@ -46,13 +57,28 @@ export const playlistTracksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetch.fulfilled, (state, action) => {
-        state.lastIndex += PER_PAGE
-        state.hasMoreTracks = action.payload.length > 0
-        state.tracks = state.tracks.concat(action.payload)
-        state.isLoading = false
+        const playlist = state[action.payload.playlistId]
+
+        state[action.payload.playlistId] = {
+          hasMoreTracks: action.payload.tracks.length > 0,
+          isLoading: false,
+          lastIndex: playlist.lastIndex + PER_PAGE,
+          tracks: playlist.tracks.concat(action.payload.tracks)
+        }
       })
-      .addCase(fetch.pending, (state) => {
-        state.isLoading = true
+      .addCase(fetch.pending, (state, action) => {
+        const playlist = state[action.meta.arg.playlistId]
+
+        if (playlist) {
+          playlist.isLoading = true
+        } else {
+          state[action.meta.arg.playlistId] = {
+            hasMoreTracks: false,
+            isLoading: true,
+            lastIndex: 0,
+            tracks: []
+          }
+        }
       })
   }
 })

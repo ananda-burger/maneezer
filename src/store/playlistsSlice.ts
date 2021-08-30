@@ -7,7 +7,7 @@ const initialState: PlaylistsState = {
   playlists: [],
   lastIndex: 0,
   isLoading: false,
-  hasMorePlaylists: true
+  hasMorePlaylists: false
 }
 
 const PER_PAGE = 30
