@@ -6,10 +6,23 @@ import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { useEffect } from 'react'
 import LoadingIcon from 'view/components/icons/LoadingIcon'
 import Track from 'view/Track'
+import { styled } from 'view/components/theme'
 
 interface Params {
   id: string
 }
+
+const Container = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+`
 
 export default function PlaylistTrackList() {
   const { id: playlistId } = useParams<Params>()
@@ -48,7 +61,7 @@ export default function PlaylistTrackList() {
           )}
         </>
       ) : (
-        <div>Please log in to see your playlists</div>
+        <Container>Please log in to see your playlists</Container>
       )}
     </>
   )

@@ -5,6 +5,19 @@ import * as user from 'store/userSlice'
 import Playlist from 'view/Playlist'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import LoadingIcon from 'view/components/icons/LoadingIcon'
+import { styled } from 'view/components/theme'
+
+const Container = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+`
 
 export default function PlaylistList() {
   const dispatch = useDispatch()
@@ -37,7 +50,7 @@ export default function PlaylistList() {
           })}
         </>
       ) : (
-        <div>Please log in to see your playlists</div>
+        <Container>Please log in to see your playlists</Container>
       )}
       {(isLoading || hasNextPage) && (
         <li ref={sentryRef}>
