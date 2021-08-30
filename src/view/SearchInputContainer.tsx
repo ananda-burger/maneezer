@@ -1,8 +1,8 @@
 import { useDispatch } from 'app/hooks'
 import { useRef } from 'react'
 import { useHistory } from 'react-router-dom'
-import Back from 'view/components/icons/Back'
-import ClearInput from 'view/components/icons/ClearInput'
+import BackIcon from 'view/components/icons/BackIcon'
+import ClearInputIcon from 'view/components/icons/ClearInputIcon'
 import { styled } from 'view/components/theme'
 import * as search from 'store/searchSlice'
 
@@ -35,7 +35,7 @@ export default function SearchInputContainer({ searchInput, isLoading }) {
   return (
     <InputContainer>
       <span onClick={() => dispatch(search.close())}>
-        <Back />
+        <BackIcon />
       </span>
       <SearchInput
         ref={textInput}
@@ -63,7 +63,7 @@ export default function SearchInputContainer({ searchInput, isLoading }) {
             dispatch(search.update(''))
           }}
         >
-          <ClearInput />
+          <ClearInputIcon />
         </span>
       )}
     </InputContainer>

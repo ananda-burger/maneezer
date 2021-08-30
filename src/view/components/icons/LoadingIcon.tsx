@@ -12,7 +12,7 @@ const Icon = styled.svg`
     color: white;
   }
 `
-export default function Loading() {
+export default function LoadingIcon() {
   return (
     <Icon
       width="200px"

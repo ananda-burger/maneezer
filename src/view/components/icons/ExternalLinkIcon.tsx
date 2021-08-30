@@ -7,7 +7,7 @@ const Icon = styled.svg`
     color: ${({ theme }) => theme.colors.secondary1};
   }
 `
-export default function ExternalLink() {
+export default function ExternalLinkIcon() {
   return (
     <Icon
       className="app-icon"

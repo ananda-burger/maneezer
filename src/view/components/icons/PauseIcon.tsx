@@ -9,7 +9,7 @@ const Icon = styled.svg`
     color: white;
   }
 `
-export default function Pause() {
+export default function PauseIcon() {
   return (
     <Icon fill="currentColor" className="app-icon" viewBox="0 0 512 512">
       <g>

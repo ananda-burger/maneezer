@@ -1,18 +1,15 @@
 import { styled } from 'view/components/theme'
 
 const Icon = styled.svg`
-  position: absolute;
-  top: calc(50% - 0.65rem);
-  left: 0.7rem;
+  width: 1.7rem !important;
+  height: 1.7rem !important;
   transition: 0.2 ease;
   &:hover {
-    fill: ${({ theme }) => theme.colors.secondary1};
     cursor: pointer;
     color: ${({ theme }) => theme.colors.secondary1};
   }
 `
-
-export default function ClearInput() {
+export default function LoginIcon() {
   return (
     <Icon
       className="app-icon"
@@ -23,8 +20,8 @@ export default function ClearInput() {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={2}
-        d="M10 19l-7-7m0 0l7-7m-7 7h18"
+        strokeWidth={1.4}
+        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
       />
     </Icon>
   )

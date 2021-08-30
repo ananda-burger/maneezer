@@ -5,11 +5,11 @@ import * as user from 'store/userSlice'
 import * as types from 'types'
 import { styled } from 'view/components/theme'
 import { secondsToMinutes } from 'utilities'
-import ExternalLink from 'view/components/icons/ExternalLink'
-import FullHeart from 'view/components/icons/FullHeart'
-import HollowHeart from 'view/components/icons/HollowHeart'
-import Pause from 'view/components/icons/Pause'
-import Play from 'view/components/icons/Play'
+import ExternalLinkIcon from 'view/components/icons/ExternalLinkIcon'
+import FullHeartIcon from 'view/components/icons/FullHeartIcon'
+import HollowHeartIcon from 'view/components/icons/HollowHeartIcon'
+import PauseIcon from 'view/components/icons/PauseIcon'
+import PlayIcon from 'view/components/icons/PlayIcon'
 
 const Container = styled.li<{ isPlaying: boolean }>`
   padding: 0.5rem 1.5rem;
@@ -108,11 +108,11 @@ export default function Track({
     <Container isPlaying={isPlaying}>
       {isPlaying ? (
         <Column onClick={() => dispatch(audio.pause())}>
-          <Pause />
+          <PauseIcon />
         </Column>
       ) : (
         <Column onClick={() => dispatch(audio.play(track))}>
-          <Play />
+          <PlayIcon />
         </Column>
       )}
       <Column>
@@ -132,20 +132,20 @@ export default function Track({
         <ButtonsContainer>
           {isFavorite ? (
             <div onClick={() => dispatch(favorites.remove(track))}>
-              <FullHeart />
+              <FullHeartIcon />
             </div>
           ) : (
             isLogged && (
               <div>
                 <div onClick={() => dispatch(favorites.add(track))}>
-                  <HollowHeart />
+                  <HollowHeartIcon />
                 </div>
               </div>
             )
           )}
           <div>
             <a href={track.link} target="_blank" rel="noreferrer">
-              <ExternalLink />
+              <ExternalLinkIcon />
             </a>
           </div>
         </ButtonsContainer>

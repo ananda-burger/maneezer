@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Track from 'view/Track'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
-import Loading from 'view/components/icons/Loading'
+import LoadingIcon from 'view/components/icons/LoadingIcon'
 import { styled } from 'view/components/theme'
 import { RootState } from 'app/store'
 import { AsyncThunk } from '@reduxjs/toolkit'
@@ -81,7 +81,7 @@ export default function TrackList({
         })}
         {(isLoading || hasNextPage) && (
           <LoadingItem ref={sentryRef}>
-            <Loading />
+            <LoadingIcon />
           </LoadingItem>
         )}
       </>

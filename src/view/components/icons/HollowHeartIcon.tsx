@@ -2,15 +2,14 @@ import { styled } from 'view/components/theme'
 
 const Icon = styled.svg`
   transition: 0.2 ease;
-  color: ${({ theme }) => theme.colors.secondary1};
-  fill: ${({ theme }) => theme.colors.secondary1};
   &:hover {
     color: white;
+    fill: ${({ theme }) => theme.colors.secondary1};
     cursor: pointer;
   }
 `
 
-export default function FullHeart() {
+export default function HollowHeartIcon() {
   return (
     <Icon
       className="app-icon"

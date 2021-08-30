@@ -1,18 +1,18 @@
 import { styled } from 'view/components/theme'
 
 const Icon = styled.svg`
-  width: 1.7rem !important;
-  height: 1.7rem !important;
   transition: 0.2 ease;
   &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.colors.secondary1};
   }
 `
-export default function Login() {
+
+export default function SearchIcon() {
   return (
     <Icon
       className="app-icon"
+      xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -20,8 +20,8 @@ export default function Login() {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={1.4}
-        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+        strokeWidth="3"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
       />
     </Icon>
   )

@@ -4,10 +4,10 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import * as search from 'store/searchSlice'
 import * as user from 'store/userSlice'
 import { Route } from 'types'
-import Login from 'view/components/icons/Login'
-import Logo from 'view/components/icons/Logo'
-import Search from 'view/components/icons/Search'
-import User from 'view/components/icons/User'
+import LoginIcon from 'view/components/icons/LoginIcon'
+import LogoIcon from 'view/components/icons/LogoIcon'
+import SearchIcon from 'view/components/icons/SearchIcon'
+import UserIcon from 'view/components/icons/UserIcon'
 import SearchInputContainer from 'view/SearchInputContainer'
 import TracksHeader from 'view/TracksHeader'
 import { styled } from 'view/components/theme'
@@ -180,7 +180,7 @@ export default function MainNavigation() {
     <Header>
       <Nav>
         <LogoLink to="/">
-          <Logo />
+          <LogoIcon />
           <span className="medium-only">Maneezer</span>
         </LogoLink>
         <MainNavOptions>
@@ -203,7 +203,7 @@ export default function MainNavigation() {
                 }}
                 path={path}
               >
-                <Search />
+                <SearchIcon />
               </SearchLink>
               <PlaylistsLink to="/playlists" path={path}>
                 Playlists
@@ -214,13 +214,13 @@ export default function MainNavigation() {
         {isLogged ? (
           <UserLink to="/">
             <LogoutOptions onClick={() => dispatch(user.logout())}>
-              <User />
+              <UserIcon />
               <span className="medium-only">Logout</span>
             </LogoutOptions>
           </UserLink>
         ) : (
           <LoginOptions onClick={() => dispatch(user.login())}>
-            <Login />
+            <LoginIcon />
             <span className="medium-only">Login</span>
           </LoginOptions>
         )}

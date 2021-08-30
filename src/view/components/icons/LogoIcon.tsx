@@ -5,7 +5,7 @@ const Icon = styled.svg`
   height: 30px;
 `
 
-export default function Logo() {
+export default function LogoIcon() {
   return (
     <Icon
       viewBox="19.619 12.553 466.291 468.859"

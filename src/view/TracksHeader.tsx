@@ -1,4 +1,4 @@
-import Clock from 'view/components/icons/Clock'
+import ClockIcon from 'view/components/icons/ClockIcon'
 import { Icon } from 'view/components/styled'
 import { styled } from 'view/components/theme'
 
@@ -35,7 +35,7 @@ export default function TracksHeader() {
         <div>ALBUM</div>
         <div>
           <Icon>
-            <Clock />
+            <ClockIcon />
           </Icon>
         </div>
         <div></div>

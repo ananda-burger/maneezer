@@ -1,27 +1,30 @@
 import { styled } from 'view/components/theme'
 
 const Icon = styled.svg`
+  position: absolute;
+  top: calc(50% - 0.65rem);
+  left: 0.7rem;
   transition: 0.2 ease;
   &:hover {
-    color: white;
     fill: ${({ theme }) => theme.colors.secondary1};
     cursor: pointer;
+    color: ${({ theme }) => theme.colors.secondary1};
   }
 `
 
-export default function HollowHeart() {
+export default function BackIcon() {
   return (
     <Icon
       className="app-icon"
-      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={1.6}
-        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+        strokeWidth={2}
+        d="M10 19l-7-7m0 0l7-7m-7 7h18"
       />
     </Icon>
   )

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'app/hooks'
 import { useParams } from 'react-router-dom'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { useEffect } from 'react'
-import Loading from 'view/components/icons/Loading'
+import LoadingIcon from 'view/components/icons/LoadingIcon'
 import Track from 'view/Track'
 
 interface Params {
@@ -43,7 +43,7 @@ export default function PlaylistTrackList() {
           })}
           {(isLoading || hasNextPage) && (
             <li ref={sentryRef}>
-              <Loading />
+              <LoadingIcon />
             </li>
           )}
         </>

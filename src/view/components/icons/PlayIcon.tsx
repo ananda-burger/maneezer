@@ -8,7 +8,7 @@ const Icon = styled.svg`
   }
 `
 
-export default function Play() {
+export default function PlayIcon() {
   return (
     <Icon
       fill="currentColor"

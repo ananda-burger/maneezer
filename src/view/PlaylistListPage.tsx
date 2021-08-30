@@ -4,7 +4,7 @@ import * as playlistsSlice from 'store/playlistsSlice'
 import * as user from 'store/userSlice'
 import Playlist from 'view/Playlist'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
-import Loading from 'view/components/icons/Loading'
+import LoadingIcon from 'view/components/icons/LoadingIcon'
 
 export default function PlaylistList() {
   const dispatch = useDispatch()
@@ -41,7 +41,7 @@ export default function PlaylistList() {
       )}
       {(isLoading || hasNextPage) && (
         <li ref={sentryRef}>
-          <Loading />
+          <LoadingIcon />
         </li>
       )}
     </>
