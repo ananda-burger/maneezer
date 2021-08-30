@@ -1,6 +1,6 @@
 import Clock from 'view/components/icons/Clock'
 import { Icon } from 'view/components/styled'
-import { styled } from 'view/theme'
+import { styled } from 'view/components/theme'
 
 const Header = styled.div`
   font-size: 0.9rem;

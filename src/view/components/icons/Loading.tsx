@@ -1,4 +1,4 @@
-import { styled } from 'view/theme'
+import { styled } from 'view/components/theme'
 
 const Icon = styled.svg`
   margin: 0;

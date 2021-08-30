@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import Back from 'view/components/icons/Back'
 import ClearInput from 'view/components/icons/ClearInput'
-import { styled } from 'view/theme'
+import { styled } from 'view/components/theme'
 import * as search from 'store/searchSlice'
 
 const InputContainer = styled.div`

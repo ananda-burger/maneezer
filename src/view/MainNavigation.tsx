@@ -10,7 +10,7 @@ import Search from 'view/components/icons/Search'
 import User from 'view/components/icons/User'
 import SearchInputContainer from 'view/SearchInputContainer'
 import TracksHeader from 'view/TracksHeader'
-import { styled } from 'view/theme'
+import { styled } from 'view/components/theme'
 import queryString from 'query-string'
 
 const Header = styled.header`

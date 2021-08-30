@@ -1,4 +1,4 @@
-import { styled } from 'view/theme'
+import { styled } from 'view/components/theme'
 import { Link } from 'react-router-dom'
 
 const HomeButton = styled(Link)<{ path: string }>`
