@@ -14,7 +14,7 @@ import NotFound from 'view/NotFoundPage'
 import { useDispatch, useSelector } from 'app/hooks'
 import { styled, theme } from 'view/components/theme'
 import PlaylistList from 'view/PlaylistListPage'
-import PlaylistTrackList from 'view/PlaylistTrackListPage'
+import PlaylistTrackList from 'view/pages/playlistTracks/PlaylistTrackListPage'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
