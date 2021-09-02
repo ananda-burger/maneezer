@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from 'app/hooks'
 import { useEffect } from 'react'
 import * as playlistsSlice from 'store/playlistsSlice'
 import * as user from 'store/userSlice'
+import * as modal from 'store/modalSlice'
 import Playlist from 'view/Playlist'
+import Modal from 'view/Modal'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import LoadingIcon from 'view/components/icons/LoadingIcon'
 import PlusIcon from 'view/components/icons/PlusIcon'
@@ -60,6 +62,7 @@ export default function PlaylistList() {
   const isLoading = useSelector(playlistsSlice.selectIsLoading)
   const hasNextPage = useSelector(playlistsSlice.selectHasMore)
   const isLogged = useSelector(user.selectIsLogged)
+  const modalIsOpen = useSelector(modal.selectModalIsOpen)
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,
@@ -74,11 +77,16 @@ export default function PlaylistList() {
     }
   }, [isLogged])
 
+  const openModal = () => {
+    dispatch(modal.open())
+  }
+
   return (
     <>
       {isLogged ? (
         <GridContainer>
-          <GridItem>
+          {modalIsOpen && <Modal />}
+          <GridItem onClick={openModal}>
             <PlusIcon />
             Create Playlist
           </GridItem>

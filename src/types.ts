@@ -113,6 +113,10 @@ export interface UserState {
   loginData: LoginResponse
 }
 
+export interface ModalState {
+  isOpen: boolean
+}
+
 export interface PopUpState {
   isOpen: boolean
   message: string
