@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'app/hooks'
 import { MouseEvent } from 'react'
-import * as modal from 'store/modalSlice'
 import * as confirmationModal from 'store/confirmationModalSlice'
 import * as playlist from 'store/playlistsSlice'
 import { styled } from 'view/components/theme'
@@ -23,7 +22,7 @@ const ModalStyle = styled.form`
   transform: translate(-50%, -50%);
   font-size: 1.5rem;
   height: 50%;
-  width: 60%;
+  width: 50%;
   border: 2px solid ${({ theme }) => theme.colors.primary4};
   border-radius: 5px;
   display: flex;
@@ -41,13 +40,15 @@ const ModalStyle = styled.form`
 const Title = styled.div`
   color: white;
   font-weight: bold;
+  margin: 2rem;
 `
 
 const ButtonsContainer = styled.div`
   color: white;
+  margin: 2rem;
 `
 
-const CreateButton = styled.button`
+const DeleteButton = styled.button`
   margin: 0 1rem;
   padding: 0.5rem;
   border: none;
@@ -104,10 +105,10 @@ export default function ConfirmationModal() {
   return (
     <div>
       <ModalStyle>
-        <Title>Delete Playlist</Title>
+        <Title>Delete Playlist?</Title>
         <ButtonsContainer>
           <CancelButton onClick={closeModal}>CANCEL</CancelButton>
-          <CreateButton onClick={createPlaylist}>DELETE</CreateButton>
+          <DeleteButton onClick={createPlaylist}>DELETE</DeleteButton>
         </ButtonsContainer>
       </ModalStyle>
       <Backdrop onClick={closeModal} />

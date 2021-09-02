@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { secondsToMinutes } from 'utilities'
 import { styled } from 'view/components/theme'
 import * as confirmationModal from 'store/confirmationModalSlice'
+import TrashIcon from 'view/components/icons/TrashIcon'
 
 const GridItem = styled(Link)`
   position: relative;
@@ -64,15 +65,15 @@ const DeleteButton = styled.button`
   top: 0.5rem;
   right: 0.5rem;
   color: white;
-  background: black;
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 50%;
-  border: 1.5px solid white;
+  border: 1.5px solid ${({ theme }) => theme.colors.primary4};
   transition: 0.2s ease;
   &:hover {
     cursor: pointer;
-    color: black;
+    fill: none;
     background: ${({ theme }) => theme.colors.secondary1};
   }
 `
@@ -99,7 +100,7 @@ export default function Playlist({ playlist }) {
       <Info>{playlist.nb_tracks} tracks</Info>
       <Info>{secondsToMinutes(playlist.duration)}</Info>
       <DeleteButton onClick={(e) => openConfirmationModal(e, playlist.id)}>
-        X
+        <TrashIcon />
       </DeleteButton>
     </GridItem>
   )
