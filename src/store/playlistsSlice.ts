@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
 import { FetchPayload, PlaylistsState } from 'types'
 import * as api from 'tracksAPI'
+import * as popUp from 'store/popUpSlice'
 
 const initialState: PlaylistsState = {
   playlists: [],
@@ -43,6 +44,19 @@ export const fetch = createAsyncThunk(
   }
 )
 
+export const create = createAsyncThunk(
+  'playlists/create',
+  (playlistTitle: string, { getState, dispatch }: any) => {
+    const state: RootState = getState()
+    return api
+      .createPlaylist(selectUserID(state), playlistTitle)
+      .catch((message) => {
+        dispatch(popUp.appear(message))
+        throw new Error(message)
+      })
+  }
+)
+
 export const playlistsSlice = createSlice({
   name: 'playlists',
   initialState,
@@ -56,6 +70,13 @@ export const playlistsSlice = createSlice({
         state.isLoading = false
       })
       .addCase(fetch.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(create.fulfilled, (state, action) => {
+        state.playlists = state.playlists.concat(action.payload)
+        state.isLoading = false
+      })
+      .addCase(create.pending, (state) => {
         state.isLoading = true
       })
   }

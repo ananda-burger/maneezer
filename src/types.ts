@@ -56,7 +56,7 @@ export interface Playlist {
   link: string
   picture: string
   picture_small: string
-  picture_meduim: string
+  picture_medium: string
   picture_big: string
   picture_xl: string
   checksum: string
@@ -115,6 +115,7 @@ export interface UserState {
 
 export interface ModalState {
   isOpen: boolean
+  title: string
 }
 
 export interface PopUpState {

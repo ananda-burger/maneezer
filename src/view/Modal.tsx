@@ -1,6 +1,9 @@
-import { styled } from 'view/components/theme'
-import { useDispatch } from 'app/hooks'
+import { useDispatch, useSelector } from 'app/hooks'
+import { MouseEvent } from 'react'
 import * as modal from 'store/modalSlice'
+import * as playlist from 'store/playlistsSlice'
+import { styled } from 'view/components/theme'
+import LoadingIcon from './components/icons/LoadingIcon'
 
 const Backdrop = styled.div`
   position: fixed;
@@ -92,15 +95,27 @@ const CancelButton = styled.button`
 
 export default function Modal() {
   const dispatch = useDispatch()
+  const isLoading = useSelector(playlist.selectIsLoading)
+  const playlistTitle = useSelector(modal.selectTitle)
 
-  const closeModal = (event: React.MouseEvent<HTMLElement>) => {
+  const closeModal = (event: MouseEvent) => {
     event.preventDefault()
     dispatch(modal.close())
   }
 
-  const createPlaylist = (event: React.MouseEvent<HTMLElement>) => {
+  const createPlaylist = (event: MouseEvent) => {
     event.preventDefault()
-    console.log('create')
+    dispatch(playlist.create(playlistTitle))
+    dispatch(modal.close())
+  }
+
+  if (isLoading) {
+    return (
+      <ModalStyle>
+        <LoadingIcon />
+        <Backdrop />
+      </ModalStyle>
+    )
   }
 
   return (
@@ -110,11 +125,14 @@ export default function Modal() {
         <Input
           placeholder="Title"
           autoFocus
+          onChange={(e) => {
+            dispatch(modal.update(e.target.value))
+          }}
           onKeyUp={(e) => {
             if (e.key === 'Escape') {
               dispatch(modal.close())
             } else if (e.key === 'Enter') {
-              console.log('submit')
+              dispatch(modal.update(playlistTitle))
             }
           }}
         />

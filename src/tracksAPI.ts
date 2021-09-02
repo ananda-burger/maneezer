@@ -33,21 +33,6 @@ export const fetchFilteredTracks = (
   })
 }
 
-export const fetchPlaylists = (
-  id: string,
-  lastIndex: number,
-  perPage: number
-) => {
-  return new Promise<Playlist[]>((resolve, _reject) => {
-    window.DZ.api(
-      `/user/${id}/playlists?index=${lastIndex}&limit=${perPage}`,
-      (response: DeezerPlaylistResponse) => {
-        resolve(response.data)
-      }
-    )
-  })
-}
-
 export const fetchFavoriteTracks = (
   id: string,
   lastIndex: number,
@@ -88,6 +73,69 @@ export const removeFromFavorites = (id: string, track: Track) => {
       { track_id: track.id },
       (_response: any) => {
         resolve(track)
+      }
+    )
+  })
+}
+
+export const fetchPlaylists = (
+  id: string,
+  lastIndex: number,
+  perPage: number
+) => {
+  return new Promise<Playlist[]>((resolve, _reject) => {
+    window.DZ.api(
+      `/user/${id}/playlists?index=${lastIndex}&limit=${perPage}`,
+      (response: DeezerPlaylistResponse) => {
+        resolve(response.data)
+      }
+    )
+  })
+}
+
+export const createPlaylist = (userId: string, playlistTitle: string) => {
+  return new Promise<Playlist[]>((resolve, reject) => {
+    window.DZ.api(
+      `/user/${userId}/playlists`,
+      'POST',
+      { title: playlistTitle },
+      (response: any) => {
+        if (response.id) {
+          resolve([
+            {
+              id: response.id,
+              title: playlistTitle,
+              duration: 0,
+              public: true,
+              is_loved_track: false,
+              collaborative: false,
+              nb_tracks: 0,
+              fans: 0,
+              link: '',
+              picture: '',
+              picture_small: '',
+              picture_medium: '',
+              picture_big: '',
+              picture_xl: '',
+              checksum: '',
+              tracklist: '',
+              creation_date: '',
+              md5_image: '',
+              picture_type: '',
+              time_add: '',
+              time_mod: '',
+              creator: {
+                id: '',
+                name: '',
+                tracklist: '',
+                type: ''
+              },
+              type: 'playlist'
+            }
+          ])
+        } else {
+          reject(response.error.message)
+        }
       }
     )
   })

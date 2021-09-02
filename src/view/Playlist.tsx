@@ -54,7 +54,13 @@ const Info = styled.p`
 export default function Playlist({ playlist }) {
   return (
     <GridItem to={`/playlists/${playlist.id}`}>
-      <Cover src={playlist.picture_medium} alt="Playlist cover" />
+      <Cover
+        src={
+          playlist.picture_medium ||
+          'https://cdns-images.dzcdn.net/images/cover//250x250-000000-80-0-0.jpg'
+        }
+        alt="Playlist cover"
+      />
       <Title>{playlist.title}</Title>
       <Info>{playlist.nb_tracks} tracks</Info>
       <Info>{secondsToMinutes(playlist.duration)}</Info>
