@@ -81,10 +81,8 @@ const DeleteButton = styled.button`
 export default function Playlist({ playlist }) {
   const dispatch = useDispatch()
 
-  const openConfirmationModal = (event, id: string) => {
-    event.preventDefault()
-    dispatch(confirmationModal.updateId(id))
-    dispatch(confirmationModal.open())
+  const openConfirmationModal = (id: string) => {
+    dispatch(confirmationModal.open(id))
   }
 
   return (
@@ -99,7 +97,12 @@ export default function Playlist({ playlist }) {
       <Title>{playlist.title}</Title>
       <Info>{playlist.nb_tracks} tracks</Info>
       <Info>{secondsToMinutes(playlist.duration)}</Info>
-      <DeleteButton onClick={(e) => openConfirmationModal(e, playlist.id)}>
+      <DeleteButton
+        onClick={(e) => {
+          e.preventDefault()
+          openConfirmationModal(playlist.id)
+        }}
+      >
         <TrashIcon />
       </DeleteButton>
     </GridItem>

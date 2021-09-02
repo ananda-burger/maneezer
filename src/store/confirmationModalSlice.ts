@@ -19,18 +19,16 @@ export const confirmationModalSlice = createSlice({
   name: 'confirmationModal',
   initialState,
   reducers: {
-    open: (state) => {
+    open: (state, action) => {
+      state.id = action.payload
       state.isOpen = true
     },
     close: (state) => {
       state.isOpen = false
-    },
-    updateId: (state, action) => {
-      state.id = action.payload
     }
   }
 })
 
-export const { open, close, updateId } = confirmationModalSlice.actions
+export const { open, close } = confirmationModalSlice.actions
 
 export const { reducer } = confirmationModalSlice
