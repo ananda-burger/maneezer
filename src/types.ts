@@ -118,6 +118,11 @@ export interface ModalState {
   title: string
 }
 
+export interface ConfirmationModalState {
+  isOpen: boolean
+  id: string
+}
+
 export interface PopUpState {
   isOpen: boolean
   message: string

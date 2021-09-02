@@ -141,6 +141,18 @@ export const createPlaylist = (userId: string, playlistTitle: string) => {
   })
 }
 
+export const removePlaylist = (playlistId: string) => {
+  return new Promise<string>((resolve, reject) => {
+    window.DZ.api(`/playlist/${playlistId}`, 'DELETE', (response: any) => {
+      if (typeof response === 'boolean') {
+        resolve(playlistId)
+      } else {
+        reject(response.error.message)
+      }
+    })
+  })
+}
+
 export const fetchPlaylistTracks = (
   lastIndex: number,
   perPage: number,

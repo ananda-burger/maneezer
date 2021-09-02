@@ -57,6 +57,16 @@ export const create = createAsyncThunk(
   }
 )
 
+export const remove = createAsyncThunk(
+  'playlists/remove',
+  (playlistId: string, { dispatch }: any) => {
+    return api.removePlaylist(playlistId).catch((message) => {
+      dispatch(popUp.appear(message))
+      throw new Error(message)
+    })
+  }
+)
+
 export const playlistsSlice = createSlice({
   name: 'playlists',
   initialState,
@@ -77,6 +87,14 @@ export const playlistsSlice = createSlice({
         state.isLoading = false
       })
       .addCase(create.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(remove.fulfilled, (state, action) => {
+        const index = state.playlists.findIndex((p) => p.id === action.payload)
+        state.playlists.splice(index, 1)
+        state.isLoading = false
+      })
+      .addCase(remove.pending, (state) => {
         state.isLoading = true
       })
   }

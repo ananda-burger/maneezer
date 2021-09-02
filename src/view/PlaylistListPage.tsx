@@ -3,8 +3,10 @@ import { useEffect } from 'react'
 import * as playlistsSlice from 'store/playlistsSlice'
 import * as user from 'store/userSlice'
 import * as modal from 'store/modalSlice'
+import * as confirmationModal from 'store/confirmationModalSlice'
 import Playlist from 'view/Playlist'
 import Modal from 'view/Modal'
+import ConfirmationModal from 'view/ConfirmationModal'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import LoadingIcon from 'view/components/icons/LoadingIcon'
 import PlusIcon from 'view/components/icons/PlusIcon'
@@ -63,6 +65,9 @@ export default function PlaylistList() {
   const hasNextPage = useSelector(playlistsSlice.selectHasMore)
   const isLogged = useSelector(user.selectIsLogged)
   const modalIsOpen = useSelector(modal.selectModalIsOpen)
+  const confirmationModalIsOpen = useSelector(
+    confirmationModal.selectModalIsOpen
+  )
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,
@@ -84,16 +89,19 @@ export default function PlaylistList() {
   return (
     <>
       {isLogged ? (
-        <GridContainer>
+        <>
           {modalIsOpen && <Modal />}
-          <GridItem onClick={openModal}>
-            <PlusIcon />
-            Create Playlist
-          </GridItem>
-          {playlists.map((playlist) => {
-            return <Playlist key={playlist.id} playlist={playlist} />
-          })}
-        </GridContainer>
+          {confirmationModalIsOpen && <ConfirmationModal />}
+          <GridContainer>
+            <GridItem onClick={openModal}>
+              <PlusIcon />
+              Create Playlist
+            </GridItem>
+            {playlists.map((playlist) => {
+              return <Playlist key={playlist.id} playlist={playlist} />
+            })}
+          </GridContainer>
+        </>
       ) : (
         <Container>Please log in to see your playlists</Container>
       )}
