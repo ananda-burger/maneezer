@@ -1,5 +1,4 @@
 import * as artist from 'store/artistTracksSlice'
-import * as user from 'store/userSlice'
 import { useSelector, useDispatch } from 'app/hooks'
 import { useParams } from 'react-router-dom'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
@@ -18,25 +17,12 @@ const LoadingItem = styled.li`
   padding: 1rem 0;
 `
 
-const Container = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5rem;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-`
-
-export default function PlaylistTrackList() {
+export default function ArtistTrackList() {
   const { id: artistId } = useParams<Params>()
   const tracks = useSelector(artist.selectTracks(artistId))
   const lastIndex = useSelector(artist.selectLastIndex(artistId))
   const hasNextPage = useSelector(artist.selectHasMoreTracks(artistId))
   const isLoading = useSelector(artist.selectIsLoadingTracks(artistId))
-  const isLogged = useSelector(user.selectIsLogged)
   const dispatch = useDispatch()
 
   const [sentryRef] = useInfiniteScroll({
@@ -48,26 +34,18 @@ export default function PlaylistTrackList() {
   })
 
   useEffect(() => {
-    if (isLogged) {
-      dispatch(artist.fetch({ lastIndex, isLoading, artistId }))
-    }
-  }, [isLogged, artistId])
+    dispatch(artist.fetch({ lastIndex, isLoading, artistId }))
+  }, [artistId])
 
   return (
     <>
-      {isLogged ? (
-        <>
-          {tracks.map((track) => {
-            return <Track key={track.id} track={track} />
-          })}
-          {(isLoading || hasNextPage) && (
-            <LoadingItem ref={sentryRef}>
-              <LoadingIcon />
-            </LoadingItem>
-          )}
-        </>
-      ) : (
-        <Container>Please log in to see your playlists</Container>
+      {tracks.map((track) => {
+        return <Track key={track.id} track={track} />
+      })}
+      {(isLoading || hasNextPage) && (
+        <LoadingItem ref={sentryRef}>
+          <LoadingIcon />
+        </LoadingItem>
       )}
     </>
   )

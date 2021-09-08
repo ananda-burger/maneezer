@@ -52,20 +52,20 @@ export const artistTracksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetch.fulfilled, (state, action) => {
-        const playlist = state[action.meta.arg.artistId]
+        const artist = state[action.meta.arg.artistId]
 
         state[action.meta.arg.artistId] = {
           hasMoreTracks: action.payload.length > 0,
           isLoading: false,
-          lastIndex: playlist.lastIndex + PER_PAGE,
-          tracks: playlist.tracks.concat(action.payload)
+          lastIndex: artist.lastIndex + PER_PAGE,
+          tracks: artist.tracks.concat(action.payload)
         }
       })
       .addCase(fetch.pending, (state, action) => {
-        const playlist = state[action.meta.arg.artistId]
+        const artist = state[action.meta.arg.artistId]
 
-        if (playlist) {
-          playlist.isLoading = true
+        if (artist) {
+          artist.isLoading = true
         } else {
           state[action.meta.arg.artistId] = {
             hasMoreTracks: false,
