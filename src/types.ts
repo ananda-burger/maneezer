@@ -133,6 +133,11 @@ export interface PopUpState {
   timer: ReturnType<typeof setTimeout> | void
 }
 
+export interface DropdownState {
+  isOpen: boolean
+  id: string
+}
+
 export interface LoginResponse {
   authInitDate: number
   authResponse: { accessToken: string; expire: number }

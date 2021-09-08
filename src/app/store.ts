@@ -9,6 +9,7 @@ import { reducer as playlistsReducer } from 'store/playlistsSlice'
 import { reducer as playlistTracksReducer } from 'store/playlistTracksSlice'
 import { reducer as modalReducer } from 'store/modalSlice'
 import { reducer as confirmationModalReducer } from 'store/confirmationModalSlice'
+import { reducer as dropdownReducer } from 'store/dropdownSlice'
 import { reducer as artistTracksReducer } from 'store/artistTracksSlice'
 
 export const store = configureStore({
@@ -23,7 +24,8 @@ export const store = configureStore({
     playlists: playlistsReducer,
     playlistTracks: playlistTracksReducer,
     modal: modalReducer,
-    confirmationModal: confirmationModalReducer
+    confirmationModal: confirmationModalReducer,
+    dropdown: dropdownReducer
   }
 })
 
