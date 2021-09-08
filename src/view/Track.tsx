@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'app/hooks'
 import * as audio from 'store/audioSlice'
 import * as favorites from 'store/favoriteTracksSlice'
@@ -5,11 +6,12 @@ import * as user from 'store/userSlice'
 import * as types from 'types'
 import { styled } from 'view/components/theme'
 import { secondsToMinutes } from 'utilities'
-import ExternalLinkIcon from 'view/components/icons/ExternalLinkIcon'
+// import ExternalLinkIcon from 'view/components/icons/ExternalLinkIcon'
 import FullHeartIcon from 'view/components/icons/FullHeartIcon'
 import HollowHeartIcon from 'view/components/icons/HollowHeartIcon'
 import PauseIcon from 'view/components/icons/PauseIcon'
 import PlayIcon from 'view/components/icons/PlayIcon'
+import EtcIcon from 'view/components/icons/EtcIcon'
 
 const Container = styled.li<{ isPlaying: boolean }>`
   padding: 0.5rem 1.5rem;
@@ -92,6 +94,13 @@ const ButtonsContainer = styled.div`
   }
 `
 
+const ArtistLink = styled(Link)`
+  :hover {
+    border-radius: 5px;
+    color: ${({ theme }) => theme.colors.secondary1};
+  }
+`
+
 export default function Track({
   track,
   isFavorite
@@ -144,9 +153,16 @@ export default function Track({
             )
           )}
           <div>
-            <a href={track.link} target="_blank" rel="noreferrer">
-              <ExternalLinkIcon />
-            </a>
+            <ArtistLink to={`/artist/${track.artist.id}`}>
+              Go to artist
+            </ArtistLink>
+            {/* <div>Go to album</div> */}
+            {/* <div>Entire track on Deezer</div> */}
+            {/* <div>Add to playlist...</div> */}
+            {/* <a href={track.link} target="_blank" rel="noreferrer"> */}
+            {/*   <ExternalLinkIcon /> */}
+            {/* </a> */}
+            <EtcIcon />
           </div>
         </ButtonsContainer>
       </Column>

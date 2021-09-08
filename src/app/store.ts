@@ -9,6 +9,7 @@ import { reducer as playlistsReducer } from 'store/playlistsSlice'
 import { reducer as playlistTracksReducer } from 'store/playlistTracksSlice'
 import { reducer as modalReducer } from 'store/modalSlice'
 import { reducer as confirmationModalReducer } from 'store/confirmationModalSlice'
+import { reducer as artistTracksReducer } from 'store/artistTracksSlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     audio: audioReducer,
     search: searchReducer,
     favoriteTracks: favoritesReducer,
+    artistTracks: artistTracksReducer,
     user: userReducer,
     popUp: popUpReducer,
     playlists: playlistsReducer,

@@ -84,6 +84,10 @@ export interface TopTracksState {
 
 export interface FavoriteTracksState extends TopTracksState {}
 
+export interface ArtistTracksState {
+  [artistId: string]: TopTracksState
+}
+
 export interface PlaylistTracksState {
   [playlistId: string]: TopTracksState
 }
@@ -153,7 +157,8 @@ export enum Route {
   Favorites = '/favorites',
   Search = '/search',
   Playlists = '/playlists',
-  Playlist = '/playlists/:id'
+  Playlist = '/playlists/:id',
+  Artist = '/artist/:id'
 }
 
 export interface FetchPayload {
@@ -165,4 +170,8 @@ export interface FetchPayload {
 
 export interface FetchPlaylistPayload extends FetchPayload {
   playlistId: string
+}
+
+export interface FetchArtistPayload extends FetchPayload {
+  artistId: string
 }

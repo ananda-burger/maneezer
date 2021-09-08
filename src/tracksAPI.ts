@@ -168,6 +168,21 @@ export const fetchPlaylistTracks = (
   })
 }
 
+export const fetchArtistTracks = (
+  lastIndex: number,
+  perPage: number,
+  id: string
+) => {
+  return new Promise<Track[]>((resolve, _reject) => {
+    window.DZ.api(
+      `/artist/${id}/top?index=${lastIndex}&limit=${perPage}`,
+      (response: DeezerResponse) => {
+        resolve(response.data)
+      }
+    )
+  })
+}
+
 export const login = () => {
   return new Promise<LoginResponse>((resolve, _reject) => {
     window.DZ.login(

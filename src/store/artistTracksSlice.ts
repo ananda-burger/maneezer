@@ -1,60 +1,60 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { Track, PlaylistTracksState, FetchPlaylistPayload } from 'types'
+import { Track, ArtistTracksState, FetchArtistPayload } from 'types'
 import * as api from 'tracksAPI'
 
-const initialState: PlaylistTracksState = {}
+const initialState: ArtistTracksState = {}
 
 const PER_PAGE = 30
 
 export const selectTracks =
-  (playlistId: string) =>
+  (artistId: string) =>
   (state: RootState): Track[] => {
-    const playlist = state.playlistTracks[playlistId]
-    return playlist ? playlist.tracks : []
+    const artist = state.artistTracks[artistId]
+    return artist ? artist.tracks : []
   }
 
 export const selectLastIndex =
-  (playlistId: string) =>
+  (artistId: string) =>
   (state: RootState): number => {
-    const playlist = state.playlistTracks[playlistId]
-    return playlist ? playlist.lastIndex : 0
+    const artist = state.artistTracks[artistId]
+    return artist ? artist.lastIndex : 0
   }
 
 export const selectIsLoadingTracks =
-  (playlistId: string) =>
+  (artistId: string) =>
   (state: RootState): boolean => {
-    const playlist = state.playlistTracks[playlistId]
-    return playlist ? playlist.isLoading : false
+    const artist = state.artistTracks[artistId]
+    return artist ? artist.isLoading : false
   }
 
 export const selectHasMoreTracks =
-  (playlistId: string) =>
+  (artistId: string) =>
   (state: RootState): boolean => {
-    const playlist = state.playlistTracks[playlistId]
-    return playlist ? playlist.hasMoreTracks : false
+    const artist = state.artistTracks[artistId]
+    return artist ? artist.hasMoreTracks : false
   }
 
 export const fetch = createAsyncThunk(
-  'playlistTracks/fetch',
-  ({ lastIndex, isLoading, playlistId }: FetchPlaylistPayload) => {
+  'artist/fetchTracks',
+  ({ lastIndex, isLoading, artistId }: FetchArtistPayload) => {
     if (isLoading) {
       return Promise.resolve([])
     }
-    return api.fetchPlaylistTracks(lastIndex, PER_PAGE, playlistId)
+    return api.fetchArtistTracks(lastIndex, PER_PAGE, artistId)
   }
 )
 
-export const playlistTracksSlice = createSlice({
-  name: 'playlistTracksSlice',
+export const artistTracksSlice = createSlice({
+  name: 'artistTracksSlice',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetch.fulfilled, (state, action) => {
-        const playlist = state[action.meta.arg.playlistId]
+        const playlist = state[action.meta.arg.artistId]
 
-        state[action.meta.arg.playlistId] = {
+        state[action.meta.arg.artistId] = {
           hasMoreTracks: action.payload.length > 0,
           isLoading: false,
           lastIndex: playlist.lastIndex + PER_PAGE,
@@ -62,12 +62,12 @@ export const playlistTracksSlice = createSlice({
         }
       })
       .addCase(fetch.pending, (state, action) => {
-        const playlist = state[action.meta.arg.playlistId]
+        const playlist = state[action.meta.arg.artistId]
 
         if (playlist) {
           playlist.isLoading = true
         } else {
-          state[action.meta.arg.playlistId] = {
+          state[action.meta.arg.artistId] = {
             hasMoreTracks: false,
             isLoading: true,
             lastIndex: 0,
@@ -78,4 +78,4 @@ export const playlistTracksSlice = createSlice({
   }
 })
 
-export const { reducer } = playlistTracksSlice
+export const { reducer } = artistTracksSlice

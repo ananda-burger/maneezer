@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'app/hooks'
 import { styled, theme } from 'view/components/theme'
 import PlaylistList from 'view/PlaylistListPage'
 import PlaylistTrackList from 'view/pages/playlistTracks/PlaylistTrackListPage'
+import ArtistTrackList from 'view/pages/artistTracks/artistTracksPage'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -135,6 +136,9 @@ export default function App() {
             </Route>
             <Route path={types.Route.Playlist}>
               <PlaylistTrackList />
+            </Route>
+            <Route path={types.Route.Artist}>
+              <ArtistTrackList />
             </Route>
             <Route>
               <NotFound />
