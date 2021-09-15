@@ -1,4 +1,5 @@
 import {
+  Album,
   DeezerPlaylistResponse,
   DeezerResponse,
   LoginResponse,
@@ -180,6 +181,14 @@ export const fetchArtistTracks = (
         resolve(response.data)
       }
     )
+  })
+}
+
+export const fetchAlbum = (id: string) => {
+  return new Promise<Album>((resolve, _reject) => {
+    window.DZ.api(`/album/${id}`, (response: Album) => {
+      resolve(response)
+    })
   })
 }
 

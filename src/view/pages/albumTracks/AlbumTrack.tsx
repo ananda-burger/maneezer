@@ -66,6 +66,20 @@ const TrackName = styled.div`
   max-width: 100%;
 `
 
+const ArtistName = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: ${({ theme }) => theme.colors.primary5};
+  font-size: 0.9rem;
+`
+
+const AlbumTitle = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
 const ButtonsContainer = styled.div`
   color: ${({ theme }) => theme.colors.primary5};
   display: flex;
@@ -93,22 +107,12 @@ const ArtistLink = styled(Link)`
 `
 
 const AlbumLink = styled(Link)`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   :hover {
     color: ${({ theme }) => theme.colors.secondary1};
-    cursor: pointer;
   }
 `
 
-export default function Track({
-  track,
-  isFavorite
-}: {
-  track: types.Track
-  isFavorite?: boolean
-}) {
+export default function Track({ track }: { track: types.Track }) {
   const dispatch = useDispatch()
   const playingTrackId = useSelector(audio.selectPlayingTrackId)
   const isLogged = useSelector(user.selectIsLogged)
@@ -130,7 +134,7 @@ export default function Track({
           <Cover src={track.album.cover_small} alt="Album cover" />
         </Column>
       ) : (
-        ''
+        <Column></Column>
       )}
       <Column>
         <TrackName>{track.title}</TrackName>
@@ -140,33 +144,27 @@ export default function Track({
       </Column>
       {track.album ? (
         <ColumnLarge>
-          <AlbumLink to={`/album/${track.album.id}`}>
-            {track.album.title}
-          </AlbumLink>
+          <AlbumTitle>{track.album.title}</AlbumTitle>
         </ColumnLarge>
       ) : (
-        ''
+        <ColumnLarge></ColumnLarge>
       )}
       <ColumnLarge>
         <div>{secondsToMinutes(track.duration)}</div>
       </ColumnLarge>
       <Column>
         <ButtonsContainer>
-          {isFavorite ? (
-            <div onClick={() => dispatch(favorites.remove(track))}>
-              <FullHeartIcon />
-            </div>
-          ) : (
-            isLogged && (
-              <div>
-                <div onClick={() => dispatch(favorites.add(track))}>
-                  <HollowHeartIcon />
-                </div>
+          <div onClick={() => dispatch(favorites.remove(track))}>
+            <FullHeartIcon />
+          </div>
+          {isLogged && (
+            <div>
+              <div onClick={() => dispatch(favorites.add(track))}>
+                <HollowHeartIcon />
               </div>
-            )
+            </div>
           )}
           <div>
-            {/* <div>Go to album</div> */}
             {/* <div>Entire track on Deezer</div> */}
             {/* <div>Add to playlist...</div> */}
             {/* <a href={track.link} target="_blank" rel="noreferrer"> */}

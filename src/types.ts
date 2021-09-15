@@ -1,4 +1,4 @@
-export interface Album {
+export interface TrackAlbum {
   id: number
   title: string
   cover: string
@@ -40,8 +40,77 @@ export interface Track {
   md5_image: string
   position: number
   artist: Artist
-  album: Album
+  album?: TrackAlbum
   type: string
+}
+
+export interface Contributors {
+  id: number
+  name: string
+  link: string
+  share: string
+  picture: string
+  picture_small: string
+  picture_medium: string
+  picture_big: string
+  picture_xl: string
+  radio: boolean
+  tracklist: string
+  type: string
+  role: string
+}
+
+export interface Album {
+  id: string
+  title: string
+  upc: string
+  link: string
+  share: string
+  cover: string
+  cover_small: string
+  cover_medium: string
+  cover_big: string
+  cover_xl: string
+  md5_image: string
+  genre_id: number
+  genres: {
+    data: [
+      {
+        id: number
+        name: string
+        picture: string
+        type: string
+      }
+    ]
+  }
+  label: string
+  nb_tracks: number
+  duration: number
+  fans: number
+  rating: number
+  release_date: string
+  record_type: string
+  available: boolean
+  tracklist: string
+  explicit_lyrics: boolean
+  explicit_content_lyrics: number
+  explicit_content_cover: number
+  contributors: Contributors[]
+  artist: {
+    id: string
+    name: string
+    picture: string
+    picture_small: string
+    picture_medium: string
+    picture_big: string
+    picture_xl: string
+    tracklist: string
+    type: string
+  }
+  type: string
+  tracks: {
+    data: Track[]
+  }
 }
 
 export interface Playlist {
@@ -86,6 +155,10 @@ export interface FavoriteTracksState extends TopTracksState {}
 
 export interface ArtistTracksState {
   [artistId: string]: TopTracksState
+}
+
+export interface AlbumTracksState {
+  [albumId: string]: Album
 }
 
 export interface PlaylistTracksState {
@@ -163,7 +236,8 @@ export enum Route {
   Search = '/search',
   Playlists = '/playlists',
   Playlist = '/playlists/:id',
-  Artist = '/artist/:id'
+  Artist = '/artist/:id',
+  Album = '/album/:id'
 }
 
 export interface FetchPayload {
@@ -179,4 +253,8 @@ export interface FetchPlaylistPayload extends FetchPayload {
 
 export interface FetchArtistPayload extends FetchPayload {
   artistId: string
+}
+
+export interface FetchAlbumPayload extends FetchPayload {
+  albumId: string
 }
