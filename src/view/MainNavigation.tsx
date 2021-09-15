@@ -106,7 +106,7 @@ const FavoritesLink = styled(Link)<{ path: string }>`
     color: ${({ theme }) => theme.colors.secondary1};
   }
   ${({ path, theme }) =>
-    path === '/favorites'
+    path === Route.Favorites
       ? `color: ${theme.colors.secondary1};`
       : `color: ${theme.colors.primary5};`}
 `
@@ -117,7 +117,7 @@ const PlaylistsLink = styled(Link)<{ path: string }>`
     color: ${({ theme }) => theme.colors.secondary1};
   }
   ${({ path, theme }) =>
-    path === '/playlists'
+    path === Route.Playlists
       ? `color: ${theme.colors.secondary1};`
       : `color: ${theme.colors.primary5};`}
 `
@@ -179,7 +179,7 @@ export default function MainNavigation() {
   return (
     <Header>
       <Nav>
-        <LogoLink to="/">
+        <LogoLink to={Route.Home}>
           <LogoIcon />
           <span className="medium-only">Maneezer</span>
         </LogoLink>
@@ -191,10 +191,10 @@ export default function MainNavigation() {
             />
           ) : (
             <>
-              <TopTracksLink to="/" path={path}>
+              <TopTracksLink to={Route.Home} path={path}>
                 Top Tracks
               </TopTracksLink>
-              <FavoritesLink to="/favorites" path={path}>
+              <FavoritesLink to={Route.Favorites} path={path}>
                 Favorites
               </FavoritesLink>
               <SearchLink
@@ -205,14 +205,14 @@ export default function MainNavigation() {
               >
                 <SearchIcon />
               </SearchLink>
-              <PlaylistsLink to="/playlists" path={path}>
+              <PlaylistsLink to={Route.Playlists} path={path}>
                 Playlists
               </PlaylistsLink>
             </>
           )}
         </MainNavOptions>
         {isLogged ? (
-          <UserLink to="/">
+          <UserLink to={Route.Home}>
             <LogoutOptions onClick={() => dispatch(user.logout())}>
               <UserIcon />
               <span className="medium-only">Logout</span>
@@ -225,7 +225,7 @@ export default function MainNavigation() {
           </LoginOptions>
         )}
       </Nav>
-      {history.location.pathname !== '/playlists' && <TracksHeader />}
+      {history.location.pathname !== Route.Playlists && <TracksHeader />}
     </Header>
   )
 }
