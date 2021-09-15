@@ -1,6 +1,8 @@
-import ClockIcon from 'view/components/icons/ClockIcon'
-import { Icon } from 'view/components/styled'
-import { styled } from 'view/components/theme'
+import { useHistory } from 'react-router-dom'
+import ClockIcon from 'view/common/icons/ClockIcon'
+import { Icon } from 'view/common/styled'
+import { styled } from 'view/common/theme'
+import { Route } from 'types'
 
 const Header = styled.div`
   font-size: 0.9rem;

@@ -1,9 +1,9 @@
 import { useDispatch } from 'app/hooks'
 import { useRef } from 'react'
 import { useHistory } from 'react-router-dom'
-import BackIcon from 'view/components/icons/BackIcon'
-import ClearInputIcon from 'view/components/icons/ClearInputIcon'
-import { styled } from 'view/components/theme'
+import BackIcon from 'view/common/icons/BackIcon'
+import ClearInputIcon from 'view/common/icons/ClearInputIcon'
+import { styled } from 'view/common/theme'
 import * as search from 'store/searchSlice'
 
 const InputContainer = styled.div`

@@ -1,22 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { ModalState } from 'types'
+import { CreatePlaylistModalState } from 'types'
 
-const initialState: ModalState = {
+const initialState: CreatePlaylistModalState = {
   isOpen: false,
   title: ''
 }
 
 export const selectModalIsOpen = (state: RootState) => {
-  return state.modal.isOpen
+  return state.createPlaylistModal.isOpen
 }
 
 export const selectTitle = (state: RootState) => {
-  return state.modal.title
+  return state.createPlaylistModal.title
 }
 
-export const modalSlice = createSlice({
-  name: 'modal',
+export const createPlaylistModalSlice = createSlice({
+  name: 'createPlaylistModal',
   initialState,
   reducers: {
     open: (state) => {
@@ -31,6 +31,6 @@ export const modalSlice = createSlice({
   }
 })
 
-export const { open, close, update } = modalSlice.actions
+export const { open, close, update } = createPlaylistModalSlice.actions
 
-export const { reducer } = modalSlice
+export const { reducer } = createPlaylistModalSlice

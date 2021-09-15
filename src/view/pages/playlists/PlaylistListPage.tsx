@@ -2,15 +2,15 @@ import { useDispatch, useSelector } from 'app/hooks'
 import { useEffect } from 'react'
 import * as playlistsSlice from 'store/playlistsSlice'
 import * as user from 'store/userSlice'
-import * as modal from 'store/modalSlice'
-import * as confirmationModal from 'store/confirmationModalSlice'
-import Playlist from 'view/Playlist'
-import Modal from 'view/Modal'
-import ConfirmationModal from 'view/ConfirmationModal'
+import * as createPlaylistModal from 'store/createPlaylistModalSlice'
+import * as deletePlaylistModal from 'store/deletePlaylistModalSlice'
+import Playlist from 'view/pages/playlists/Playlist'
+import CreatePlaylistModal from 'view/pages/playlists/CreatePlaylistModal'
+import DeletePlaylistModal from 'view/pages/playlists/DeletePlaylistModal'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
-import LoadingIcon from 'view/components/icons/LoadingIcon'
-import PlusIcon from 'view/components/icons/PlusIcon'
-import { styled } from 'view/components/theme'
+import LoadingIcon from 'view/common/icons/LoadingIcon'
+import PlusIcon from 'view/common/icons/PlusIcon'
+import { styled } from 'view/common/theme'
 
 const LoadingItem = styled.li`
   display: flex;
@@ -64,9 +64,11 @@ export default function PlaylistList() {
   const isLoading = useSelector(playlistsSlice.selectIsLoading)
   const hasNextPage = useSelector(playlistsSlice.selectHasMore)
   const isLogged = useSelector(user.selectIsLogged)
-  const modalIsOpen = useSelector(modal.selectModalIsOpen)
-  const confirmationModalIsOpen = useSelector(
-    confirmationModal.selectModalIsOpen
+  const createPlaylistModalIsOpen = useSelector(
+    createPlaylistModal.selectModalIsOpen
+  )
+  const deletePlaylistModalIsOpen = useSelector(
+    deletePlaylistModal.selectModalIsOpen
   )
 
   const [sentryRef] = useInfiniteScroll({
@@ -82,18 +84,18 @@ export default function PlaylistList() {
     }
   }, [isLogged])
 
-  const openModal = () => {
-    dispatch(modal.open())
+  const openCreatePlaylistModal = () => {
+    dispatch(createPlaylistModal.open())
   }
 
   return (
     <>
       {isLogged ? (
         <>
-          {modalIsOpen && <Modal />}
-          {confirmationModalIsOpen && <ConfirmationModal />}
+          {createPlaylistModalIsOpen && <CreatePlaylistModal />}
+          {deletePlaylistModalIsOpen && <DeletePlaylistModal />}
           <GridContainer>
-            <GridItem onClick={openModal}>
+            <GridItem onClick={openCreatePlaylistModal}>
               <PlusIcon />
               Create Playlist
             </GridItem>

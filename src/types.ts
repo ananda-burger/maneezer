@@ -190,12 +190,12 @@ export interface UserState {
   loginData: LoginResponse
 }
 
-export interface ModalState {
+export interface CreatePlaylistModalState {
   isOpen: boolean
   title: string
 }
 
-export interface ConfirmationModalState {
+export interface DeletePlaylistModalState {
   isOpen: boolean
   id: string
 }

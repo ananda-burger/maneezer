@@ -7,8 +7,8 @@ import { reducer as userReducer } from 'store/userSlice'
 import { reducer as popUpReducer } from 'store/popUpSlice'
 import { reducer as playlistsReducer } from 'store/playlistsSlice'
 import { reducer as playlistTracksReducer } from 'store/playlistTracksSlice'
-import { reducer as modalReducer } from 'store/modalSlice'
-import { reducer as confirmationModalReducer } from 'store/confirmationModalSlice'
+import { reducer as createPlaylistModalReducer } from 'store/createPlaylistModalSlice'
+import { reducer as deletePlaylistModalReducer } from 'store/deletePlaylistModalSlice'
 import { reducer as dropdownReducer } from 'store/dropdownSlice'
 import { reducer as artistTracksReducer } from 'store/artistTracksSlice'
 import { reducer as albumReducer } from 'store/albumSlice'
@@ -25,8 +25,8 @@ export const store = configureStore({
     popUp: popUpReducer,
     playlists: playlistsReducer,
     playlistTracks: playlistTracksReducer,
-    modal: modalReducer,
-    confirmationModal: confirmationModalReducer,
+    createPlaylistModal: createPlaylistModalReducer,
+    deletePlaylistModal: deletePlaylistModalReducer,
     dropdown: dropdownReducer
   }
 })

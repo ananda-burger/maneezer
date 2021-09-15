@@ -1,18 +1,17 @@
-import { styled } from 'view/components/theme'
+import { styled } from 'view/common/theme'
 
 const Icon = styled.svg`
+  position: absolute;
+  top: calc(50% - 0.65rem);
+  right: 0.5rem;
   transition: 0.2 ease;
-  height: 1.5rem;
-  width: 1.5rem;
-  padding: 0.5rem;
   &:hover {
-    color: white;
     fill: ${({ theme }) => theme.colors.secondary1};
     cursor: pointer;
-  }
+    color: ${({ theme }) => theme.colors.secondary1};
 `
 
-export default function PlusIcon() {
+export default function ClearInputIcon() {
   return (
     <Icon
       className="app-icon"
@@ -24,7 +23,7 @@ export default function PlusIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
-        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+        d="M6 18L18 6M6 6l12 12"
       />
     </Icon>
   )

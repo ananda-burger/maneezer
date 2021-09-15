@@ -4,13 +4,12 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import * as search from 'store/searchSlice'
 import * as user from 'store/userSlice'
 import { Route } from 'types'
-import LoginIcon from 'view/components/icons/LoginIcon'
-import LogoIcon from 'view/components/icons/LogoIcon'
-import SearchIcon from 'view/components/icons/SearchIcon'
-import UserIcon from 'view/components/icons/UserIcon'
-import SearchInputContainer from 'view/SearchInputContainer'
-import TracksHeader from 'view/TracksHeader'
-import { styled } from 'view/components/theme'
+import LoginIcon from 'view/common/icons/LoginIcon'
+import LogoIcon from 'view/common/icons/LogoIcon'
+import SearchIcon from 'view/common/icons/SearchIcon'
+import UserIcon from 'view/common/icons/UserIcon'
+import SearchInputContainer from 'view/common/SearchInputContainer'
+import { styled } from 'view/common/theme'
 import queryString from 'query-string'
 
 const Header = styled.header`
@@ -225,7 +224,6 @@ export default function MainNavigation() {
           </LoginOptions>
         )}
       </Nav>
-      {history.location.pathname !== Route.Playlists && <TracksHeader />}
     </Header>
   )
 }

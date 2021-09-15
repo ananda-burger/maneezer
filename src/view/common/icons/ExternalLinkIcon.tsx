@@ -1,4 +1,4 @@
-import { styled } from 'view/components/theme'
+import { styled } from 'view/common/theme'
 
 const Icon = styled.svg`
   transition: 0.2 ease;
@@ -7,8 +7,7 @@ const Icon = styled.svg`
     color: ${({ theme }) => theme.colors.secondary1};
   }
 `
-
-export default function SearchIcon() {
+export default function ExternalLinkIcon() {
   return (
     <Icon
       className="app-icon"
@@ -20,8 +19,8 @@ export default function SearchIcon() {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="3"
-        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        strokeWidth={1.6}
+        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
       />
     </Icon>
   )

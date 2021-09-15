@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'app/hooks'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import AlbumTrack from 'view/pages/albumTracks/AlbumTrack'
-import { styled } from 'view/components/theme'
+import { styled } from 'view/common/theme'
+import TracksHeader from 'view/common/TracksHeader'
+import ClockIcon from 'view/common/icons/ClockIcon'
 
 interface Params {
   id: string

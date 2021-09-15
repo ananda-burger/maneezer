@@ -1,22 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { ConfirmationModalState } from 'types'
+import { DeletePlaylistModalState } from 'types'
 
-const initialState: ConfirmationModalState = {
+const initialState: DeletePlaylistModalState = {
   isOpen: false,
   id: ''
 }
 
 export const selectModalIsOpen = (state: RootState) => {
-  return state.confirmationModal.isOpen
+  return state.deletePlaylistModal.isOpen
 }
 
 export const selectId = (state: RootState) => {
-  return state.confirmationModal.id
+  return state.deletePlaylistModal.id
 }
 
-export const confirmationModalSlice = createSlice({
-  name: 'confirmationModal',
+export const deletePlaylistModalSlice = createSlice({
+  name: 'deletePlaylistModal',
   initialState,
   reducers: {
     open: (state, action) => {
@@ -29,6 +29,6 @@ export const confirmationModalSlice = createSlice({
   }
 })
 
-export const { open, close } = confirmationModalSlice.actions
+export const { open, close } = deletePlaylistModalSlice.actions
 
-export const { reducer } = confirmationModalSlice
+export const { reducer } = deletePlaylistModalSlice

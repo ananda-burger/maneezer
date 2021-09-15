@@ -1,9 +1,9 @@
 import { useDispatch } from 'app/hooks'
 import { Link } from 'react-router-dom'
 import { secondsToMinutes } from 'utilities'
-import { styled } from 'view/components/theme'
-import * as confirmationModal from 'store/confirmationModalSlice'
-import TrashIcon from 'view/components/icons/TrashIcon'
+import { styled } from 'view/common/theme'
+import * as deletePlaylistModal from 'store/deletePlaylistModalSlice'
+import TrashIcon from 'view/common/icons/TrashIcon'
 
 const GridItem = styled(Link)`
   position: relative;
@@ -81,8 +81,8 @@ const DeleteButton = styled.button`
 export default function Playlist({ playlist }) {
   const dispatch = useDispatch()
 
-  const openConfirmationModal = (id: string) => {
-    dispatch(confirmationModal.open(id))
+  const openDeletePlaylistModal = (id: string) => {
+    dispatch(deletePlaylistModal.open(id))
   }
 
   return (
@@ -100,7 +100,7 @@ export default function Playlist({ playlist }) {
       <DeleteButton
         onClick={(e) => {
           e.preventDefault()
-          openConfirmationModal(playlist.id)
+          openDeletePlaylistModal(playlist.id)
         }}
       >
         <TrashIcon />

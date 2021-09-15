@@ -1,4 +1,4 @@
-import { styled } from 'view/components/theme'
+import { styled } from 'view/common/theme'
 
 const Icon = styled.svg`
   color: ${({ theme }) => theme.colors.secondary1};

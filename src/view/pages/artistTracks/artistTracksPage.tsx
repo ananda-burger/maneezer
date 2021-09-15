@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'app/hooks'
 import { useParams } from 'react-router-dom'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { useEffect } from 'react'
-import LoadingIcon from 'view/components/icons/LoadingIcon'
-import Track from 'view/Track'
-import { styled } from 'view/components/theme'
+import LoadingIcon from 'view/common/icons/LoadingIcon'
+import Track from 'view/common/Track'
+import TracksHeader from 'view/common/TracksHeader'
+import { styled } from 'view/common/theme'
+import ClockIcon from 'view/common/icons/ClockIcon'
 
 interface Params {
   id: string

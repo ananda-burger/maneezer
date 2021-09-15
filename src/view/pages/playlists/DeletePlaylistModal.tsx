@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'app/hooks'
 import { MouseEvent } from 'react'
-import * as modal from 'store/modalSlice'
+import * as deletePlaylistModal from 'store/deletePlaylistModalSlice'
 import * as playlist from 'store/playlistsSlice'
-import { styled } from 'view/components/theme'
-import LoadingIcon from './components/icons/LoadingIcon'
+import { styled } from 'view/common/theme'
+import LoadingIcon from 'view/common/icons/LoadingIcon'
 
 const Backdrop = styled.div`
   position: fixed;
@@ -15,24 +15,6 @@ const Backdrop = styled.div`
   left: 0;
 `
 
-const Input = styled.input`
-  margin: 3.5rem 0;
-  font-size: 1.1rem;
-  color: white;
-  width: 90%;
-  height: 2.3rem;
-  border: none;
-  border-bottom: 2px solid ${({ theme }) => theme.colors.secondary1};
-  background: transparent;
-  outline: none;
-
-  @media (max-width: 768px) {
-    & {
-      width: 85%;
-    }
-  }
-`
-
 const ModalStyle = styled.form`
   position: fixed;
   top: 50%;
@@ -40,7 +22,7 @@ const ModalStyle = styled.form`
   transform: translate(-50%, -50%);
   font-size: 1.5rem;
   height: 50%;
-  width: 60%;
+  width: 50%;
   border: 2px solid ${({ theme }) => theme.colors.primary4};
   border-radius: 5px;
   display: flex;
@@ -58,13 +40,15 @@ const ModalStyle = styled.form`
 const Title = styled.div`
   color: white;
   font-weight: bold;
+  margin: 2rem;
 `
 
 const ButtonsContainer = styled.div`
   color: white;
+  margin: 2rem;
 `
 
-const CreateButton = styled.button`
+const DeleteButton = styled.button`
   margin: 0 1rem;
   padding: 0.5rem;
   border: none;
@@ -93,20 +77,20 @@ const CancelButton = styled.button`
   }
 `
 
-export default function Modal() {
+export default function DeletePlaylistModal() {
   const dispatch = useDispatch()
   const isLoading = useSelector(playlist.selectIsLoading)
-  const playlistTitle = useSelector(modal.selectTitle)
+  const playlistId = useSelector(deletePlaylistModal.selectId)
 
   const closeModal = (event: MouseEvent) => {
     event.preventDefault()
-    dispatch(modal.close())
+    dispatch(deletePlaylistModal.close())
   }
 
   const createPlaylist = (event: MouseEvent) => {
     event.preventDefault()
-    dispatch(playlist.create(playlistTitle))
-    dispatch(modal.close())
+    dispatch(playlist.remove(playlistId))
+    dispatch(deletePlaylistModal.close())
   }
 
   if (isLoading) {
@@ -121,24 +105,10 @@ export default function Modal() {
   return (
     <div>
       <ModalStyle>
-        <Title>Create Playlist</Title>
-        <Input
-          placeholder="Title"
-          autoFocus
-          onChange={(e) => {
-            dispatch(modal.update(e.target.value))
-          }}
-          onKeyUp={(e) => {
-            if (e.key === 'Escape') {
-              dispatch(modal.close())
-            } else if (e.key === 'Enter') {
-              dispatch(modal.update(playlistTitle))
-            }
-          }}
-        />
+        <Title>Delete Playlist?</Title>
         <ButtonsContainer>
           <CancelButton onClick={closeModal}>CANCEL</CancelButton>
-          <CreateButton onClick={createPlaylist}>CREATE</CreateButton>
+          <DeleteButton onClick={createPlaylist}>DELETE</DeleteButton>
         </ButtonsContainer>
       </ModalStyle>
       <Backdrop onClick={closeModal} />
