@@ -154,9 +154,6 @@ export default function Track({ track }: { track: types.Track }) {
       </ColumnLarge>
       <Column>
         <ButtonsContainer>
-          <div onClick={() => dispatch(favorites.remove(track))}>
-            <FullHeartIcon />
-          </div>
           {isLogged && (
             <div>
               <div onClick={() => dispatch(favorites.add(track))}>
