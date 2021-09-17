@@ -119,6 +119,7 @@ export interface Album {
 export interface Playlist {
   id: string
   title: string
+  description?: string
   duration: number
   public: boolean
   is_loved_track: boolean
@@ -126,6 +127,7 @@ export interface Playlist {
   nb_tracks: number
   fans: number
   link: string
+  share?: string
   picture: string
   picture_small: string
   picture_medium: string
@@ -136,8 +138,8 @@ export interface Playlist {
   creation_date: string
   md5_image: string
   picture_type: string
-  time_add: string
-  time_mod: string
+  time_add?: string
+  time_mod?: string
   creator: {
     id: string
     name: string
@@ -145,6 +147,9 @@ export interface Playlist {
     type: string
   }
   type: string
+  tracks?: {
+    data: Track[]
+  }
 }
 
 export interface TopTracksState {
@@ -170,7 +175,12 @@ export interface AlbumTracksState {
 }
 
 export interface PlaylistTracksState {
-  [playlistId: string]: TopTracksState
+  playlist: {
+    [playlistId: string]: Playlist
+  }
+  tracks: {
+    [playlistId: string]: TopTracksState
+  }
 }
 
 export interface PlaylistsState {

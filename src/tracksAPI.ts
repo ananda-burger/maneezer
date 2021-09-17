@@ -170,6 +170,14 @@ export const fetchPlaylistTracks = (
   })
 }
 
+export const fetchPlaylist = (playlistId: string) => {
+  return new Promise<Playlist>((resolve, _reject) => {
+    window.DZ.api(`/playlist/${playlistId}`, (response: Playlist) => {
+      resolve(response)
+    })
+  })
+}
+
 export const fetchArtist = (id: string) => {
   return new Promise<Artist>((resolve, _reject) => {
     window.DZ.api(`/artist/${id}`, (response: Artist) => {
