@@ -17,6 +17,31 @@ const LoadingItem = styled.li`
   padding: 1rem 0;
 `
 
+const CoverContainer = styled.div`
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 2rem;
+`
+
+const TitleContainer = styled.div`
+  align-items: flex-end;
+  color: white;
+  font-size: 2rem;
+`
+
+const TitleType = styled.div`
+  color: ${({ theme }) => theme.colors.primary5};
+  font-size: 1rem;
+  padding-bottom: 0.3rem;
+`
+
+const Cover = styled.img`
+  height: 150px;
+  object-fit: scale-down;
+  margin-bottom: 1rem;
+`
 export default function AlbumTrackList() {
   const { id: albumId } = useParams<Params>()
   const album = useSelector(albumSlice.selectAlbum(albumId))
@@ -29,6 +54,13 @@ export default function AlbumTrackList() {
   if (album) {
     return (
       <>
+        <CoverContainer>
+          <Cover src={album.cover_medium} alt={album.title} />
+          <TitleContainer>
+            <TitleType>ALBUM</TitleType>
+            <div>{album.title}</div>
+          </TitleContainer>
+        </CoverContainer>
         <TracksHeader columns={['', '', 'TITLE', '', <ClockIcon />, '']} />
         {album.tracks.data.map((track) => {
           return <AlbumTrack key={track.id} track={track} />

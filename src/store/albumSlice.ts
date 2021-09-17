@@ -1,11 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'app/store'
-import { Track, Album, AlbumTracksState, FetchAlbumPayload } from 'types'
+import { Album, AlbumTracksState } from 'types'
 import * as api from 'tracksAPI'
 
 const initialState: AlbumTracksState = {}
-
-const PER_PAGE = 30
 
 export const selectAlbum =
   (albumId: string) =>
