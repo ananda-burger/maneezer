@@ -95,7 +95,6 @@ export default function PlaylistList() {
         <>
           {createPlaylistModalIsOpen && <CreatePlaylistModal />}
           {deletePlaylistModalIsOpen && <DeletePlaylistModal />}
-          <TracksHeader columns={['', '', '', '', '', '']} />
           <GridContainer>
             <GridItem onClick={openCreatePlaylistModal}>
               <PlusIcon />
