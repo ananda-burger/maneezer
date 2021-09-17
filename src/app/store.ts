@@ -10,7 +10,7 @@ import { reducer as playlistTracksReducer } from 'store/playlistTracksSlice'
 import { reducer as createPlaylistModalReducer } from 'store/createPlaylistModalSlice'
 import { reducer as deletePlaylistModalReducer } from 'store/deletePlaylistModalSlice'
 import { reducer as dropdownReducer } from 'store/dropdownSlice'
-import { reducer as artistTracksReducer } from 'store/artistTracksSlice'
+import { reducer as artistReducer } from 'store/artistSlice'
 import { reducer as albumReducer } from 'store/albumSlice'
 
 export const store = configureStore({
@@ -19,7 +19,7 @@ export const store = configureStore({
     audio: audioReducer,
     search: searchReducer,
     favoriteTracks: favoritesReducer,
-    artistTracks: artistTracksReducer,
+    artist: artistReducer,
     album: albumReducer,
     user: userReducer,
     popUp: popUpReducer,

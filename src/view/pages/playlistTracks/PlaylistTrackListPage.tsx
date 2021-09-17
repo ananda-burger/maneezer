@@ -34,10 +34,14 @@ const Container = styled.div`
 
 export default function PlaylistTrackList() {
   const { id: playlistId } = useParams<Params>()
-  const tracks = useSelector(playlists.selectTracks(playlistId))
-  const lastIndex = useSelector(playlists.selectLastIndex(playlistId))
-  const hasNextPage = useSelector(playlists.selectHasMoreTracks(playlistId))
-  const isLoading = useSelector(playlists.selectIsLoadingTracks(playlistId))
+  const tracks = useSelector(playlistTracks.selectTracks(playlistId))
+  const lastIndex = useSelector(playlistTracks.selectLastIndex(playlistId))
+  const hasNextPage = useSelector(
+    playlistTracks.selectHasMoreTracks(playlistId)
+  )
+  const isLoading = useSelector(
+    playlistTracks.selectIsLoadingTracks(playlistId)
+  )
   const isLogged = useSelector(user.selectIsLogged)
   const dispatch = useDispatch()
 
@@ -45,13 +49,13 @@ export default function PlaylistTrackList() {
     loading: isLoading,
     hasNextPage,
     onLoadMore: () =>
-      dispatch(playlists.fetch({ lastIndex, isLoading, playlistId })),
+      dispatch(playlistTracks.fetch({ lastIndex, isLoading, playlistId })),
     rootMargin: '0px 0px 150px 0px'
   })
 
   useEffect(() => {
     if (isLogged) {
-      dispatch(playlists.fetch({ lastIndex, isLoading, playlistId }))
+      dispatch(playlistTracks.fetch({ lastIndex, isLoading, playlistId }))
     }
   }, [isLogged, playlistId])
 
