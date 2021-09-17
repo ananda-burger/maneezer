@@ -43,6 +43,9 @@ const Column = styled.div`
 `
 
 const ColumnLarge = styled(Column)`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @media (max-width: 768px) {
     & {
       display: none;
@@ -93,9 +96,6 @@ const ArtistLink = styled(Link)`
 `
 
 const AlbumLink = styled(Link)`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   :hover {
     color: ${({ theme }) => theme.colors.secondary1};
     cursor: pointer;
