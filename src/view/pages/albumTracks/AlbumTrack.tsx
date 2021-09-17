@@ -7,7 +7,7 @@ import * as types from 'types'
 import { styled } from 'view/common/theme'
 import { secondsToMinutes } from 'utilities'
 // import ExternalLinkIcon from 'view/common/icons/ExternalLinkIcon'
-import FullHeartIcon from 'view/common/icons/FullHeartIcon'
+// import FullHeartIcon from 'view/common/icons/FullHeartIcon'
 import HollowHeartIcon from 'view/common/icons/HollowHeartIcon'
 import PauseIcon from 'view/common/icons/PauseIcon'
 import PlayIcon from 'view/common/icons/PlayIcon'
@@ -66,14 +66,6 @@ const TrackName = styled.div`
   max-width: 100%;
 `
 
-const ArtistName = styled.div`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: ${({ theme }) => theme.colors.primary5};
-  font-size: 0.9rem;
-`
-
 const AlbumTitle = styled.div`
   white-space: nowrap;
   overflow: hidden;
@@ -103,12 +95,6 @@ const ArtistLink = styled(Link)`
   :hover {
     color: ${({ theme }) => theme.colors.secondary1};
     cursor: pointer;
-  }
-`
-
-const AlbumLink = styled(Link)`
-  :hover {
-    color: ${({ theme }) => theme.colors.secondary1};
   }
 `
 
