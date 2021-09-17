@@ -1,5 +1,6 @@
 import * as playlistTracks from 'store/playlistTracksSlice'
 import * as user from 'store/userSlice'
+import * as util from 'utilities'
 import { useSelector, useDispatch } from 'app/hooks'
 import { useParams } from 'react-router-dom'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
@@ -97,6 +98,11 @@ export default function PlaylistTrackList() {
             />
             <TitleContainer>
               <TitleType>PLAYLIST</TitleType>
+              <TitleType>
+                {currentPlaylist.nb_tracks}{' '}
+                {currentPlaylist.nb_tracks > 1 ? 'Tracks' : 'Track'} -{' '}
+                {util.secondsToMinutes(currentPlaylist.duration)}
+              </TitleType>
               <div>{currentPlaylist.title}</div>
             </TitleContainer>
           </CoverContainer>

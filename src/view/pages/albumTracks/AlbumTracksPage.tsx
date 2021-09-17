@@ -1,4 +1,5 @@
 import * as albumSlice from 'store/albumSlice'
+import * as util from 'utilities'
 import { useSelector, useDispatch } from 'app/hooks'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
@@ -58,6 +59,10 @@ export default function AlbumTrackList() {
           <Cover src={album.cover_medium} alt={album.title} />
           <TitleContainer>
             <TitleType>ALBUM</TitleType>
+            <TitleType>
+              {album.nb_tracks} {album.nb_tracks > 1 ? 'Tracks' : 'Track'} -{' '}
+              {util.secondsToMinutes(album.duration)}
+            </TitleType>
             <div>{album.title}</div>
           </TitleContainer>
         </CoverContainer>
