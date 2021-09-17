@@ -4,11 +4,13 @@ import { useLocation } from 'react-router-dom'
 import Track from 'view/common/Track'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import LoadingIcon from 'view/common/icons/LoadingIcon'
+import ClockIcon from 'view/common/icons/ClockIcon'
 import { styled } from 'view/common/theme'
 import { RootState } from 'app/store'
 import { AsyncThunk } from '@reduxjs/toolkit'
 import * as user from 'store/userSlice'
 import * as types from 'types'
+import TracksHeader from 'view/common/TracksHeader'
 
 const LoadingItem = styled.li`
   display: flex;
@@ -76,6 +78,7 @@ export default function TrackList({
   const renderTracks = () => {
     return (
       <>
+        <TracksHeader columns={['', '', 'TITLE', 'ALBUM', <ClockIcon />, '']} />
         {tracks.map((track) => {
           return <Track key={track.id} track={track} isFavorite={isFavorite} />
         })}

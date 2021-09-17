@@ -1,12 +1,14 @@
-import * as playlists from 'store/playlistTracksSlice'
+import * as playlistTracks from 'store/playlistTracksSlice'
 import * as user from 'store/userSlice'
 import { useSelector, useDispatch } from 'app/hooks'
 import { useParams } from 'react-router-dom'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { useEffect } from 'react'
 import LoadingIcon from 'view/common/icons/LoadingIcon'
+import ClockIcon from 'view/common/icons/ClockIcon'
 import Track from 'view/common/Track'
 import { styled } from 'view/common/theme'
+import TracksHeader from 'view/common/TracksHeader'
 
 interface Params {
   id: string
@@ -57,6 +59,9 @@ export default function PlaylistTrackList() {
     <>
       {isLogged ? (
         <>
+          <TracksHeader
+            columns={['', '', 'TITLE', 'ALBUM', <ClockIcon />, '']}
+          />
           {tracks.map((track) => {
             return <Track key={track.id} track={track} />
           })}

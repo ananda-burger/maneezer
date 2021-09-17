@@ -11,6 +11,7 @@ import useInfiniteScroll from 'react-infinite-scroll-hook'
 import LoadingIcon from 'view/common/icons/LoadingIcon'
 import PlusIcon from 'view/common/icons/PlusIcon'
 import { styled } from 'view/common/theme'
+import TracksHeader from 'view/common/TracksHeader'
 
 const LoadingItem = styled.li`
   display: flex;
@@ -94,6 +95,7 @@ export default function PlaylistList() {
         <>
           {createPlaylistModalIsOpen && <CreatePlaylistModal />}
           {deletePlaylistModalIsOpen && <DeletePlaylistModal />}
+          <TracksHeader columns={['', '', '', '', '', '']} />
           <GridContainer>
             <GridItem onClick={openCreatePlaylistModal}>
               <PlusIcon />

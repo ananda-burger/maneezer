@@ -29,6 +29,7 @@ export default function AlbumTrackList() {
   if (album) {
     return (
       <>
+        <TracksHeader columns={['', '', 'TITLE', '', <ClockIcon />, '']} />
         {album.tracks.data.map((track) => {
           return <AlbumTrack key={track.id} track={track} />
         })}
