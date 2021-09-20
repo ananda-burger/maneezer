@@ -73,7 +73,7 @@ export default function TrackList({
     if (isLogged && isFavorite) {
       dispatch(fetch({ lastIndex, isLoading }))
     }
-  }, [])
+  }, [isFavorite])
 
   const renderTracks = () => {
     return (
